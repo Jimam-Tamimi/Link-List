@@ -1,0 +1,9 @@
+{
+    "title": "Welcome to Our Site",
+    "description": "This is the homepage description.",
+    "messages": {
+      "greeting": "Hello",
+      "welcome": "Welcome to our website"
+    },
+    "image": "/images/home-image.png"
+  }
