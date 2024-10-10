@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.validators import EmailValidator
@@ -50,6 +51,7 @@ class Profile(models.Model):
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
 
+
     @property
     def email(self):
         return self.user.email
@@ -64,3 +66,20 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+
+
+
+    def save(self, *args, **kwargs):
+        # If the instance is being updated and has a previous profile_image
+        if self.pk:  # Check if the object already exists (update scenario)
+            old_instance = Profile.objects.get(pk=self.pk)
+            if old_instance.profile_image and old_instance.profile_image != self.profile_image:
+                # Get the path to the old image
+                old_image_path = old_instance.profile_image.path
+                # Delete the old image from the file system
+                if os.path.exists(old_image_path):
+                    os.remove(old_image_path)
+
+        # Call the superclass's save method to save the profile
+        super().save(*args, **kwargs)
+ 

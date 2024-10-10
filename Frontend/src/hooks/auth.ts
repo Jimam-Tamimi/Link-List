@@ -1,26 +1,39 @@
 "use client";
 
-import { AuthType, fetchProfileById, signIn, signUp } from '@/api-calls/auth';
-import { getAuthData, removeAuthData, storeAuthData } from '@/storage/auth';
-import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react'; 
-import { refreshAuth } from '@/api-calls/api';
-import { setError, setLoading, signInSuccess, signOut } from '@/redux/slices/authSlice';
-import { useAppDispatch } from '@/redux/store';
-import { jwtDecode } from 'jwt-decode'; 
+import {
+  AuthType,
+  fetchMyProfile,
+  ProfileType,
+  signIn,
+  signUp,
+  updateMyProfile,
+} from "@/api-calls/auth";
+import { getAuthData, removeAuthData, storeAuthData } from "@/storage/auth";
+import { AxiosError } from "axios";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { refreshAuth } from "@/api-calls/api";
+import {
+  setError,
+  setLoading,
+  signInSuccess,
+  signOut,
+} from "@/redux/slices/authSlice";
+import { RootState, useAppDispatch } from "@/redux/store";
+import { jwtDecode } from "jwt-decode";
 import {
   useQuery,
   useMutation,
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'
+} from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 export const useSignIn = () => {
   const dispatch = useAppDispatch();
 
-  return useMutation( {
-    mutationFn:signIn,
+  return useMutation({
+    mutationFn: signIn,
     onMutate: () => {
       dispatch(setLoading(true));
     },
@@ -39,8 +52,8 @@ export const useSignIn = () => {
 
 export const useSignUp = () => {
   const dispatch = useAppDispatch();
-  return useMutation( {
-    mutationFn:signUp,
+  return useMutation({
+    mutationFn: signUp,
     onMutate: () => {
       dispatch(setLoading(true));
     },
@@ -69,11 +82,11 @@ const checkTokenValidity = (token: string): boolean => {
 
 export const useSignOut = () => {
   const dispatch = useAppDispatch();
-  
+
   const signOutFn = async () => {
     dispatch(signOut()); // Dispatch sign-in success
     await removeAuthData();
-    window.location.href = '/auth/sign-in'; // Redirect to sign-in page after logout
+    window.location.href = "/auth/sign-in"; // Redirect to sign-in page after logout
   };
 
   return signOutFn;
@@ -98,7 +111,7 @@ export const useAuthRedirect = () => {
   //     } catch (error) {
   //       await removeAuthData();
   //       router.replace('/auth/sign-in');
-  //     } finally { 
+  //     } finally {
   //       setIsLoading(false); // Set loading to false after handling redirect
   //     }
   //   };
@@ -108,6 +121,38 @@ export const useAuthRedirect = () => {
   return isLoading;
 };
 
-export const useProfile = (id: string) => {
-  return useQuery({ queryKey: ['profile', id], queryFn: () => fetchProfileById(id) });
+export const useMyProfile = () => {
+  const profileId = useSelector(
+    (state: RootState) => state.auth.data?.profile?.id
+  );
+  return useQuery({
+    queryKey: ["profile", profileId],
+    queryFn: () => fetchMyProfile(profileId as number),
+    enabled: !!profileId,
+
+  });
+};
+
+export const useUpdateProfile = () => {
+  const profileId = useSelector(
+    (state: RootState) => state.auth.data?.profile?.id
+  );
+
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: any) => updateMyProfile(data, profileId as number),
+    
+    onSuccess: (data: ProfileType) => {
+      queryClient.setQueryData(
+        ["profile", profileId],
+        (oldData: AuthType | undefined) => {
+          console.log(data);
+          console.log(oldData);
+          console.log("oldData");
+          if (!oldData) return;
+          return { ...oldData, ...data };
+        }
+      );
+    },
+  });
 };

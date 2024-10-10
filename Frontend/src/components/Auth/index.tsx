@@ -41,7 +41,7 @@ export default function Auth() {
     
     if(auth?.access){
       console.log("first")
-      onOpenChange.apply(false)
+      onOpenChange()
     }
     return () => {
       
@@ -88,7 +88,7 @@ export default function Auth() {
                       {visibleComponent === "SIGN_IN" ? "Sign In" : "Sign Up"}
                     </h3>
                     <div
-                      onClick={onOpenChange.bind(false)}
+                      onClick={onOpenChange}
                       className="p-0.5 left-0.5 relative hover:scale-110 active:scale-90 transition-all duration-300 ease-in-out cursor-pointer rounded-full"
                     >
                       <MdOutlineClose size={25} />

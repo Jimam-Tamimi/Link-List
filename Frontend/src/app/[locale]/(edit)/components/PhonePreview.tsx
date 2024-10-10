@@ -6,9 +6,11 @@ import React from "react";
 import { FaGithub, FaLink } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { socialMediaOptions } from "../links/page";
+import { useMyProfile } from "@/hooks/auth";
 
 export default function PhonePreview() {
-  const { data: links, isLoading: loading } = useLinksForMe();
+  const { data: links } = useLinksForMe();
+  const myProfile = useMyProfile();
 
   return (
     <>
@@ -24,29 +26,24 @@ export default function PhonePreview() {
             <div>
               <Image
                 alt="photo frame"
-                src={"/images/me.webp"}
+                src={myProfile?.data?.profile_image}
                 width={800}
                 height={800}
                 className="object-cover object-center w-24 h-24 rounded-full"
               />
             </div>
             <div className="flex flex-col items-center justify-center gap-2 font-semibold tracking-wider ">
-              <h1 className="text-[1.3rem] opacity-80">@jimam_</h1>
-              <h1 className="text-[1.4rem]">Jimamt Tamimi</h1>
+              <h1 className="text-[1.3rem]  opacity-80">{myProfile?.data?.username}</h1>
+              <h1 className="text-[1.4rem]  capitalize">{myProfile?.data?.first_name} {myProfile?.data?.last_name}</h1>
             </div>
-            <p className="text-center mb-2 leading-loose max-w-[900px]">
-              hey this is jimam tamimi and this is my bio. How are you doing
-              today?
-              <span className="hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                voluptate quod quae voluptatum officiis perferendis
-              </span>
+            <p className="text-center mb-2 leading-loose capitalize max-w-[900px]">
+              {myProfile?.data?.bio} 
             </p>
             {links?.map((link, i) => (
               <Link
                 href={link?.url as any}
                 target="_blank"
-                className="bg-black font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out"
+                className="bg-black text-white font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 py-5 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out"
               >
                 <div className="flex items-center justify-center gap-3 text-lg">
                   {/* <FaGithub size={27} /> */}

@@ -1,16 +1,14 @@
+"use client"
+
 import axios from "axios";
-import ProfileForm from "./component/ProfileForm";
+import ProfileForm from "./component/ProfileForm"; 
 
 
 
-export default  function Home({ params }: { params: { locale: string } }) {
+export default  function page({ params }: { params: { locale: string } }) {
   const { locale } = params;
 
-  // const response = await axios.get(
-  //   `http://127.0.0.1:8000/static/content/${locale}/home.json`
-  // );
-  // const content = response.data;
-
+ 
   return (
     <>
       <div className="space-y-2">

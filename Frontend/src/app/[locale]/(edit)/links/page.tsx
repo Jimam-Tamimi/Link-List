@@ -109,6 +109,9 @@ export default function Home({ params }: { params: { locale: string } }) {
         className="flex justify-center items-center p-2 rounded-full m-auto    bg-gradient-to-br from-[#2563eb] to-[#0035a8] opacity-90 active:scale-90 hover:opacity-100 cursor-pointer hover:scale-110 transition-all duration-300 ease-in-out"
         onClick={(e) => {
           queryClient.setQueryData(["links", username], (oldData: any) => {
+            if(!Array?.isArray(oldData)){
+              return oldData
+            } 
             return [
               {
                 uid: uuidv4().slice(0, 10),
@@ -305,8 +308,7 @@ function UrlForm({ link, i }: { link: LinkType; i: number }) {
                 message: "Enter a valid URL",
               },
             })}
-            error={errors?.url?.message}
-            defaultValue={link?.url ? link?.url : ""}
+            error={errors?.url?.message} 
           />
         </div>
       </div>

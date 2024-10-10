@@ -6,14 +6,14 @@ interface UserType {
   email: string;
 }
 
-interface ProfileType {
+export interface ProfileType {
   id: number;
   user: string;
   username: string; // Added username
   email: string; // Added email
-  firstName?: string;
-  lastName?: string;
-  profileImage?: string;
+  first_name?: string;
+  last_name?: string;
+  profile_image?: string;
   bio?: string;
 }
 
@@ -47,7 +47,19 @@ export const signUp = async (data: SignUpFormDataType) => {
   return response.data;
 };
 
-export const fetchProfileById = async (id: string) => {
+export const fetchMyProfile = async (id: number): Promise<ProfileType> => {
   const response = await api.get(`/auth/profiles/${id}/`);
-  return response.data as ProfileType;
+  return response.data ;
+};
+
+
+export const updateMyProfile = async (profileData: Partial<ProfileType>, id:number): Promise<ProfileType> => {
+ 
+
+  const response = await api.patch(`/auth/profiles/${id}/`, profileData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
 };

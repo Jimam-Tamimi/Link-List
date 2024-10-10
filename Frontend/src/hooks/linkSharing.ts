@@ -11,11 +11,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 
 export const useLinksByUsername = (username: string) => {
-    console.log(username)
   return useQuery({
     queryKey: ["links", username],
     queryFn: () => getLinksByUsername(username),
-    // enabled: !!username,
+    enabled: !!username,
   });
 };
 
@@ -25,7 +24,7 @@ export const useLinksForMe = () => {
     return useQuery({
       queryKey: ["links", username],
       queryFn: () => getLinksForMe(),
-      // enabled: !!username,
+      enabled: !!username,
     });
   };
   
@@ -43,6 +42,7 @@ export const useCreateLink = () => {
           return [newData, ...oldData.slice(1)];
         });
       },
+
     });
   };
   

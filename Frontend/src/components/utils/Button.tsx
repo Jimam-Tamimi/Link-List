@@ -77,50 +77,51 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      onClick={onClick}
+      onClick={isLoading ? undefined : onClick}
+      disabled={isLoading}
       className={`
-        ${className}  
-        flex justify-center   items-center outline-none ${styles[variant]} 
-        ${animationStyles} 
-        
+      ${className}  
+      flex justify-center items-center outline-none ${styles[variant]} 
+      ${animationStyles} 
+      ${isLoading ? "cursor-not-allowed " : ""}
       `}
     >
       {isLoading ? (
-        loadingComponent || <HashLoader  size={20} color="#ffffff" />
+      loadingComponent || <HashLoader size={20} color="#ffffff" />
       ) : (
-        <>
-          {leftIcon && (
-            <span 
-              className="mr-3 flex items-center"
-              style={{ minWidth: iconSize, minHeight: iconSize }}
-            >
-              {React.isValidElement(leftIcon) ? (
-                React.cloneElement(leftIcon, {
-                  width: iconSize,
-                  height: iconSize,
-                } as any)
-              ) : (
-                <span style={{ fontSize: iconSize }}>{leftIcon}</span>
-              )}
-            </span>
+      <>
+        {leftIcon && (
+        <span 
+          className="mr-3 flex items-center"
+          style={{ minWidth: iconSize, minHeight: iconSize }}
+        >
+          {React.isValidElement(leftIcon) ? (
+          React.cloneElement(leftIcon, {
+            width: iconSize,
+            height: iconSize,
+          } as any)
+          ) : (
+          <span style={{ fontSize: iconSize }}>{leftIcon}</span>
           )}
-          {children}
-          {rightIcon && (
-            <span
-              className="ml-3 flex items-center "
-              style={{ minWidth: iconSize, minHeight: iconSize }}
-            >
-              {React.isValidElement(rightIcon) ? (
-                React.cloneElement(rightIcon, {
-                  weight: iconSize,
-                  height: iconSize,
-                } as any)
-              ) : (
-                <span style={{ fontSize: iconSize }}>{rightIcon}</span>
-              )}
-            </span>
+        </span>
+        )}
+        {children}
+        {rightIcon && (
+        <span
+          className="ml-3 flex items-center "
+          style={{ minWidth: iconSize, minHeight: iconSize }}
+        >
+          {React.isValidElement(rightIcon) ? (
+          React.cloneElement(rightIcon, {
+            width: iconSize,
+            height: iconSize,
+          } as any)
+          ) : (
+          <span style={{ fontSize: iconSize }}>{rightIcon}</span>
           )}
-        </>
+        </span>
+        )}
+      </>
       )}
     </button>
   );

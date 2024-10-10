@@ -78,3 +78,24 @@ class ProfileViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        
+    def partial_update(self, request, *args, **kwargs):
+        
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        
+        # Update the profile fields
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        
+        # Update the user fields
+        user = instance.user
+        user.username = request.data.get('username', user.username)
+        user.email = request.data.get('email', user.email)
+        user.save()
+        
+        if getattr(instance, '_prefetched_objects_cache', None):
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
