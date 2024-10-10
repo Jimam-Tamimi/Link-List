@@ -25,7 +25,7 @@ export default function Auth() {
     "SIGN_IN" | "SIGN_UP"
   >("SIGN_IN");
   const auth = useSelector(
-    (state: RootState) => state.auth?.auth
+    (state: RootState) => state.auth?.data
   );
 
   const fadeAnimation = {
@@ -81,9 +81,9 @@ export default function Auth() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.25 }}
                   exit={{ opacity: 0, scale: 1.1 }}
-                  className="  "
+                  className=""
                 >
-                  <ModalHeader className="flex flex-row justify-between items-center">
+                  <ModalHeader className="flex flex-row items-center justify-between">
                     <h3 className="text-2xl tracking-wide">
                       {visibleComponent === "SIGN_IN" ? "Sign In" : "Sign Up"}
                     </h3>
@@ -99,8 +99,8 @@ export default function Auth() {
                       {visibleComponent === "SIGN_IN" ? <SignIn /> : <SignUp />}
                     </>
                   </ModalBody>
-                  <ModalFooter className="flex flex-col gap-5 justify-center items-center">
-                    <div className="flex justify-center items-center gap-14">
+                  <ModalFooter className="flex flex-col items-center justify-center gap-5">
+                    <div className="flex items-center justify-center gap-14">
                       <div className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
                         <Image
                           alt="Google logo"
@@ -129,7 +129,7 @@ export default function Auth() {
                         />
                       </div>
                     </div>
-                    <p className="tracking-wide font-semibold cursor-pointer text-blue-500 hover:text-blue-600 transition-all duration-300">
+                    <p className="font-semibold tracking-wide text-blue-500 transition-all duration-300 cursor-pointer hover:text-blue-600">
                       Forgot Password
                     </p>
                     <p>
@@ -140,7 +140,7 @@ export default function Auth() {
                             ? setVisibleComponent("SIGN_UP")
                             : setVisibleComponent("SIGN_IN");
                         }}
-                        className="tracking-wide font-semibold cursor-pointer text-blue-500 hover:text-blue-600 transition-all duration-300"
+                        className="font-semibold tracking-wide text-blue-500 transition-all duration-300 cursor-pointer hover:text-blue-600"
                       >
                         {"  "}Create One
                       </span>

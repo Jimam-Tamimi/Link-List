@@ -1,7 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .apis import LinkViewSet
+
+router = DefaultRouter()
+router.register(r'links', LinkViewSet)
 
 urlpatterns = [
-    # Define your app-specific URLs here
-    # Example: path('links/', views.LinkListView.as_view(), name='link-list'),
+    path('', include(router.urls)),
 ]

@@ -36,7 +36,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-            'user': user_serializer.data,
+            'profile': ProfileSerializer(user.profile).data
         })
 
 class CustomTokenRefreshView(TokenRefreshView):

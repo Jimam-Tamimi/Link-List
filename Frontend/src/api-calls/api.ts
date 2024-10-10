@@ -18,7 +18,7 @@ const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     const state = store.getState(); // Access current Redux state
-    const auth = state.auth.auth; // Get the auth data from Redux
+    const auth = state.auth.data; // Get the auth data from Redux
 
     if (auth?.access) {
       config.headers.Authorization = `JWT ${auth.access}`;
@@ -59,14 +59,14 @@ api.interceptors.response.use(
 
 export const refreshAuth = async (): Promise<AuthType | null> => {
   const state = store.getState(); // Access Redux state
-  const auth = state.auth.auth; // Get the auth data from Redux
+  const auth = state.auth; // Get the auth data from Redux
 
-  if (!auth?.refresh) return null; // If no refresh token, return null
+  if (!auth?.data?.access) return null; // If no refresh token, return null
 
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/api/account/token/refresh/`,
-      { refresh: auth?.refresh }
+      { refresh: auth?.data?.refresh }
     );
 
     const newAuth: AuthType = response.data;

@@ -18,10 +18,9 @@ interface ProfileType {
 }
 
 export type AuthType = {
-  access: string;
-  refresh: string;
-  user: UserType;
-  profile: ProfileType; // Added profile to AuthType
+  access: string | null;
+  refresh: string | null;
+  profile: ProfileType | null; // Added profile to AuthType
 };
 export type SignInFormDataType = {
    emailOrUsername: string;

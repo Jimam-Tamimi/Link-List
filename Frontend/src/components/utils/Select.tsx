@@ -13,7 +13,7 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
-  defaultValue?: Option; // Optional default value for the select
+  defaultValue?: Option | null; // Optional default value for the select
   label: String; // Optional default value for the select
   iconLabel?: ReactNode; 
   error?: string;
@@ -57,7 +57,7 @@ const Select: React.FC<SelectProps> = ({ options, defaultValue, onSelect, label,
   
   
   return (
-    <div className="w-full my-2.5">
+    <div className="w-full ">
       <label className="block mb-2 text-sm" htmlFor="1">
         {label}
       </label>

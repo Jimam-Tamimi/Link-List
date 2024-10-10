@@ -13,7 +13,7 @@ interface AuthRouteProps {
 
 const AuthRoute = ({ children, allowedUserType }: AuthRouteProps) => {
   const router = useRouter();
-  const auth = useSelector((state: RootState) => state.auth.auth);
+  const auth = useSelector((state: RootState) => state.auth?.data);
 
   useEffect(() => {
     const checkAuth = async () => {

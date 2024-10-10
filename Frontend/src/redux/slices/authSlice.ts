@@ -2,13 +2,13 @@ import { AuthType } from '@/api-calls/auth';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AuthState {
-  auth: AuthType | null;
+  data: AuthType | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: AuthState = {
-  auth: null,
+  data: null,
   loading: false,
   error: null,
 };
@@ -18,12 +18,12 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signInSuccess(state, action: PayloadAction<AuthType>) {
-      state.auth = action.payload;
+      state.data = action.payload;
       state.loading = false;
       state.error = null;
     },
     signOut(state) {
-      state.auth = null;
+      state.data = null;
       state.loading = false;
       state.error = null;
     },

@@ -35,7 +35,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div
-        className={`w-full flex flex-col items-start justify-center my-2.5 ${containerClass}`}
+        className={`w-full flex flex-col items-start justify-center   ${containerClass}`}
         style={containerStyle}
       >
         {label && (
@@ -47,7 +47,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className="relative flex items-center w-full">
           {leftIcon && (
             <span
-              className="absolute left-3 flex z-10 items-center"
+              className="absolute z-10 flex items-center left-3"
               style={{ minWidth: defaultIconSize, minHeight: defaultIconSize }}
             >
               {React.isValidElement(leftIcon) ? (
@@ -73,7 +73,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           />
           {rightIcon && (
             <span
-              className="absolute right-3 z-10 flex items-center"
+              className="absolute z-10 flex items-center right-3"
               style={{ minWidth: defaultIconSize, minHeight: defaultIconSize }}
             >
               {React.isValidElement(rightIcon) ? (
@@ -89,7 +89,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <p
-          className={`text-red-500 font-bold tracking-wide text-sm mt-1 ${
+          className={`text-red-500 font-bold tracking-wide text-xs mt-1 ${
             error ? "visible" : "invisible" 
           } mt-1 transition-all duration-100 ease-in-out `}
         >
