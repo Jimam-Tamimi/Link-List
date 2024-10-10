@@ -7,9 +7,14 @@ import SignIn from "./SignIn";
 import { MdOutlinePreview } from "react-icons/md";
 import { CiViewList } from "react-icons/ci";
 import SignUp from "./SignUp";
-import { FiExternalLink } from "react-icons/fi";
+import { FiEdit, FiExternalLink } from "react-icons/fi";
+import { Link } from "@/i18n/routing";
 
-export default function Header() {
+export default function Header({
+  previewHeader = false,
+}: {
+  previewHeader?: boolean;
+}) {
   return (
     <>
       <header className="  p-4   shadow-md dark:shadow-[#ffffff30]">
@@ -17,13 +22,24 @@ export default function Header() {
           <h1 className="text-3xl font-bold bg-gradient-to-br  from-[#02103d] to-[#1e00a3] dark:from-[#eaefff] dark:to-[#ffcfe4]   text-transparent bg-clip-text ">
             Link List
           </h1>
-          <Navigation />
+          {!previewHeader ? <Navigation /> : ""}
+
           <div className="flex  justify-center items-center gap-10">
             <ThemeToggler />
-            <Button size="md" 
-            rightIcon={<FiExternalLink               size={24}  />}
-            >Preview</Button>
-            <SignUp />
+            {previewHeader ? (
+              <Link href={"/links"}>
+                <Button size="md" rightIcon={<FiEdit  size={24} />}>
+                  Create Your Own Profile
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Button size="md" rightIcon={<FiExternalLink size={24} />}>
+                  Preview
+                </Button>
+                <SignUp />
+              </>
+            )}
           </div>
         </div>
       </header>

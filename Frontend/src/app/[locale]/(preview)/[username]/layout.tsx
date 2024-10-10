@@ -15,11 +15,8 @@ export default async function Layout({
 }>) {
   return (
     <>
-      <ThemeProvider defaultTheme="system" enableSystem attribute="class">
-        <div className="absolute  left-[212px] top-[212px] shadow-[0px_0px_300px_135px_#2563eb] bg-transparent z-0"></div>
-        <div className="absolute   right-[0] bottom-[0] shadow-[0px_143px_12810px_297px_#eb25a67d] bg-transparent z-0"></div>
+        <Header previewHeader />
         {children}
-      </ThemeProvider>
     </>
   );
 }

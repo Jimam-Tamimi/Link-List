@@ -38,7 +38,7 @@ export default function SignUp() {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-row justify-between items-center ">
-                <h3 className="text-2xl tracking-wide">Sign In</h3>
+                <h3 className="text-2xl tracking-wide">Create An Account</h3>
                 <div
                   onClick={onOpenChange.bind(false)}
                   className="p-0.5 left-0.5 relative hover:scale-110 active:scale-90 transition-all duration-300  ease-in-out cursor-pointer   rounded-full"
@@ -46,7 +46,7 @@ export default function SignUp() {
                   <MdOutlineClose size={25} />
                 </div>
               </ModalHeader>
-              <ModalBody className="flex flex-col gap-6 justify-center items-center">
+              <ModalBody className="flex flex-col gap-6 justify-center items-center mb-3">
                 <Input leftIcon={<MdAlternateEmail  />} type="text" label="Username" required />
                 <Input leftIcon={<HiOutlineMail />} type="text" label="Email" required />
                 <Input leftIcon={<RiLockPasswordLine  />} type="Password" label="Password" required />
@@ -58,8 +58,6 @@ export default function SignUp() {
                 >
                   Submit
                 </Button>
-              </ModalBody>
-              <ModalFooter className="flex flex-col  gap-5 justify-center items-center">
                 <div className="flex justify-center items-center gap-14">
                   <div className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer ">
                     <Image
@@ -95,13 +93,13 @@ export default function SignUp() {
                 <p className="flex justify-center items-center gap-2">
                   <p>
 
-                  Don't Have an Account?
+                  Already Have an Account?
                   </p>
                   <p className=" tracking-wide font-semibold cursor-pointer text-blue-500 hover:text-[#ff0040]   hover:scale-105 active:scale-100  transition-all duration-300">
-                    Create One
+                    Sign In
                   </p>
                 </p>
-              </ModalFooter>
+              </ModalBody>
             </>
           )}
         </ModalContent>
