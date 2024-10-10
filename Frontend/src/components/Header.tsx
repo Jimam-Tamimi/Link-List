@@ -3,12 +3,13 @@ import Navigation from "./Navigation";
 import ThemeToggler from "./ThemeToggler";
 import Button from "./utils/Button";
 import Modal from "./utils/Modal";
-import SignIn from "./SignIn";
+import SignIn from "./Auth/SignIn";
 import { MdOutlinePreview } from "react-icons/md";
 import { CiViewList } from "react-icons/ci";
-import SignUp from "./SignUp";
+import SignUp from "./Auth/SignUp";
 import { FiEdit, FiExternalLink } from "react-icons/fi";
 import { Link } from "@/i18n/routing";
+import Auth from "./Auth";
 
 export default function Header({
   previewHeader = false,
@@ -37,7 +38,7 @@ export default function Header({
                 <Button size="md" rightIcon={<FiExternalLink size={24} />}>
                   Preview
                 </Button>
-                <SignUp />
+                <Auth />
               </>
             )}
           </div>

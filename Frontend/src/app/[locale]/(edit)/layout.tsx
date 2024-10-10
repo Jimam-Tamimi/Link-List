@@ -86,6 +86,7 @@ export default async function RootLayout({
             exit={{ opacity: 0, scale: 1.1 }}
             mode="popLayout"
             className="  lg:w-8/12 xl:w-[67%]  w-full"
+
           >
             <div className="gap-8 flex flex-col justify-center  *:tracking-wide    rounded-lg px-8 py-10 dark:shadow-[0_0px_15px_#ffffff20]    shadow-[0_0px_15px_#00000010]  backdrop-blur-[5px]   bg-[rgba(255,255,255,0.05)]">
               {children}
