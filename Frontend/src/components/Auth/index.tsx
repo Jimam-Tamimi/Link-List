@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../utils/Button";
 import {
   Modal,
@@ -14,24 +14,52 @@ import SignUp from "./SignUp";
 import { MdOutlineClose } from "react-icons/md";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "@/redux/store";
+import { signOut } from "@/redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 export default function Auth() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [visibleComponent, setVisibleComponent] = useState<
     "SIGN_IN" | "SIGN_UP"
   >("SIGN_IN");
+  const auth = useSelector(
+    (state: RootState) => state.auth?.auth
+  );
 
   const fadeAnimation = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
     exit: { opacity: 0 },
   };
+ 
+ 
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    
+    if(auth?.access){
+      console.log("first")
+      onOpenChange.apply(false)
+    }
+    return () => {
+      
+    }
+  }, [auth?.access])
+  
+  
   return (
     <>
-      <Button variant="transparent" onClick={onOpen}>
-        Sign In
-      </Button>
+      {!auth?.access ? (
+        <Button variant="transparent" onClick={onOpen}>
+          Sign In
+        </Button>
+      ) : 
+        <Button variant="transparent" onClick={() => {dispatch(signOut()); toast.success("Successfully Signed Out")}}>
+          Sign Out
+        </Button>
+    }
 
       <Modal
         size="lg"
@@ -40,7 +68,7 @@ export default function Auth() {
         classNames={{
           base: "dark:shadow-[0_0px_15px_#ffffff20] shadow-[0_0px_15px_#00000010] backdrop-blur-[15px] bg-[#caddff29] dark:bg-[rgba(255,255,255,0.1)] py-2",
         }}
-        isOpen={isOpen}
+        isOpen={isOpen && !auth?.access}
         onOpenChange={onOpenChange}
       >
         <ModalContent className="overflow-hidden">
@@ -69,13 +97,6 @@ export default function Auth() {
                   <ModalBody className="gap-6">
                     <>
                       {visibleComponent === "SIGN_IN" ? <SignIn /> : <SignUp />}
-                      <Button
-                        className="w-full hover:!scale-100 active:!scale-95 transition-all duration-300 ease-in-out mt-1"
-                        size="sm"
-                        onClick={onClose}
-                      >
-                        Submit
-                      </Button>
                     </>
                   </ModalBody>
                   <ModalFooter className="flex flex-col gap-5 justify-center items-center">

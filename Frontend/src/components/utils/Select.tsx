@@ -8,6 +8,7 @@ interface Option {
   value: string;
   label: string;
   icon?: ReactNode; // Optional icon property for each option
+  
 }
 
 interface SelectProps {
@@ -15,10 +16,11 @@ interface SelectProps {
   defaultValue?: Option; // Optional default value for the select
   label: String; // Optional default value for the select
   iconLabel?: ReactNode; 
+  error?: string;
   onSelect?: (option: Option) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ options, defaultValue, onSelect, label, iconLabel }) => {
+const Select: React.FC<SelectProps> = ({ options, defaultValue, onSelect, label, iconLabel, error }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<Option | null>(
     defaultValue || null
@@ -55,7 +57,7 @@ const Select: React.FC<SelectProps> = ({ options, defaultValue, onSelect, label,
   
   
   return (
-    <div className="w-full">
+    <div className="w-full my-2.5">
       <label className="block mb-2 text-sm" htmlFor="1">
         {label}
       </label>
@@ -109,6 +111,13 @@ const Select: React.FC<SelectProps> = ({ options, defaultValue, onSelect, label,
           )}
         </AnimatePresence>
       </div>
+      <p
+          className={`text-red-500 font-bold tracking-wide text-sm mt-1 ${
+            error ? "visible" : "invisible" 
+          } mt-1 transition-all duration-100 ease-in-out `}
+        >
+          {error ? error : "_"}
+        </p>
     </div>
   );
 };

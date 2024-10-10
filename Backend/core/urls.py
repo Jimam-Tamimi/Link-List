@@ -6,7 +6,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('LinkSharing.urls')),  # Include your app's URLs
-    path('auth/', include('Auth.urls')),        # Include your Auth app's URLs
+    path('api/auth/', include('Auth.urls')),        # Include your Auth app's URLs
 ]
 
 if settings.DEBUG:

@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Navigation from "./Navigation";
 import ThemeToggler from "./ThemeToggler";
@@ -16,6 +17,9 @@ export default function Header({
 }: {
   previewHeader?: boolean;
 }) {
+
+
+  
   return (
     <>
       <header className="  p-4   shadow-md dark:shadow-[#ffffff30]">

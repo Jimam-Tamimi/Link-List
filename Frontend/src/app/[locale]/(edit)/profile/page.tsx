@@ -3,13 +3,13 @@ import ProfileForm from "./component/ProfileForm";
 
 
 
-export default async function Home({ params }: { params: { locale: string } }) {
+export default  function Home({ params }: { params: { locale: string } }) {
   const { locale } = params;
 
-  const response = await axios.get(
-    `http://127.0.0.1:8000/static/content/${locale}/home.json`
-  );
-  const content = response.data;
+  // const response = await axios.get(
+  //   `http://127.0.0.1:8000/static/content/${locale}/home.json`
+  // );
+  // const content = response.data;
 
   return (
     <>

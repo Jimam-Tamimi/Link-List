@@ -1,5 +1,5 @@
 import React from "react";
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, HashLoader } from "react-spinners";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
@@ -86,11 +86,11 @@ const Button: React.FC<ButtonProps> = ({
       `}
     >
       {isLoading ? (
-        loadingComponent || <ClipLoader size={20} color="#ffffff" />
+        loadingComponent || <HashLoader  size={20} color="#ffffff" />
       ) : (
         <>
           {leftIcon && (
-            <span
+            <span 
               className="mr-3 flex items-center"
               style={{ minWidth: iconSize, minHeight: iconSize }}
             >
@@ -112,8 +112,8 @@ const Button: React.FC<ButtonProps> = ({
             >
               {React.isValidElement(rightIcon) ? (
                 React.cloneElement(rightIcon, {
-                  minWidth: iconSize,
-                  minHeight: iconSize,
+                  weight: iconSize,
+                  height: iconSize,
                 } as any)
               ) : (
                 <span style={{ fontSize: iconSize }}>{rightIcon}</span>
