@@ -51,6 +51,10 @@ export const fetchMyProfile = async (id: number): Promise<ProfileType> => {
   const response = await api.get(`/auth/profiles/${id}/`);
   return response.data ;
 };
+export const fetchProfileByUsername = async (username: string): Promise<ProfileType> => {
+  const response = await api.post(`/auth/profiles/get-profile-by-username/`, { username });
+  return response.data ;
+};
 
 
 export const updateMyProfile = async (profileData: Partial<ProfileType>, id:number): Promise<ProfileType> => {

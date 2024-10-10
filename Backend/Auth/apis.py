@@ -6,6 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from django.contrib.auth import authenticate, get_user_model
 from .serializers import ProfileSerializer, UserSerializer
+from rest_framework.decorators import action
 from .models import Profile
 
 class UserViewSet(ModelViewSet):
@@ -99,3 +100,19 @@ class ProfileViewSet(ModelViewSet):
             instance._prefetched_objects_cache = {}
 
         return Response(serializer.data)
+    
+    
+    
+    
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny], url_path='get-profile-by-username')
+    def get_profile_by_username(self, request):
+        username = request.data.get('username')
+        if not username:
+            return Response({'detail': 'Username is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            profile = Profile.objects.get(user__username=username)
+            serializer = self.get_serializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Profile.DoesNotExist:
+            return Response({'detail': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)

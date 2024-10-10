@@ -5,7 +5,6 @@ import { getAuthData, removeAuthData, storeAuthData } from '@/storage/auth';
 import { store } from '@/redux/store';
 import { signInSuccess, signOut } from '@/redux/slices/authSlice';
 import { AuthType } from './auth';
-console.log(process.env.NEXT_PUBLIC_API_URL) 
 const api = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`, // Set this in your environment variables
   headers: {

@@ -3,6 +3,7 @@
 import {
   AuthType,
   fetchMyProfile,
+  fetchProfileByUsername,
   ProfileType,
   signIn,
   signUp,
@@ -121,6 +122,15 @@ export const useAuthRedirect = () => {
   return isLoading;
 };
 
+export const useProfileByUsername = (userName:string) => {
+ 
+  return useQuery({
+    queryKey: ["profile", userName],
+    queryFn: () => fetchProfileByUsername(userName ),
+    enabled: !!userName,
+
+  });
+};
 export const useMyProfile = () => {
   const profileId = useSelector(
     (state: RootState) => state.auth.data?.profile?.id

@@ -11,6 +11,8 @@ import SignUp from "./Auth/SignUp";
 import { FiEdit, FiExternalLink } from "react-icons/fi";
 import { Link } from "@/i18n/routing";
 import Auth from "./Auth";
+import { useSelector } from 'react-redux';
+import { RootState } from "@/redux/store";
 
 export default function Header({
   previewHeader = false,
@@ -19,6 +21,7 @@ export default function Header({
 }) {
 
 
+  const userName = useSelector((state: RootState) => state.auth?.data?.profile?.username);
   
   return (
     <>
@@ -39,9 +42,11 @@ export default function Header({
               </Link>
             ) : (
               <>
+              <Link target="_blank" href={`/${userName}`}>
                 <Button size="md" rightIcon={<FiExternalLink size={24} />}>
                   Preview
                 </Button>
+              </Link>
                 <Auth />
               </>
             )}

@@ -26,7 +26,7 @@ export default function PhonePreview() {
             <div>
               <Image
                 alt="photo frame"
-                src={myProfile?.data?.profile_image}
+                src={myProfile?.data?.profile_image as any}
                 width={800}
                 height={800}
                 className="object-cover object-center w-24 h-24 rounded-full"

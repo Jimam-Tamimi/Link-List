@@ -11,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 import ReduxProvider from "@/hoc/ReduxProvider";
 import { QueryClient } from "@tanstack/react-query";
 import QueryClientProvider from "@/hoc/QueryClientProvider";
-import GlassToastContainer from "@/hoc/GlassToastContainer";
 
 const inter = Inter({
   subsets: ["latin"], // Add other subsets if needed
@@ -40,7 +39,8 @@ export default async function RootLayout({
       <body
         className={` min-h-screen relative overflow-x-hidden bg-gradient-to-br from-[#eaefff] to-[rgb(197,211,255)] dark:from-[#020e32] dark:to-[rgb(50,0,23)] dark:text-white   ${inter.className} `}
       >
-<GlassToastContainer/>
+        <ToastContainer  draggable />
+
         <Image
           layout="fill"
           style={{ zIndex: "-1", objectFit: "cover", objectPosition: "center" }}

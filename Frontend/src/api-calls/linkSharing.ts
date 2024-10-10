@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import api from './api';
 
@@ -17,7 +18,7 @@ export interface LinkType {
 
 
 export const getLinksByUsername = async (username: string): Promise<LinkType[]> => {
-  const response = await api.post('/links/get-links-for-username/', { username });
+  const response = await axios.post('/links/get-links-for-username/', { username });
   return response.data;
 };
 
