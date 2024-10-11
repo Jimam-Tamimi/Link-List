@@ -22,7 +22,7 @@ export default async function RootLayout({
       <Header />
 
       <div className="flex items-center justify-between ">
-        <div className="container relative flex flex-col items-start justify-between gap-10 mx-auto lg:flex-row lg:py-20 py-14 lg:gap-0 ">
+        <div className="container relative flex flex-col items-center justify-between gap-10 mx-auto lg:flex-row lg:py-20 py-14 lg:gap-0 ">
           {/* Mobile Mockup Section */}
 
         <PhonePreview />
