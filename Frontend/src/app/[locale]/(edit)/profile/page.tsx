@@ -1,14 +1,11 @@
-"use client"
+"use client";
 
 import axios from "axios";
-import ProfileForm from "./component/ProfileForm"; 
+import ProfileForm from "./component/ProfileForm";
 
-
-
-export default  function page({ params }: { params: { locale: string } }) {
+export default function page({ params }: { params: { locale: string } }) {
   const { locale } = params;
 
- 
   return (
     <>
       <div className="space-y-2">
@@ -17,7 +14,7 @@ export default  function page({ params }: { params: { locale: string } }) {
           Edit your profile below and then share it with the world!
         </p>
       </div>
-    <ProfileForm />
+      <ProfileForm />
     </>
   );
 }

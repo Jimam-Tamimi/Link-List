@@ -33,13 +33,13 @@ export default function PhonePreview() {
             </div>
             <div className="flex flex-col items-center justify-center gap-2 font-semibold tracking-wider ">
               <h1 className="text-[1.3rem]  opacity-80">
-                {myProfile?.data?.username}
+                @{myProfile?.data?.username}
               </h1>
               <h1 className="text-[1.4rem]  capitalize">
                 {myProfile?.data?.first_name} {myProfile?.data?.last_name}
               </h1>
             </div>
-            <p className="text-center mb-2 leading-loose capitalize max-w-[900px]">
+            <p className="text-center text-sm mb-2 leading-loose capitalize max-w-[900px]">
               {myProfile?.data?.bio}
             </p>
             {links?.map((link, i) => {
@@ -63,7 +63,7 @@ export default function PhonePreview() {
                       color: selectedPlatform?.text_color,
                     } as any
                   }
-                  className={`  font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 py-5 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out`}
+                  className={`  font-semibold tracking-wide cursor-pointer flex justify-between items-center px-4 py-4 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out my-1`}
                 >
                   <div className="flex items-center justify-center gap-3 text-lg">
                     {/* <FaGithub size={27} /> */}

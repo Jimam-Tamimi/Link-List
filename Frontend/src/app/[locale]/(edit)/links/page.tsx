@@ -321,6 +321,7 @@ export default function Home({ params }: { params: { locale: string } }) {
             return newOrder;
           });
         }}
+        // draggable={false}
       >
         {links?.map((link, i) => (
           <Reorder.Item className="" key={link?.id} value={link}>
@@ -353,26 +354,6 @@ const UrlForm = React.memo(({ link, i }: { link: LinkType; i: number }) => {
   console.log(getValues());
   console.log(watch());
   console.log(oldLink);
-
-  useEffect(() => {
-    const subscription = watch((value) => {
-      const hasChanges = Object.keys(value).some(
-        (key) => value[key as keyof LinkType] !== link[key as keyof LinkType]
-      );
-
-      if (hasChanges) {
-        queryClient.setQueryData(
-          ["links", username],
-          (oldData: LinkType[] | undefined) =>
-            oldData?.map((oldLink) =>
-              oldLink.id === link.id ? { ...oldLink, ...value } : oldLink
-            )
-        );
-      }
-    });
-
-    return subscription.unsubscribe;
-  }, [watch()]);
 
   const auth = useSelector((state: RootState) => state.auth?.data);
   const username = auth?.profile?.username || "";
@@ -422,6 +403,20 @@ const UrlForm = React.memo(({ link, i }: { link: LinkType; i: number }) => {
   };
 
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      queryClient.setQueryData(
+        ["links", username],
+        (oldData: LinkType[] | undefined) =>
+          oldData?.map((oldLink) =>
+            oldLink.id === link.id ? watch() : oldLink
+          )
+      );
+    });
+
+    return subscription.unsubscribe;
+  }, [watch(), queryClient]);
 
   return (
     <>

@@ -83,6 +83,7 @@ class ProfileViewSet(ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         
         partial = kwargs.pop('partial', False)
+        print(request.data)
         instance = self.get_object()
         
         # Update the profile fields

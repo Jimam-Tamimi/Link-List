@@ -144,12 +144,12 @@ export default function ProfilePictureUploader({ onUpload }: ProfilePictureUploa
       </div>
 
       {/* Preview of Cropped Image Below the Upload Tool */}
-      {croppedImageUrl && (
+      {/* {croppedImageUrl && (
         <div style={{ marginTop: "20px", textAlign: "center" }}>
           <h4>Preview:</h4>
           <img src={croppedImageUrl} alt="Cropped Profile Preview" className="" style={{ maxWidth: "200px", borderRadius: "50%" }} />
         </div>
-      )}
+      )} */}
 
       <Modal
         size="3xl"

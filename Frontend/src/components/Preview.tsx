@@ -202,10 +202,10 @@ export default async function Preview({
   // console.log(username)
   // const { data: links, isPending } = useLinksByUsername(username);
   // const {data: profile,} = useProfileByUsername(username);
-  const response = await await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/links/get-links-for-username/`, { username });
+  const response = await  axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/links/get-links-for-username/`, { username });
   const links : LinkType[] = response.data;
 
-  const profileResponse = await await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/profiles/get-profile-by-username/`, { username });
+  const profileResponse = await  axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/profiles/get-profile-by-username/`, { username });
   const profile : ProfileType = profileResponse.data;
 
   return (

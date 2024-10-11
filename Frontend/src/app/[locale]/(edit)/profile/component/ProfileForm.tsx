@@ -1,6 +1,6 @@
 "use client";
 import ProfilePictureUploader from "@/components/ProfilePictureUploader";
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/components/utils/Button";
 import ThemeToggler from "@/components/ThemeToggler";
 import { Link } from "@/i18n/routing";
@@ -36,8 +36,11 @@ import { useMyProfile, useUpdateProfile } from "@/hooks/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ProfileType } from "@/api-calls/auth";
 import api from "@/api-calls/api";
-import loading from '../loading';
+import loading from "../loading";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 interface ProfileFormInputs {
   first_name: string;
@@ -56,11 +59,17 @@ export default function ProfileForm() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
     reset,
   } = useForm<ProfileFormInputs>();
+
+  const [oldMyProfileData, setOldMyProfileData] = useState<ProfileType >()
+  
+  
   React.useEffect(() => {
-    if (myProfile?.data) {
+    if (myProfile?.isFetched) {
+      setOldMyProfileData(myProfile?.data);
       reset({
         bio: myProfile?.data?.bio ? myProfile?.data?.bio : "",
         first_name: myProfile?.data?.first_name || "",
@@ -69,31 +78,32 @@ export default function ProfileForm() {
         email: myProfile?.data?.email || "",
       });
     }
-  }, [myProfile?.data, reset]);
+  }, [myProfile?.isFetched]);
 
-  console.log(myProfile?.data);
-
+  
+  
   // Handle form submission
   const onSubmit = async (data: ProfileFormInputs) => {
+    console.log(myProfile?.data);
     console.log(data);
-    const formData  = new FormData();
+    const formData = new FormData();
 
-    // Append form data to send to the backend 
-    if (data.bio !== myProfile?.data?.bio) {
+    // Append form data to send to the backend
+    if (data.bio !== oldMyProfileData?.bio) {
       formData.append("bio", data.bio);
     }
-    if (data.first_name !== myProfile?.data?.first_name) {
+    if (data.first_name !== oldMyProfileData?.first_name) {
       formData.append("first_name", data.first_name);
     }
-    if (data.last_name !== myProfile?.data?.last_name) {
+    if (data.last_name !== oldMyProfileData?.last_name) {
       formData.append("last_name", data.last_name);
     }
-    if (data.username !== myProfile?.data?.username) {
+    if (data.username !== oldMyProfileData?.username) {
       formData.append("username", data.username);
     }
-    if (data.email !== myProfile?.data?.email) {
+    if (data.email !== oldMyProfileData?.email) {
       formData.append("email", data.email);
-    } 
+    }
     if (data?.profile_image) {
       formData.append("profile_image", data.profile_image);
     }
@@ -102,18 +112,41 @@ export default function ProfileForm() {
     // if (data.profile_image && data.profile_image.length > 0) {
     //   formData.append("profile_image", data.profile_image[0]); // Only select the first image
     // }
-
+    console.log(formData?.values());
 
     await updateProfile?.mutateAsync(formData as any, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        reset(data);
         toast.success("Profile updated successfully!");
       },
       onError: (error: any) => {
         toast.error(`Failed to update profile!`);
-      }
+      },
     });
- 
   };
+
+  const queryClient = useQueryClient();
+
+  const profileId = useSelector(
+    (state: RootState) => state.auth.data?.profile?.id
+  );
+  React.useEffect(() => {
+    // Store the watched field values in the QueryClient
+
+    const subscription = watch((value) => {
+      if (value.profile_image && value.profile_image instanceof File) {
+        const file = value.profile_image;
+        const imageUrl = URL.createObjectURL(file);
+        value.profile_image = imageUrl as any;
+        console.log("Image URL:", imageUrl);
+      } else {
+        value.profile_image = myProfile?.data?.profile_image as any;
+      }
+      queryClient.setQueryData(["profile", profileId], value);
+    });
+
+    return subscription.unsubscribe;
+  }, [watch()]);
 
   return (
     <>
@@ -167,6 +200,7 @@ export default function ProfileForm() {
           size="sm"
           type="submit"
           isLoading={updateProfile?.isPending}
+          
         >
           Save
         </Button>

@@ -153,10 +153,7 @@ export const useUpdateProfile = () => {
     onSuccess: (data: ProfileType) => {
       queryClient.setQueryData(
         ["profile", profileId],
-        (oldData: AuthType | undefined) => {
-          console.log(data);
-          console.log(oldData);
-          console.log("oldData");
+        (oldData: AuthType | undefined) => { 
           if (!oldData) return;
           return { ...oldData, ...data };
         }
