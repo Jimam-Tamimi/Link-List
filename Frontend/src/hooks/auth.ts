@@ -93,35 +93,33 @@ export const useSignOut = () => {
   return signOutFn;
 };
 
-export const useAuthRedirect = () => {
+export const useCheckAuth = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const auth = useSelector((state: RootState) => state.auth.data);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        if (!auth?.access || !checkTokenValidity(auth?.access)) {
+          const newAuth = await refreshAuth();
+          if (!newAuth?.access || !checkTokenValidity(newAuth?.access)) {
+            dispatch(signOut())
+          }
+        }
+      } catch (error) {
+        dispatch(signOut())
+      } finally {
+        setIsLoading(false); // Set loading to false after handling redirect
+      }
+    };
 
-  // useEffect(() => {
-  //   const checkToken = async () => {
-  //     try {
-  //       const auth = await getAuthData();
-  //       if (!auth?.access || !checkTokenValidity(auth?.access)) {
-  //         const newAuth = await refreshAuth();
-  //         if (!newAuth?.access || !checkTokenValidity(newAuth?.access)) {
-  //           await removeAuthData();
-  //           router.replace('/auth/sign-in'); // Redirect to sign-in page
-  //           return;
-  //         }
-  //       }
-  //     } catch (error) {
-  //       await removeAuthData();
-  //       router.replace('/auth/sign-in');
-  //     } finally {
-  //       setIsLoading(false); // Set loading to false after handling redirect
-  //     }
-  //   };
-
-  //   checkToken();
-  // }, [router]);
+    checkToken();
+  }, [router]);
   return isLoading;
 };
 
+ 
 export const useProfileByUsername = (userName:string) => {
  
   return useQuery({

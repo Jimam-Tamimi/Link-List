@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import ReduxProvider from "@/hoc/ReduxProvider";
 import { QueryClient } from "@tanstack/react-query";
 import QueryClientProvider from "@/hoc/QueryClientProvider";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   subsets: ["latin"], // Add other subsets if needed
@@ -36,6 +37,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      
       <body
         className={` min-h-screen relative overflow-x-hidden bg-gradient-to-br from-[#eaefff] to-[rgb(197,211,255)] dark:from-[#020e32] dark:to-[rgb(50,0,23)] dark:text-white   ${inter.className} `}
       >
@@ -47,13 +49,15 @@ export default async function RootLayout({
           src={"/images/map.webp"}
           className="mix-blend-soft-light blur-[0.5px] dark:mix-blend-color-dodge "
           alt={"World Map Image"}
-        />
+          />
         <NextIntlClientProvider messages={messages}>
+      <ThemeProvider defaultTheme="system" enableSystem attribute="class">
           <NextUIProvider>
             <QueryClientProvider>
               <ReduxProvider>{children}</ReduxProvider>
             </QueryClientProvider>
           </NextUIProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

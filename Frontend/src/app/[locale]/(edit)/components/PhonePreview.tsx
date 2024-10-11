@@ -2,7 +2,7 @@
 import { useLinksForMe } from "@/hooks/linkSharing";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { FaGithub, FaLink } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { socialMediaOptions } from "../links/page";
@@ -11,7 +11,6 @@ import { useMyProfile } from "@/hooks/auth";
 export default function PhonePreview() {
   const { data: links } = useLinksForMe();
   const myProfile = useMyProfile();
-
   return (
     <>
       <div className="lg:w-[30%] xl:w-[27%]   w-6/12 ">
@@ -33,50 +32,56 @@ export default function PhonePreview() {
               />
             </div>
             <div className="flex flex-col items-center justify-center gap-2 font-semibold tracking-wider ">
-              <h1 className="text-[1.3rem]  opacity-80">{myProfile?.data?.username}</h1>
-              <h1 className="text-[1.4rem]  capitalize">{myProfile?.data?.first_name} {myProfile?.data?.last_name}</h1>
+              <h1 className="text-[1.3rem]  opacity-80">
+                {myProfile?.data?.username}
+              </h1>
+              <h1 className="text-[1.4rem]  capitalize">
+                {myProfile?.data?.first_name} {myProfile?.data?.last_name}
+              </h1>
             </div>
             <p className="text-center mb-2 leading-loose capitalize max-w-[900px]">
-              {myProfile?.data?.bio} 
+              {myProfile?.data?.bio}
             </p>
-            {links?.map((link, i) => (
-              <Link
-                href={link?.url as any}
-                target="_blank"
-                className="bg-black text-white font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 py-5 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out"
-              >
-                <div className="flex items-center justify-center gap-3 text-lg">
-                  {/* <FaGithub size={27} /> */}
+            {links?.map((link, i) => {
+              const selectedPlatform = socialMediaOptions.find(
+                (option) => option.value === link?.platform
+              ) || {
+                label: link?.platform,
+                value: link?.platform,
+                bg_color: link?.bg_color,
+                icon: <FaLink />,
+              };
 
-                  {
-                    React.cloneElement(
-                      (
-                        socialMediaOptions.find(
-                          (option) => option.value === link?.platform
-                        ) || {
-                          label: link?.platform,
-                          value: link?.platform,
-                          icon: <FaLink />,
-                        }
-                      )?.icon,
+              return (
+                <Link
+                  href={link?.url as any}
+                  target="_blank"
+                  style={{backgroundColor: selectedPlatform?.bg_color}}
+                  className={` text-white font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 py-5 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out`}
+                >
+                  <div className="flex items-center justify-center gap-3 text-lg">
+                    {/* <FaGithub size={27} /> */}
+
+                    {React.cloneElement(
+                        selectedPlatform.icon || <FaLink />,
                       {
                         size: 27, // Get icon size
                       } as any
-                    )
-                  }
+                    )}
 
-                  <p>
-                    {link?.platform
-                      .split(" ")
-                      .map(
-                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
-                      )
-                      .join(" ")}
-                  </p>
-                </div>
-                <FaArrowRightLong size={22} />
-              </Link>
-            ))}
+                    <p>
+                      {link?.platform
+                        .split(" ")
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(" ")}
+                    </p>
+                  </div>
+                  <FaArrowRightLong size={22} />
+                </Link>
+              );
+            })}
           </div>
           {/* <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full">
                 <Image
