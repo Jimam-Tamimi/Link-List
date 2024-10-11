@@ -48,7 +48,8 @@ export default function PhonePreview() {
               ) || {
                 label: link?.platform,
                 value: link?.platform,
-                bg_color: link?.bg_color,
+                bg_color: "#f94877",
+                text_color: "#ffffff",
                 icon: <FaLink />,
               };
 
@@ -56,8 +57,8 @@ export default function PhonePreview() {
                 <Link
                   href={link?.url as any}
                   target="_blank"
-                  style={{backgroundColor: selectedPlatform?.bg_color}}
-                  className={` text-white font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 py-5 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out`}
+                  style={{backgroundColor: selectedPlatform?.bg_color, color: selectedPlatform?.text_color} as any}
+                  className={`  font-semibold tracking-wide cursor-pointer flex justify-between items-center p-6 py-5 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out`}
                 >
                   <div className="flex items-center justify-center gap-3 text-lg">
                     {/* <FaGithub size={27} /> */}

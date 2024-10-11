@@ -34,184 +34,184 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp, FaYoutube, FaLinkedin, FaGoogle, FaGithub, FaSnapchat, FaReddit, FaPinterest, FaTiktok, FaTwitch, FaDiscord, FaApple, FaAmazon, FaMicrosoft, FaSkype, FaQuora, FaSoundcloud, FaDribbble, FaMedium, FaVimeo, FaTelegram, FaLink } from "react-icons/fa";
 
 
-
 export const socialMediaOptions = [
   {
     value: "facebook",
     label: "Facebook",
     icon: <FaFacebook />,
-    bg_color: "#1877f2", // Darker Facebook color
-    textColor: "#ffffff", // White text
+    bg_color: "#1877f2",
+    text_color: "#ffffff",
   },
   {
     value: "twitter",
     label: "Twitter",
     icon: <FaTwitter />,
-    bg_color: "#1da1f2", // Darker Twitter color
-    textColor: "#ffffff", // White text
+    bg_color: "#1da1f2",
+    text_color: "#ffffff",
   },
   {
     value: "instagram",
     label: "Instagram",
     icon: <FaInstagram />,
-    bg_color: "#c32aa3", // Darker Instagram color
-    textColor: "#ffffff", // White text
+    bg_color: "#c32aa3",
+    text_color: "#ffffff",
   },
   {
     value: "whatsapp",
     label: "WhatsApp",
     icon: <FaWhatsapp />,
-    bg_color: "#25d366", // Darker WhatsApp color
-    textColor: "#ffffff", // White text
+    bg_color: "#25d366",
+    text_color: "#ffffff",
   },
   {
     value: "youtube",
     label: "Youtube",
     icon: <FaYoutube />,
-    bg_color: "#ff0000", // Darker YouTube color
-    textColor: "#ffffff", // White text
+    bg_color: "#ff0000",
+    text_color: "#ffffff",
   },
   {
     value: "linkedin",
     label: "LinkedIn",
     icon: <FaLinkedin />,
-    bg_color: "#0a66c2", // Darker LinkedIn color
-    textColor: "#ffffff", // White text
+    bg_color: "#0a66c2",
+    text_color: "#ffffff",
   },
   {
     value: "google",
     label: "Google",
     icon: <FaGoogle />,
-    bg_color: "#db4437", // Darker Google color
-    textColor: "#ffffff", // White text
+    bg_color: "#db4437",
+    text_color: "#ffffff",
   },
   {
     value: "github",
     label: "GitHub",
     icon: <FaGithub />,
-    bg_color: "black", // Darker GitHub color
-    textColor: "#ffffff", // White text
+    bg_color: "black",
+    text_color: "#ffffff",
   },
   {
     value: "snapchat",
     label: "Snapchat",
     icon: <FaSnapchat />,
-    bg_color: "#fffc00", // Darker Snapchat color
-    textColor: "#333333", // Dark text for contrast
+    bg_color: "#fffc00",
+    text_color: "#333333",
   },
   {
     value: "reddit",
     label: "Reddit",
     icon: <FaReddit />,
-    bg_color: "#ff5700", // Darker Reddit color
-    textColor: "#ffffff", // White text
+    bg_color: "#ff5700",
+    text_color: "#ffffff",
   },
   {
     value: "pinterest",
     label: "Pinterest",
     icon: <FaPinterest />,
-    bg_color: "#bd081c", // Darker Pinterest color
-    textColor: "#ffffff", // White text
+    bg_color: "#bd081c",
+    text_color: "#ffffff",
   },
   {
     value: "tiktok",
     label: "TikTok",
     icon: <FaTiktok />,
-    bg_color: "#ee1d52", // Darker TikTok color
-    textColor: "#ffffff", // White text
+    bg_color: "#ee1d52",
+    text_color: "#ffffff",
   },
   {
     value: "twitch",
     label: "Twitch",
     icon: <FaTwitch />,
-    bg_color: "#9146ff", // Darker Twitch color
-    textColor: "#ffffff", // White text
+    bg_color: "#9146ff",
+    text_color: "#ffffff",
   },
   {
     value: "discord",
     label: "Discord",
     icon: <FaDiscord />,
-    bg_color: "#5865f2", // Darker Discord color
-    textColor: "#ffffff", // White text
+    bg_color: "#5865f2",
+    text_color: "#ffffff",
   },
   {
     value: "apple",
     label: "Apple",
     icon: <FaApple />,
-    bg_color: "#000000", // Darker Apple color
-    textColor: "#ffffff", // White text
+    bg_color: "#000000",
+    text_color: "#ffffff",
   },
   {
     value: "amazon",
     label: "Amazon",
     icon: <FaAmazon />,
-    bg_color: "#ff9900", // Darker Amazon color
-    textColor: "#000000", // Dark text for contrast
+    bg_color: "#ff9900",
+    text_color: "#000000",
   },
   {
     value: "microsoft",
     label: "Microsoft",
     icon: <FaMicrosoft />,
-    bg_color: "#f35022", // Darker Microsoft color
-    textColor: "#ffffff", // White text
+    bg_color: "#f35022",
+    text_color: "#ffffff",
   },
   {
     value: "skype",
     label: "Skype",
     icon: <FaSkype />,
-    bg_color: "#0078d7", // Darker Skype color
-    textColor: "#ffffff", // White text
+    bg_color: "#0078d7",
+    text_color: "#ffffff",
   },
   {
     value: "quora",
     label: "Quora",
     icon: <FaQuora />,
-    bg_color: "#aa2200", // Darker Quora color
-    textColor: "#ffffff", // White text
+    bg_color: "#aa2200",
+    text_color: "#ffffff",
   },
   {
     value: "soundcloud",
     label: "Sound Cloud",
     icon: <FaSoundcloud />,
-    bg_color: "#ff3300", // Darker SoundCloud color
-    textColor: "#ffffff", // White text
+    bg_color: "#ff3300",
+    text_color: "#ffffff",
   },
   {
     value: "dribbble",
     label: "Dribbble",
     icon: <FaDribbble />,
-    bg_color: "#ea4c89", // Darker Dribbble color
-    textColor: "#ffffff", // White text
+    bg_color: "#ea4c89",
+    text_color: "#ffffff",
   },
   {
     value: "medium",
     label: "Medium",
     icon: <FaMedium />,
-    bg_color: "#02b875", // Darker Medium color
-    textColor: "#ffffff", // White text
+    bg_color: "#02b875",
+    text_color: "#ffffff",
   },
   {
     value: "vimeo",
     label: "Vimeo",
     icon: <FaVimeo />,
-    bg_color: "#1ab7ea", // Darker Vimeo color
-    textColor: "#ffffff", // White text
+    bg_color: "#1ab7ea",
+    text_color: "#ffffff",
   },
   {
     value: "telegram",
     label: "Telegram",
     icon: <FaTelegram />,
-    bg_color: "#0088cc", // Darker Telegram color
-    textColor: "#ffffff", // White text
+    bg_color: "#0088cc",
+    text_color: "#ffffff",
   },
   {
     value: "other",
     label: "Other",
     icon: <FaLink />,
-    bg_color: "#AFAFAF", // Darker color for other
-    textColor: "#ffffff", // White text
+    bg_color: "#2e2e3e",
+    text_color: "#ffffff",
   },
 ];
+
 
 export default function Home({ params }: { params: { locale: string } }) {
   const { locale } = params;
@@ -414,6 +414,8 @@ function UrlForm({ link, i }: { link: LinkType; i: number }) {
                     transition={{ duration: 0.2 }}
                     className="absolute"
                   >
+                    
+                    
                     <MdOutlineDeleteSweep
                       onClick={async () => {
                         await deleteLink?.mutateAsync(undefined, {

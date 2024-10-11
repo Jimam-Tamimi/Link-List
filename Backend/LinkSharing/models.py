@@ -6,8 +6,7 @@ from Auth.models import Profile
 class Link(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='links')  # Replace user with profile
     platform = models.CharField(max_length=255)
-    url = models.URLField()
-    bg_color = models.CharField(max_length=7, default='#FFFFFF')  
+    url = models.URLField()  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)   
 

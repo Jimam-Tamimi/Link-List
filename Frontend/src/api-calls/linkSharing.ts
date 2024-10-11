@@ -9,8 +9,7 @@ export interface LinkType {
   uid?: string;
   profile: number;
   platform: string;
-  url: string;
-  bg_color: string;
+  url: string; 
   created_at?: string;
   updated_at?: string;
 }
