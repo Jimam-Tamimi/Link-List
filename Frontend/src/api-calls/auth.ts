@@ -1,4 +1,5 @@
 import api from './api';
+import NProgress from 'nprogress';
 
 interface UserType {
   id: number;
@@ -27,7 +28,6 @@ export type SignInFormDataType = {
    password: string 
 };
 
-
 export type SignUpFormDataType = {
   username: string;
   email: string;
@@ -35,35 +35,72 @@ export type SignUpFormDataType = {
   confirmPassword: string;
 }
 
-
-
 export const signIn = async (data: SignInFormDataType) => {
-  const response = await api.post('/auth/token/', data);
-  return response.data as AuthType;
+  NProgress.start();
+  try {
+    const response = await api.post('/auth/token/', data);
+    return response.data as AuthType;
+  } catch (error) {
+    console.error("Error signing in:", error);
+    throw error;
+  } finally {
+    NProgress.done();
+  }
 };
 
 export const signUp = async (data: SignUpFormDataType) => {
-  const response = await api.post('/auth/users/', data);
-  return response.data;
+  NProgress.start();
+  try {
+    const response = await api.post('/auth/users/', data);
+    return response.data;
+  } catch (error) {
+    console.error("Error signing up:", error);
+    throw error;
+  } finally {
+    NProgress.done();
+  }
 };
 
 export const fetchMyProfile = async (id: number): Promise<ProfileType> => {
-  const response = await api.get(`/auth/profiles/${id}/`);
-  return response.data ;
+  NProgress.start();
+  try {
+    const response = await api.get(`/auth/profiles/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching my profile:", error);
+    throw error;
+  } finally {
+    NProgress.done();
+  }
 };
+
 export const fetchProfileByUsername = async (username: string): Promise<ProfileType> => {
-  const response = await api.post(`/auth/profiles/get-profile-by-username/`, { username });
-  return response.data ;
+  NProgress.start();
+  try {
+    const response = await api.post(`/auth/profiles/get-profile-by-username/`, { username });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching profile by username:", error);
+    throw error;
+  } finally {
+    NProgress.done();
+  }
 };
 
-
-export const updateMyProfile = async (profileData: Partial<ProfileType>, id:number): Promise<ProfileType> => {
+export const updateMyProfile = async (profileData: Partial<ProfileType>, id: number): Promise<ProfileType> => {
+  NProgress.start();
+  try {
+    const response = await api.patch(`/auth/profiles/${id}/`, profileData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating my profile:", error);
+    throw error;
+  } finally {
+    NProgress.done();
+  }
+};
  
-
-  const response = await api.patch(`/auth/profiles/${id}/`, profileData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  return response.data;
-};

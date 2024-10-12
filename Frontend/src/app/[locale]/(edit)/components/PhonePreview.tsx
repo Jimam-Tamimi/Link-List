@@ -5,8 +5,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { FaGithub, FaLink } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { socialMediaOptions } from "../links/page";
 import { useMyProfile } from "@/hooks/auth";
+import { socialMediaOptions } from "@/helpers/linkColors";
 
 export default function PhonePreview() {
   const { data: links } = useLinksForMe();
@@ -48,7 +48,7 @@ export default function PhonePreview() {
               ) || {
                 label: link?.platform,
                 value: link?.platform,
-                bg_color: "#f94877",
+                bg_color: "#2e2e3e",
                 text_color: "#ffffff",
                 icon: <FaLink />,
               };

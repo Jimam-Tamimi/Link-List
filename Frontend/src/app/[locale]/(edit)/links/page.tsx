@@ -4,7 +4,7 @@ import ThemeToggler from "@/components/ThemeToggler";
 import { Link } from "@/i18n/routing";
 import axios from "axios";
 import Image from "next/image";
-import { FaGripLines, FaPlus } from "react-icons/fa";
+import { FaGripLines, FaLink, FaPlus } from "react-icons/fa";
 import { MdOutlineDeleteSweep, MdOutlineLibraryAddCheck } from "react-icons/md";
 import { LiaGripLinesSolid } from "react-icons/lia";
 import Select from "@/components/utils/Select";
@@ -17,13 +17,14 @@ import {
   useDeleteLink,
   useLinksForMe,
   useUpdateLink,
+  useUpdateLinkOrder,
 } from "@/hooks/linkSharing";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { link } from "fs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useCreateLink } from "@/hooks/linkSharing";
-import { LinkType } from "@/api-calls/linkSharing";
+import { createLink, LinkType } from "@/api-calls/linkSharing";
 import { useQueryClient } from "@tanstack/react-query";
 import { profile } from "console";
 import { v4 as uuidv4 } from "uuid";
@@ -31,212 +32,12 @@ import { AnimatePresence, motion, Reorder } from "framer-motion";
 import { toast } from "react-toastify";
 import { HashLoader } from "react-spinners";
 import { Tooltip } from "@nextui-org/tooltip";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaWhatsapp,
-  FaYoutube,
-  FaLinkedin,
-  FaGoogle,
-  FaGithub,
-  FaSnapchat,
-  FaReddit,
-  FaPinterest,
-  FaTiktok,
-  FaTwitch,
-  FaDiscord,
-  FaApple,
-  FaAmazon,
-  FaMicrosoft,
-  FaSkype,
-  FaQuora,
-  FaSoundcloud,
-  FaDribbble,
-  FaMedium,
-  FaVimeo,
-  FaTelegram,
-  FaLink,
-} from "react-icons/fa";
-import React, { useEffect, useState } from "react";
 
-export const socialMediaOptions = [
-  {
-    value: "facebook",
-    label: "Facebook",
-    icon: <FaFacebook />,
-    bg_color: "#1877f2",
-    text_color: "#ffffff",
-  },
-  {
-    value: "twitter",
-    label: "Twitter",
-    icon: <FaTwitter />,
-    bg_color: "#1da1f2",
-    text_color: "#ffffff",
-  },
-  {
-    value: "instagram",
-    label: "Instagram",
-    icon: <FaInstagram />,
-    bg_color: "#c32aa3",
-    text_color: "#ffffff",
-  },
-  {
-    value: "whatsapp",
-    label: "WhatsApp",
-    icon: <FaWhatsapp />,
-    bg_color: "#25d366",
-    text_color: "#ffffff",
-  },
-  {
-    value: "youtube",
-    label: "Youtube",
-    icon: <FaYoutube />,
-    bg_color: "#ff0000",
-    text_color: "#ffffff",
-  },
-  {
-    value: "linkedin",
-    label: "LinkedIn",
-    icon: <FaLinkedin />,
-    bg_color: "#0a66c2",
-    text_color: "#ffffff",
-  },
-  {
-    value: "google",
-    label: "Google",
-    icon: <FaGoogle />,
-    bg_color: "#db4437",
-    text_color: "#ffffff",
-  },
-  {
-    value: "github",
-    label: "GitHub",
-    icon: <FaGithub />,
-    bg_color: "black",
-    text_color: "#ffffff",
-  },
-  {
-    value: "snapchat",
-    label: "Snapchat",
-    icon: <FaSnapchat />,
-    bg_color: "#fffc00",
-    text_color: "#333333",
-  },
-  {
-    value: "reddit",
-    label: "Reddit",
-    icon: <FaReddit />,
-    bg_color: "#ff5700",
-    text_color: "#ffffff",
-  },
-  {
-    value: "pinterest",
-    label: "Pinterest",
-    icon: <FaPinterest />,
-    bg_color: "#bd081c",
-    text_color: "#ffffff",
-  },
-  {
-    value: "tiktok",
-    label: "TikTok",
-    icon: <FaTiktok />,
-    bg_color: "#ee1d52",
-    text_color: "#ffffff",
-  },
-  {
-    value: "twitch",
-    label: "Twitch",
-    icon: <FaTwitch />,
-    bg_color: "#9146ff",
-    text_color: "#ffffff",
-  },
-  {
-    value: "discord",
-    label: "Discord",
-    icon: <FaDiscord />,
-    bg_color: "#5865f2",
-    text_color: "#ffffff",
-  },
-  {
-    value: "apple",
-    label: "Apple",
-    icon: <FaApple />,
-    bg_color: "#000000",
-    text_color: "#ffffff",
-  },
-  {
-    value: "amazon",
-    label: "Amazon",
-    icon: <FaAmazon />,
-    bg_color: "#ff9900",
-    text_color: "#000000",
-  },
-  {
-    value: "microsoft",
-    label: "Microsoft",
-    icon: <FaMicrosoft />,
-    bg_color: "#f35022",
-    text_color: "#ffffff",
-  },
-  {
-    value: "skype",
-    label: "Skype",
-    icon: <FaSkype />,
-    bg_color: "#0078d7",
-    text_color: "#ffffff",
-  },
-  {
-    value: "quora",
-    label: "Quora",
-    icon: <FaQuora />,
-    bg_color: "#aa2200",
-    text_color: "#ffffff",
-  },
-  {
-    value: "soundcloud",
-    label: "Sound Cloud",
-    icon: <FaSoundcloud />,
-    bg_color: "#ff3300",
-    text_color: "#ffffff",
-  },
-  {
-    value: "dribbble",
-    label: "Dribbble",
-    icon: <FaDribbble />,
-    bg_color: "#ea4c89",
-    text_color: "#ffffff",
-  },
-  {
-    value: "medium",
-    label: "Medium",
-    icon: <FaMedium />,
-    bg_color: "#02b875",
-    text_color: "#ffffff",
-  },
-  {
-    value: "vimeo",
-    label: "Vimeo",
-    icon: <FaVimeo />,
-    bg_color: "#1ab7ea",
-    text_color: "#ffffff",
-  },
-  {
-    value: "telegram",
-    label: "Telegram",
-    icon: <FaTelegram />,
-    bg_color: "#0088cc",
-    text_color: "#ffffff",
-  },
-  {
-    value: "other",
-    label: "Other",
-    icon: <FaLink />,
-    bg_color: "#2e2e3e",
-    text_color: "#ffffff",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { platform } from "os";
+import { url } from "inspector";
+import { socialMediaOptions } from "@/helpers/linkColors";
+
 
 export default function Home({ params }: { params: { locale: string } }) {
   const { locale } = params;
@@ -250,6 +51,8 @@ export default function Home({ params }: { params: { locale: string } }) {
   const username = auth?.profile?.username || "";
   const { data: links, isLoading: loading } = useLinksForMe();
   const hasNewObject = links?.some((link) => !link.created_at);
+  const createLink = useCreateLink();
+  const updateLinkOrder = useUpdateLinkOrder();
 
   return (
     <>
@@ -288,24 +91,8 @@ export default function Home({ params }: { params: { locale: string } }) {
             : "cursor-pointer active:scale-90 hover:opacity-100  hover:scale-110  "
         }
           `}
-          onClick={(e) => {
-            if (hasNewObject) return;
-            queryClient.setQueryData(["links", username], (oldData: any) => {
-              if (!Array?.isArray(oldData)) {
-                return oldData;
-              }
-              return [
-                {
-                  id: Math.max(0, ...oldData.map((link) => link.id)) + 1,
-                  uid: uuidv4().slice(0, 10),
-                  platform: "",
-                  url: "",
-                  profile: auth?.profile?.id,
-                  bg_color: "#000000",
-                },
-                ...oldData,
-              ];
-            });
+          onClick={async (e) => {
+            await createLink?.mutateAsync({ platform: "", url: "" } as any, {});
           }}
         >
           <FaPlus color="white" size={20} />
@@ -315,17 +102,48 @@ export default function Home({ params }: { params: { locale: string } }) {
       <Reorder.Group
         axis="y"
         values={links || []}
-        onReorder={(newOrder) => {
-          queryClient.setQueryData(["links", username], (oldData: any) => {
-            console.log(newOrder);
-            return newOrder;
-          });
+        onReorder={async (newOrder) => {
+          console.log("run");
+          await queryClient.setQueryData(
+            ["links", username],
+            (oldData: any) => {
+              return newOrder;
+            }
+          );
+           newOrder.map(async (newLink, index) => {
+              const oldLink = links?.[index];
+              if (oldLink && newLink.id !== oldLink.id) {
+                console.log("run" + index);
+                // newOrder[index].order = oldLink.order;
+                await updateLinkOrder.mutateAsync(
+                  { id: newLink.id, order: oldLink.order }, 
+                ); 
+              }
+              return null;
+            }) 
+
+          // // const tmpChangedLinkOrder = changedLinks[0].order;
+          // // changedLinks[0].order = changedLinks[1].order;
+          // // changedLinks[1].order = tmpChangedLinkOrder;
+          // await changedLinks.map(async (link) => {
+          //   await updateLinkOrder.mutateAsync(link, {
+          //     onSuccess: () => {
+          //     },
+          //   });
+          // });
+
+          // await queryClient.setQueryData(
+          //   ["links", username],
+          //   (oldData: any) => {
+          //     console.log(newOrder);
+          //     return newOrder;
+          //   }
+          // );
         }}
-        // draggable={false}
       >
         {links?.map((link, i) => (
           <Reorder.Item className="" key={link?.id} value={link}>
-            <UrlForm key={i} i={i} link={link} />
+            <UrlForm key={link?.id} i={i} link={link} />
           </Reorder.Item>
         ))}
       </Reorder.Group>
@@ -351,9 +169,6 @@ const UrlForm = React.memo(({ link, i }: { link: LinkType; i: number }) => {
 
     return () => {};
   }, []);
-  console.log(getValues());
-  console.log(watch());
-  console.log(oldLink);
 
   const auth = useSelector((state: RootState) => state.auth?.data);
   const username = auth?.profile?.username || "";
@@ -362,7 +177,6 @@ const UrlForm = React.memo(({ link, i }: { link: LinkType; i: number }) => {
   const deleteLink = useDeleteLink(link?.id || null);
 
   const onSubmit: SubmitHandler<LinkType> = async (data) => {
-    console.log({ data });
     if (!data?.created_at) {
       delete data?.id;
     }
@@ -423,9 +237,10 @@ const UrlForm = React.memo(({ link, i }: { link: LinkType; i: number }) => {
       <motion.div
         layout
         className="flex flex-col items-stretch justify-center gap-2 p-4  pb-1  border-gray-800 rounded dark:border-gray-200 dark:shadow-[0_0px_2px_#ffffff50] shadow-[0_0px_2px_#00000050]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, }}
+        animate={{ opacity: 1, }}
+        exit={{ opacity: 0, }}
+        transition={{ duration: 0.5, ease: "anticipate" }}
       >
         <div className="flex items-center justify-between ">
           <LiaGripLinesSolid
@@ -572,6 +387,7 @@ const UrlForm = React.memo(({ link, i }: { link: LinkType; i: number }) => {
                   ) || {
                     label: link?.platform,
                     value: link?.platform,
+                    bg_color:'#2e2e3e',
                     icon: <FaLink />,
                   }
                 : null

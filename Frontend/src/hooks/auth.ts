@@ -126,7 +126,7 @@ export const useProfileByUsername = (userName:string) => {
     queryKey: ["profile", userName],
     queryFn: () => fetchProfileByUsername(userName ),
     enabled: !!userName,
-
+    staleTime:  1000 * 60 * 10,
   });
 };
 export const useMyProfile = () => {
@@ -137,6 +137,7 @@ export const useMyProfile = () => {
     queryKey: ["profile", profileId],
     queryFn: () => fetchMyProfile(profileId as number),
     enabled: !!profileId,
+    staleTime:  1000 * 60 * 10,
 
   });
 };

@@ -13,6 +13,7 @@ import { Link } from "@/i18n/routing";
 import Auth from "./Auth";
 import { useSelector } from 'react-redux';
 import { RootState } from "@/redux/store";
+import { useMyProfile } from '../hooks/auth';
 
 export default function Header({
   previewHeader = false,
@@ -21,7 +22,9 @@ export default function Header({
 }) {
 
 
-  const userName = useSelector((state: RootState) => state.auth?.data?.profile?.username);
+  const myProfile = useMyProfile();
+
+  
   
   return (
     <>
@@ -42,7 +45,7 @@ export default function Header({
               </Link>
             ) : (
               <>
-              <Link target="_blank" href={`/${userName}`}>
+              <Link target="_blank" href={`/${myProfile?.data?.username}`}>
                 <Button size="md" rightIcon={<FiExternalLink size={24} />}>
                   Preview
                 </Button>

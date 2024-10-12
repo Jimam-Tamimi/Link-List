@@ -36,7 +36,6 @@ import { useMyProfile, useUpdateProfile } from "@/hooks/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ProfileType } from "@/api-calls/auth";
 import api from "@/api-calls/api";
-import loading from "../loading";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
@@ -84,8 +83,6 @@ export default function ProfileForm() {
   
   // Handle form submission
   const onSubmit = async (data: ProfileFormInputs) => {
-    console.log(myProfile?.data);
-    console.log(data);
     const formData = new FormData();
 
     // Append form data to send to the backend
@@ -104,7 +101,7 @@ export default function ProfileForm() {
     if (data.email !== oldMyProfileData?.email) {
       formData.append("email", data.email);
     }
-    if (data?.profile_image) {
+    if (data?.profile_image && data?.profile_image?.type?.startsWith("image/")) {
       formData.append("profile_image", data.profile_image);
     }
 
@@ -160,6 +157,7 @@ export default function ProfileForm() {
             type="text"
             label="First Name"
             {...register("first_name", { required: "First Name is required" })}
+            required
           />
           <Input
             leftIcon={<MdOutlineBadge />}
@@ -181,7 +179,8 @@ export default function ProfileForm() {
           type="text"
           label="Username"
           {...register("username", { required: "Username is required" })}
-        />
+          required
+          />
         <Input
           leftIcon={<HiOutlineMail />}
           type="email"

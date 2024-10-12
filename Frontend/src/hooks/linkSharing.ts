@@ -5,16 +5,27 @@ import {
   getLinksForMe,
   LinkType,
   updateLink,
+  updateOrder,
 } from "@/api-calls/linkSharing";
 import { RootState } from "@/redux/store";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
+import NProgress from "nprogress";
 
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+
+    queries: {
+
+      staleTime: 1000 * 60 * 5, // 5 minutes 
+    },
+  },
+});
 export const useLinksByUsername = (username: string) => {
   return useQuery({
     queryKey: ["links", username],
-    queryFn: () => getLinksByUsername(username),
-    enabled: !!username,
+    queryFn: () => getLinksByUsername(username), 
   });
 };
 
@@ -25,10 +36,34 @@ export const useLinksForMe = () => {
     queryKey: ["links", username],
     queryFn: () => getLinksForMe(),
     enabled: !!username,
+    staleTime:  1000 * 60 * 10,  
   });
 };
 
+export const useUpdateLinkOrder = () => {
+  const auth = useSelector((state: RootState) => state.auth?.data);
+  const username = auth?.profile?.username || "";
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (newOrderedObject: any) => updateOrder(newOrderedObject),
+    onSuccess: (data, variables, context) => {
+      console.log({ variables });
+      console.log({ context });
+
+      queryClient.setQueryData(["links", username], (oldData: LinkType[]) => {
+        if (!oldData) return;
+        return oldData.map((link) => {
+          if (link.id === data.id) {
+            return data;
+          }
+          return link;
+        });
+      });
+    },
+  });
+};
 export const useCreateLink = () => {
+
   const auth = useSelector((state: RootState) => state.auth?.data);
   const username = auth?.profile?.username || "";
   const queryClient = useQueryClient();
@@ -38,9 +73,9 @@ export const useCreateLink = () => {
       queryClient.setQueryData(["links", username], (oldData: LinkType[]) => {
         if (!oldData) return;
         ``;
-        return [newData, ...oldData.slice(1)];
+        return [newData, ...oldData];
       });
-    },
+    }, 
   });
 };
 

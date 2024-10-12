@@ -12,6 +12,9 @@ import ReduxProvider from "@/hoc/ReduxProvider";
 import { QueryClient } from "@tanstack/react-query";
 import QueryClientProvider from "@/hoc/QueryClientProvider";
 import { ThemeProvider } from "next-themes";
+import TopLoadingBar from "./components/TopLoadingBar";
+import NProgress from 'nprogress';
+import "nprogress/nprogress.css";
 
 const inter = Inter({
   subsets: ["latin"], // Add other subsets if needed
@@ -32,7 +35,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) { 
   const messages = await getMessages();
 
   return (
@@ -42,7 +45,6 @@ export default async function RootLayout({
         className={` min-h-screen relative overflow-x-hidden bg-gradient-to-br from-[#eaefff] to-[rgb(197,211,255)] dark:from-[#020e32] dark:to-[rgb(50,0,23)] dark:text-white   ${inter.className} `}
       >
         <ToastContainer  draggable />
-
         <Image
           layout="fill"
           style={{ zIndex: "-1", objectFit: "cover", objectPosition: "center" }}

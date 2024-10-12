@@ -2,69 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
- 
-
-
-
-
-.primary-btn-hover-animation{
-  position: relative;  
-  transition: all .3s ease-in-out;
+.primary-btn-hover-animation {
+  position: relative;
+  transition: all 0.3s ease-in-out;
   transform-origin: center;
 }
 
-.primary-btn-hover-animation:hover{
+.primary-btn-hover-animation:hover {
   transform: scale(1.05);
-  position: relative;  
+  position: relative;
 }
 
-.primary-btn-hover-animation::after{
+.primary-btn-hover-animation::after {
   content: "";
   z-index: -1;
   position: absolute;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   width: 100%;
   height: 100%;
   right: 0;
   top: 0;
-  background: linear-gradient(45deg, #2563eb , #0035a8 );
+  background: linear-gradient(45deg, #2563eb, #0035a8);
   backdrop-filter: blur(10px);
   transform: scaleX(1);
   transform-origin: right;
 }
 
-.primary-btn-hover-animation:hover::after{
+.primary-btn-hover-animation:hover::after {
   transform: scaleX(0);
 }
 
-.primary-btn-hover-animation::before{
+.primary-btn-hover-animation::before {
   content: "";
   z-index: -1;
   position: absolute;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
   transform: scaleX(0);
-  background: linear-gradient(45deg, #ff3b93 , #ff0040   );
-    /* background: linear-gradient(45deg, #2563eb , #0035a8 ); */
+  background: linear-gradient(45deg, #ff3b93, #ff0040);
+  /* background: linear-gradient(45deg, #2563eb , #0035a8 ); */
 
-  transform-origin: 0px 0px ;
+  transform-origin: 0px 0px;
 }
 
-.primary-btn-hover-animation:hover::before{
+.primary-btn-hover-animation:hover::before {
   transform: scaleX(1);
 }
- 
-
-
-
 
 @layer components {
   .input {
-    @apply 
-      shadow-[0_0px_15px_rgba(0,_0,_0,_0.1)] 
+    @apply shadow-[0_0px_15px_rgba(0,_0,_0,_0.1)] 
       bg-[#ffffff3b] 
       dark:bg-[#ffffff05] 
       backdrop-blur 
@@ -80,11 +70,35 @@
       py-2 
       
       border-0;
-      
   }
 }
 
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.dark #nprogress .bar {
+  background: linear-gradient(45deg, #ff3b93, #ff0040);
+}
+
+.dark #nprogress .spinner-icon {
+  border-top-color: #ff3b93; 
+  border-left-color: #ff0040; 
+}
+#nprogress .bar {
+  background: linear-gradient(45deg, #2563eb, #0035a8);
+  height: 2px;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #2563eb; 
+  border-left-color: #0035a8; 
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

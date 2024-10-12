@@ -10,7 +10,7 @@ const QueryClientProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return (
         <ReactQueryClientProvider client={queryClient}>
             {children}
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
 
         </ReactQueryClientProvider>
     );
