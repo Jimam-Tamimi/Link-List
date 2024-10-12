@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { signOut } from "@/redux/slices/authSlice";
 import { toast } from "react-toastify";
+import { signIn } from 'next-auth/react';
 
 export default function Auth() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -101,7 +102,7 @@ export default function Auth() {
                   </ModalBody>
                   <ModalFooter className="flex flex-col items-center justify-center gap-5">
                     <div className="flex items-center justify-center gap-14">
-                      <div className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
+                      <div onClick={() => signIn('google')} className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
                         <Image
                           alt="Google logo"
                           src={"/images/logo/Google Logo.svg"}
