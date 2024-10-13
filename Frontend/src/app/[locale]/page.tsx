@@ -10,3 +10,4 @@ export default async function IndexPage({params: {locale}}) {
 
   redirect('/links')
 }
+export const dynamic = 'force-dynamic';

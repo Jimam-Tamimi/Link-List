@@ -4,7 +4,7 @@ import ThemeToggler from "@/components/ThemeToggler";
 import { LayoutTransition } from "../../components/FramerLayout";
 import Link from "@/components/Navigation";
 import { getPathname } from "@/i18n/routing";
-import { getLocale } from "next-intl/server";
+import { getLocale, unstable_setRequestLocale } from "next-intl/server";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
 import Image from "next/image";
@@ -14,10 +14,12 @@ import PhonePreview from "./components/PhonePreview";
 
 export default async function RootLayout({
   children,
+
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   // await new Promise((resolve) => setTimeout(resolve, 100000)); // to see the loading animation (will be removed)
+
   return (
     <>
       <Header />

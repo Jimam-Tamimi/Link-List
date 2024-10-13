@@ -4,6 +4,7 @@ import ProfileForm from "./component/ProfileForm";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Skeleton } from "@nextui-org/skeleton";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 
 export const metadata = {
@@ -15,6 +16,7 @@ export const metadata = {
 
 export default function page({ params }: { params: { locale: string } }) {
   const { locale } = params;
+  unstable_setRequestLocale(locale);
 
   return (
     <> 
@@ -22,3 +24,4 @@ export default function page({ params }: { params: { locale: string } }) {
     </>
   );
 }
+export const dynamic = 'force-dynamic';

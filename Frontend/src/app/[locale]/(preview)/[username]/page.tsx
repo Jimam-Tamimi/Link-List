@@ -3,6 +3,7 @@ import { LinkType } from '@/api-calls/linkSharing';
 import Preview from '@/components/Preview'
 import axios from 'axios';
 import { Metadata } from 'next';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import React, { cache } from 'react'
 
 export const getProfileByUsername = cache( async (username:string) : Promise<ProfileType>  => {
@@ -11,6 +12,7 @@ export const getProfileByUsername = cache( async (username:string) : Promise<Pro
 })
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
+  unstable_setRequestLocale(params?.locale);
 
   let profile: (ProfileType | null) = null;
   try {
@@ -27,6 +29,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 
 export default async function page({ params }: { params: { locale: string, username:string  } }) {
+
   const profile = await getProfileByUsername(params?.username)
   const response = await  axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/links/get-links-for-username/`, { username: params?.username });
   const links : LinkType[] = response.data;
@@ -40,3 +43,6 @@ export default async function page({ params }: { params: { locale: string, usern
     </>
   )
 }
+
+
+export const dynamic = 'force-dynamic';

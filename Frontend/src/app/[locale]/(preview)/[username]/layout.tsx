@@ -3,7 +3,7 @@ import Button from "@/components/utils/Button";
 import ThemeToggler from "@/components/ThemeToggler";
 import Link from "@/components/Navigation";
 import { getPathname } from "@/i18n/routing";
-import { getLocale } from "next-intl/server";
+import { getLocale, unstable_setRequestLocale } from "next-intl/server";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
 import Image from "next/image";
@@ -13,6 +13,7 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <>
         <Header previewHeader />

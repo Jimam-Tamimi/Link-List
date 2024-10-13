@@ -1,6 +1,7 @@
 
 import PreLoader from "@/components/PreLoader";
 import { HashLoader } from "react-spinners";
+import {unstable_setRequestLocale} from 'next-intl/server';
 
 export const metadata = {
   title: "Edit Links",
