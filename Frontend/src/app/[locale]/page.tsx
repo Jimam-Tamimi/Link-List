@@ -5,7 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-export default function IndexPage({params: {locale}}) {
+export default async function IndexPage({params: {locale}}) {
   unstable_setRequestLocale(locale);
 
   redirect('/links')

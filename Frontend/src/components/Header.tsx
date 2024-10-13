@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Navigation from "./Navigation";
 import ThemeToggler from "./ThemeToggler";
@@ -11,9 +11,10 @@ import SignUp from "./Auth/SignUp";
 import { FiEdit, FiExternalLink } from "react-icons/fi";
 import { Link } from "@/i18n/routing";
 import Auth from "./Auth";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { useMyProfile } from '../hooks/auth';
+import { useMyProfile } from "../hooks/auth";
+import SelectLanguage from "./SelectLanguage";
 
 export default function Header({
   previewHeader = false,
@@ -21,11 +22,6 @@ export default function Header({
   previewHeader?: boolean;
 }) {
 
-
-  const myProfile = useMyProfile();
-
-  
-  
   return (
     <>
       <header className="  px-4 py-4    shadow-md dark:shadow-[#ffffff30]">
@@ -37,25 +33,40 @@ export default function Header({
 
           <div className="flex  justify-center items-center lg:gap-10 gap-5">
             <ThemeToggler />
+            <SelectLanguage />
             {previewHeader ? (
               <Link href={"/links"}>
-                <Button  rightIcon={<FiEdit  size={24} />}>
+                <Button rightIcon={<FiEdit size={24} />}>
                   Create Your Own Profile
                 </Button>
               </Link>
             ) : (
               <>
-              <Link target="_blank" href={`/${myProfile?.data?.username}`}>
-                <Button className="lg:text-base lg:py-3 lg:px-6" size="sm" rightIcon={<FiExternalLink size={24} />}>
-                  Preview
-                </Button>
-              </Link>
-                <Auth />
+                <NotForPreview />
               </>
             )}
           </div>
         </div>
       </header>
+    </>
+  );
+}
+
+function NotForPreview() {
+  const myProfile = useMyProfile();
+
+  return (
+    <>
+      <Link target="_blank" href={`/${myProfile?.data?.username}`}>
+        <Button
+          className="lg:text-base lg:py-3 lg:px-6 md:block hidden"
+          size="sm"
+          rightIcon={<FiExternalLink size={24} />}
+        >
+          Preview
+        </Button>
+      </Link>
+      <Auth />
     </>
   );
 }

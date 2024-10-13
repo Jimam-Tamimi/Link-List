@@ -102,3 +102,16 @@
   align-items: center;
   justify-content: center;
 }
+
+.preloader {
+  animation: name duration timing-function delay iteration-count direction fill-mode;
+  animation: scale-on-open 0.4 ease-in-out 0 infinite both;
+}
+
+@keyframes scale-on-open {
+  from {
+    transform: scale(1.2);
+  } to {
+    transform: scale(0.8);
+  }
+}

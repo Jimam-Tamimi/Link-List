@@ -11,8 +11,8 @@ export const metadata = {
 export default function loading() {
 
   return (
-    <div className="flex bg-transparent justify-center items-center min-h-screen w-screen *:text-4xl">
-        <PreLoader />
+    <div className="flex bg-transparent  justify-center items-center min-h-screen w-screen *:text-4xl">
+        <PreLoader   />
     </div>
   );
 }

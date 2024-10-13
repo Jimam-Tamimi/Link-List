@@ -19,7 +19,7 @@ import { ToastContainer } from "react-toastify";
 import ReduxProvider from "@/hoc/ReduxProvider";
 import { QueryClient } from "@tanstack/react-query";
 import QueryClientProvider from "@/hoc/QueryClientProvider";
-import NProgress from "nprogress";
+import NProgress, { settings } from "nprogress";
 import "nprogress/nprogress.css";
 import { NextUIProvider } from "../components/NextUiProvider";
 import type { Metadata } from "next";
@@ -50,7 +50,6 @@ export default async function Layout({
 }>) {
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
-
   return (
     
     <ReduxProvider>

@@ -12,6 +12,15 @@ const config: Config = {
   darkMode: "class",
 
   theme: {
+    animation: {
+      scale: 'scale 0.3s ease-in-out 1',
+    },
+    keyframes: {
+      scale: {
+        '0%': {  opacity: '0' },
+        '100%': {  opacity: '1' }, // Scale up a little
+      },
+    },
     extend: {
       colors: {
         background: "var(--background)",

@@ -15,22 +15,19 @@ import { socialMediaOptions } from "@/helpers/linkColors";
  
 export default async function Preview({
   className,
-  username,
+  profile,
+  links
 }: {
   className?: string;
-  username: string;
+  profile:ProfileType,
+  links:LinkType[]
 }) {
 
 
   // console.log(username)
   // const { data: links, isPending } = useLinksByUsername(username);
   // const {data: profile,} = useProfileByUsername(username);
-  const response = await  axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/links/get-links-for-username/`, { username });
-  const links : LinkType[] = response.data;
-
-  const profileResponse = await  axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/profiles/get-profile-by-username/`, { username });
-  const profile : ProfileType = profileResponse.data;
-
+ 
   return (
     <>
       <section

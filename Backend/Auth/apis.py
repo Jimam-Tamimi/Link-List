@@ -76,7 +76,7 @@ class ProfileViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        sleep(4)
+        sleep(8)
         
         return Profile.objects.filter(user=self.request.user.id)
 

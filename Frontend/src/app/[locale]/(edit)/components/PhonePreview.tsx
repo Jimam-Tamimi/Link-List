@@ -8,6 +8,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useMyProfile } from "@/hooks/auth";
 import { socialMediaOptions } from "@/helpers/linkColors";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Button from "@/components/utils/Button";
+import { FiExternalLink } from "react-icons/fi";
 
 export default function PhonePreview() {
   const linksForMe = useLinksForMe();
@@ -173,6 +175,15 @@ export default function PhonePreview() {
               </div> */}
         </div>
       </div>
+      <Link target="_blank" href={`/${myProfile?.data?.username}`}>
+        <Button
+          className="lg:text-base lg:py-3 lg:px-6 block md:hidden"
+          size="sm"
+          rightIcon={<FiExternalLink size={24} />}
+        >
+          Preview
+        </Button>
+      </Link>
     {/* </SkeletonTheme>   */}
 
     </>
