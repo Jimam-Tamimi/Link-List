@@ -61,7 +61,7 @@ const getCroppedImg = async (
 
 // Function to convert a Data URL to a Blob
 const dataURLtoBlob = (dataURL: string): Blob => {
-  const arr = dataURL.split(",");
+  const arr = dataURL?.split(",");
   const mime = arr[0].match(/:(.*?);/)[1];
   const bstr = atob(arr[1]);
   let n = bstr.length;
@@ -78,7 +78,7 @@ interface ProfilePictureUploaderProps {
 }
 
 // Main ProfilePictureUploader component
-export default function ProfilePictureUploader({ onUpload }: ProfilePictureUploaderProps) {
+export default function ProfilePictureUploader({ onUpload, }: ProfilePictureUploaderProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [image, setImage] = useState<string | null>(null);
   const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 });

@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@nextui-org/modal": "^2.0.41",
+    "@nextui-org/skeleton": "^2.0.32",
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/theme": "^2.2.11",
     "@nextui-org/tooltip": "^2.0.41",
@@ -33,6 +34,7 @@
     "react-easy-crop": "^5.0.8",
     "react-hook-form": "^7.53.0",
     "react-icons": "^5.3.0",
+    "react-loading-skeleton": "^3.5.0",
     "react-redux": "^9.1.2",
     "react-select": "^5.8.1",
     "react-spinners": "^0.14.1",

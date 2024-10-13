@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   containerClass?: string;
@@ -6,6 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  isLoaded?: boolean;
   error?: string;
 }
 
@@ -16,6 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       containerClass,
       containerStyle,
       label,
+      isLoaded = true,
       leftIcon,
       rightIcon,
       error,
@@ -34,68 +37,85 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <div
-        className={`w-full flex flex-col items-start justify-center   ${containerClass}`}
-        style={containerStyle}
-      >
-        {label && (
-          <label className="block mb-2 text-sm" htmlFor={props.id}>
-            {label}{" "}
-            {props.required ? <span className="text-red-500">*</span> : ""}
-          </label>
-        )}
-        <div className="relative flex items-center w-full">
-          {leftIcon && (
-            <span
-              className="absolute z-10 flex items-center left-3"
-              style={{ minWidth: defaultIconSize, minHeight: defaultIconSize }}
-            >
-              {React.isValidElement(leftIcon) ? (
-                React.cloneElement(leftIcon, {
-                  size: getIconSize(leftIcon), // Get icon size
-                } as any)
-              ) : (
-                <span style={{ fontSize: getIconSize(leftIcon) }}>
-                  {leftIcon}
-                </span>
-              )}
-            </span>
-          )}
-          <input
-            ref={ref} // Attach ref here
-            className={`input w-full ${props.className}`}
-            placeholder={props.placeholder || label}
-            style={{
-              paddingLeft: leftIcon ? `${defaultIconSize + 20}px` : "",
-              paddingRight: rightIcon ? `${defaultIconSize + 20}px` : "",
-            }} // Adjust padding based on icon presence
-            {...props}
-          />
-          {rightIcon && (
-            <span
-              className="absolute z-10 flex items-center right-3"
-              style={{ minWidth: defaultIconSize, minHeight: defaultIconSize }}
-            >
-              {React.isValidElement(rightIcon) ? (
-                React.cloneElement(rightIcon, {
-                  size: getIconSize(rightIcon), // Get icon size
-                } as any)
-              ) : (
-                <span style={{ fontSize: getIconSize(rightIcon) }}>
-                  {rightIcon}
-                </span>
-              )}
-            </span>
-          )}
-        </div>
-        <p
-          className={`text-red-500 font-bold tracking-wide text-xs mt-1 ${
-            error ? "visible" : "invisible" 
-          } mt-1 transition-all duration-100 ease-in-out `}
+      <>
+        <div
+          className={`w-full flex flex-col   items-start justify-center   ${containerClass}`}
+          style={containerStyle}
         >
-          {error ? error : "_"}
-        </p>
-      </div>
+          <>
+            {label && (
+              <label className="block mb-2 text-sm" htmlFor={props.id}>
+                {label}{" "}
+                {props.required ? <span className="text-red-500">*</span> : ""}
+              </label>
+            )}
+            {isLoaded ? (
+              <div className="relative flex items-center w-full">
+                {leftIcon && (
+                  <span
+                    className="absolute z-10 flex items-center left-3"
+                    style={{
+                      minWidth: defaultIconSize,
+                      minHeight: defaultIconSize,
+                    }}
+                  >
+                    {React.isValidElement(leftIcon) ? (
+                      React.cloneElement(leftIcon, {
+                        size: getIconSize(leftIcon), // Get icon size
+                      } as any)
+                    ) : (
+                      <span style={{ fontSize: getIconSize(leftIcon) }}>
+                        {leftIcon}
+                      </span>
+                    )}
+                  </span>
+                )}
+                <input
+                  ref={ref} // Attach ref here
+                  className={`input w-full ${props.className}`}
+                  placeholder={props.placeholder || label}
+                  style={{
+                    paddingLeft: leftIcon ? `${defaultIconSize + 20}px` : "",
+                    paddingRight: rightIcon ? `${defaultIconSize + 20}px` : "",
+                  }} // Adjust padding based on icon presence
+                  {...props}
+                />
+                {rightIcon && (
+                  <span
+                    className="absolute z-10 flex items-center right-3"
+                    style={{
+                      minWidth: defaultIconSize,
+                      minHeight: defaultIconSize,
+                    }}
+                  >
+                    {React.isValidElement(rightIcon) ? (
+                      React.cloneElement(rightIcon, {
+                        size: getIconSize(rightIcon), // Get icon size
+                      } as any)
+                    ) : (
+                      <span style={{ fontSize: getIconSize(rightIcon) }}>
+                        {rightIcon}
+                      </span>
+                    )}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <Skeleton
+                className="w-full h-[40px]"
+                containerClassName="w-full  block"
+              />
+            )}
+            <p
+              className={`text-red-500 font-bold tracking-wide text-xs mt-1 ${
+                error ? "visible" : "invisible"
+              } mt-1 transition-all duration-100 ease-in-out `}
+            >
+              {error ? error : "_"}
+            </p>
+          </>
+        </div>
+      </>
     );
   }
 );

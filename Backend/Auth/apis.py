@@ -1,3 +1,4 @@
+from time import sleep
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
@@ -75,13 +76,14 @@ class ProfileViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        sleep(4)
+        
         return Profile.objects.filter(user=self.request.user.id)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
         
     def partial_update(self, request, *args, **kwargs):
-        
         partial = kwargs.pop('partial', False)
         print(request.data)
         instance = self.get_object()

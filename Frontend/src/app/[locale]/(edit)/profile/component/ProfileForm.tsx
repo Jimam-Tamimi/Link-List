@@ -40,6 +40,7 @@ import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 interface ProfileFormInputs {
   first_name: string;
@@ -53,6 +54,7 @@ interface ProfileFormInputs {
 export default function ProfileForm() {
   const myProfile = useMyProfile();
   const updateProfile = useUpdateProfile();
+  const auth = useSelector((state: RootState) => state.auth?.data);
 
   const {
     register,
@@ -63,24 +65,28 @@ export default function ProfileForm() {
     reset,
   } = useForm<ProfileFormInputs>();
 
-  const [oldMyProfileData, setOldMyProfileData] = useState<ProfileType >()
-  
-  
+  const [oldMyProfileData, setOldMyProfileData] = useState<ProfileType>();
+
   React.useEffect(() => {
-      setOldMyProfileData(myProfile?.data);
-      reset({
-        bio: myProfile?.data?.bio ? myProfile?.data?.bio : "",
-        first_name: myProfile?.data?.first_name || "",
-        last_name: myProfile?.data?.last_name || "",
-        username: myProfile?.data?.username || "",
-        email: myProfile?.data?.email || "",
-      });
+    setOldMyProfileData(myProfile?.data);
+    reset({
+      bio: myProfile?.data?.bio ? myProfile?.data?.bio : "",
+      first_name: myProfile?.data?.first_name || "",
+      last_name: myProfile?.data?.last_name || "",
+      username: myProfile?.data?.username || "",
+      email: myProfile?.data?.email || "",
+    });
   }, [myProfile?.isError, myProfile?.isFetched]);
 
-  
-  
   // Handle form submission
   const onSubmit = async (data: ProfileFormInputs) => {
+    if (!auth?.access) {
+      toast.error(
+        "This is a demo profile. Please sign in to create your own profile and customize it."
+      );
+      return;
+    }
+
     const formData = new FormData();
 
     // Append form data to send to the backend
@@ -99,7 +105,10 @@ export default function ProfileForm() {
     if (data.email !== oldMyProfileData?.email) {
       formData.append("email", data.email);
     }
-    if (data?.profile_image && data?.profile_image?.type?.startsWith("image/")) {
+    if (
+      data?.profile_image &&
+      data?.profile_image?.type?.startsWith("image/")
+    ) {
       formData.append("profile_image", data.profile_image);
     }
 
@@ -145,24 +154,40 @@ export default function ProfileForm() {
 
   return (
     <>
+      <div className="space-y-2">
+        <h2 className="text-3xl font-bold ">Customize Your Profile</h2>
+        <p className="text-gray-700 dark:text-gray-300">
+          Edit your profile below and then share it with the world!
+        </p>
+        {!auth?.access && (
+          <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">
+            This is a demo profile. Please sign in to create your own profile
+            and customize it.
+          </p>
+        )}
+      </div>
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center items-stretch gap-4"
       >
-        <div className="flex justify-between items-center gap-8 md:flex-row flex-col">
+        <div className="flex justify-between w-full items-center gap-8 md:flex-row flex-col">
           <Input
             leftIcon={<MdOutlineBadge />}
             type="text"
             label="First Name"
             {...register("first_name", { required: "First Name is required" })}
+            isLoaded={myProfile?.fetchStatus == "idle"}
             required
           />
+
           <Input
             leftIcon={<MdOutlineBadge />}
             type="text"
             label="Last Name"
             required
             {...register("last_name", { required: "Last Name is required" })}
+            isLoaded={myProfile?.fetchStatus == "idle"}
           />
         </div>
         <Input
@@ -171,6 +196,7 @@ export default function ProfileForm() {
           label="Bio"
           required
           {...register("bio", { required: "Bio is required" })}
+          isLoaded={myProfile?.fetchStatus == "idle"}
         />
         <Input
           leftIcon={<MdAlternateEmail />}
@@ -178,14 +204,17 @@ export default function ProfileForm() {
           label="Username"
           {...register("username", { required: "Username is required" })}
           required
-          />
+          isLoaded={myProfile?.fetchStatus == "idle"}
+        />
         <Input
           leftIcon={<HiOutlineMail />}
           type="email"
           label="Email"
           {...register("email", { required: "Email is required" })}
           required
+          isLoaded={myProfile?.fetchStatus == "idle"}
         />
+
         <ProfilePictureUploader
           onUpload={(e) => setValue("profile_image", e.get("image") as File)}
           {...register("profile_image")}
@@ -197,7 +226,6 @@ export default function ProfileForm() {
           size="sm"
           type="submit"
           isLoading={updateProfile?.isPending}
-          
         >
           Save
         </Button>

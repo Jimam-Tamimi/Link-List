@@ -76,8 +76,7 @@ export default async function Preview({
                     } as any
                   )}
                   <p>
-                    {link?.platform
-                      .split(" ")
+                    {link?.platform?.split(" ")
                       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                       .join(" ")}
                   </p>{" "}

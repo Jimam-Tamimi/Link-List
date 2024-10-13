@@ -128,17 +128,26 @@ export const useProfileByUsername = (userName: string) => {
   });
 };
 export const useMyProfile = () => {
-  const profileId = useSelector(
-    (state: RootState) => state.auth.data?.profile?.id
+  const auth = useSelector(
+    (state: RootState) => state.auth.data
   );
   return useQuery({
-    queryKey: ["profile", profileId],
-    queryFn: () => fetchMyProfile(profileId as number),
-    enabled: !!profileId,
+    queryKey: ["profile", auth?.profile?.id],
+    queryFn: () => fetchMyProfile(auth?.profile?.id as number),
+    enabled: !!auth?.profile?.id,
     staleTime: 1000 * 60 * 10,
     initialDataUpdatedAt: 1,
-
-    initialData: {
+    
+    initialData:  auth?.access ? {
+      id: 1,
+      user: 1,
+      username: "",
+      email: "",
+      first_name: "",
+      last_name: "",
+      profile_image: "/images/unknown.webp",
+      bio: "",
+    } :{
       id: 1,
       user: 1,
       username: "user_name",

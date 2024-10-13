@@ -1,3 +1,4 @@
+from time import sleep
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -25,7 +26,7 @@ class LinkViewSet(ModelViewSet):
     
     @action(detail=False, methods=['get'], url_path='get-links-for-me')
     def get_links_for_me(self, request): 
-        
+        sleep(5)
         links = Link.objects.filter(profile__user=request.user)
         serializer = LinkSerializer(links, many=True)
         return Response(serializer.data)  
