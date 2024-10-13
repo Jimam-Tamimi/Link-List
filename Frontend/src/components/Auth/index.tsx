@@ -53,11 +53,11 @@ export default function Auth() {
   return (
     <>
       {!auth?.access ? (
-        <Button variant="transparent" onClick={onOpen}>
+        <Button className="lg:text-base lg:py-3 lg:px-6" size="sm"  variant="transparent" onClick={onOpen}>
           Sign In
         </Button>
       ) : 
-        <Button variant="transparent" onClick={() => {dispatch(signOut()); toast.success("Successfully Signed Out")}}>
+        <Button className="lg:text-base lg:py-3 lg:px-6" size="sm"  variant="transparent" onClick={() => {dispatch(signOut()); toast.success("Successfully Signed Out")}}>
           Sign Out
         </Button>
     }

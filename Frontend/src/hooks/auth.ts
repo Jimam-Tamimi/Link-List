@@ -104,11 +104,11 @@ export const useCheckAuth = () => {
         if (!auth?.access || !checkTokenValidity(auth?.access)) {
           const newAuth = await refreshAuth();
           if (!newAuth?.access || !checkTokenValidity(newAuth?.access)) {
-            dispatch(signOut())
+            dispatch(signOut());
           }
         }
       } catch (error) {
-        dispatch(signOut())
+        dispatch(signOut());
       } finally {
         setIsLoading(false); // Set loading to false after handling redirect
       }
@@ -119,14 +119,12 @@ export const useCheckAuth = () => {
   return isLoading;
 };
 
- 
-export const useProfileByUsername = (userName:string) => {
- 
+export const useProfileByUsername = (userName: string) => {
   return useQuery({
     queryKey: ["profile", userName],
-    queryFn: () => fetchProfileByUsername(userName ),
+    queryFn: () => fetchProfileByUsername(userName),
     enabled: !!userName,
-    staleTime:  1000 * 60 * 10,
+    staleTime: 1000 * 60 * 10,
   });
 };
 export const useMyProfile = () => {
@@ -137,8 +135,19 @@ export const useMyProfile = () => {
     queryKey: ["profile", profileId],
     queryFn: () => fetchMyProfile(profileId as number),
     enabled: !!profileId,
-    staleTime:  1000 * 60 * 10,
+    staleTime: 1000 * 60 * 10,
+    initialDataUpdatedAt: 1,
 
+    initialData: {
+      id: 1,
+      user: 1,
+      username: "user_name",
+      email: "email@gmail.com",
+      first_name: "Your",
+      last_name: "Name",
+      profile_image: "/images/unknown.webp",
+      bio: "This is your bio",
+    },
   });
 };
 
@@ -150,11 +159,11 @@ export const useUpdateProfile = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: any) => updateMyProfile(data, profileId as number),
-    
+
     onSuccess: (data: ProfileType) => {
       queryClient.setQueryData(
         ["profile", profileId],
-        (oldData: AuthType | undefined) => { 
+        (oldData: AuthType | undefined) => {
           if (!oldData) return;
           return { ...oldData, ...data };
         }

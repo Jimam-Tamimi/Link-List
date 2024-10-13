@@ -67,7 +67,6 @@ export default function ProfileForm() {
   
   
   React.useEffect(() => {
-    if (myProfile?.isFetched) {
       setOldMyProfileData(myProfile?.data);
       reset({
         bio: myProfile?.data?.bio ? myProfile?.data?.bio : "",
@@ -76,8 +75,7 @@ export default function ProfileForm() {
         username: myProfile?.data?.username || "",
         email: myProfile?.data?.email || "",
       });
-    }
-  }, [myProfile?.isFetched]);
+  }, [myProfile?.isError, myProfile?.isFetched]);
 
   
   

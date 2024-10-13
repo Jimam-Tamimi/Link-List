@@ -62,6 +62,7 @@ export default function Home({ params }: { params: { locale: string } }) {
           Add/edit/remove links below and then share all your profiles with the
           world!
         </p>
+        <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">This is a demo profile. Please sign in to create your own profile and customize it.</p>
       </div>
 
       {/* Add New Link */}

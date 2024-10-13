@@ -13,7 +13,7 @@ export default function ThemeToggler() {
 
     return (
 
-        <div className="relative *:absolute flex justify-end items-center *:text-2xl *:cursor-pointer *:transition-all *:duration-300">
+        <div className="relative *:absolute flex justify-end items-center *:text-xl *:md:text-2xl *:cursor-pointer *:transition-all *:duration-300">
 
             <LuSunMoon className={` dark:scale-0 dark:invisible scale-100 visible `} onClick={e => setTheme('dark')} />
             <BsMoonStars className={` dark:scale-95 dark:visible scale-0 invisible:`} onClick={e => setTheme("light")} />

@@ -24,7 +24,7 @@ const Navigation = () => {
   }, [pathname]);
 
   return (
-    <nav style={{ position: "relative", display: "flex", gap: "70px" }} className="  *:text-lg *:font-semibold tracking-wide flex justify-center items-center   ">
+    <nav style={{ position: "relative", display: "flex", }} className=" *:text-base *:md:text-lg *:font-semibold tracking-wide flex justify-center items-center  md:gap-12 gap-6 ">
       <Link
         href="/links"
         ref={(el) => (linksRef.current[0] = el)}

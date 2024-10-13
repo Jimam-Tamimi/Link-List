@@ -26,7 +26,6 @@ export default function SignIn() {
           toast.success("Signed in successfully!");
       },
       onError: (error:AxiosError) => {
-        toast.success("Signed in successfully!");
         if (error.response) {
           switch (error.response.status) {
             case 400:

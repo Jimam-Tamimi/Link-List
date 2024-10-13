@@ -13,15 +13,15 @@ export default function PhonePreview() {
   const myProfile = useMyProfile();
   return (
     <>
-      <div className="lg:w-[30%] xl:w-[27%]   w-6/12 sticky top-5 bottom-5 ">
-        <div className="relative ">
+      <div className="lg:w-[30%] xl:w-[27%]   md:w-6/12 w-[70%] sticky top-5 bottom-5 ">
+        <div className="relative    ">
           <Image
             alt="photo frame"
             src={"/images/phone-frame.webp"}
             width={1000}
             height={1000}
           />
-          <div className="absolute  top-0  bottom-0 right-0 m-auto  no-scrollbar left-0     overflow-scroll flex flex-col justify-start max-w-[87%] max-h-[90%] py-10 gap-4 items-center  ">
+          <div className="absolute  top-0  bottom-0 right-0 m-auto  no-scrollbar left-0     overflow-scroll flex flex-col justify-start max-w-[87%] max-h-[90%] py-10 md:gap-4 gap-2 items-center  ">
             <div>
               <Image
                 alt="photo frame"
@@ -33,10 +33,10 @@ export default function PhonePreview() {
             </div>
             <div className="flex flex-col items-center justify-center gap-2 font-semibold tracking-wider ">
               <h1 className="text-[1.3rem]  opacity-80">
-                @{myProfile?.data?.username}
+                @{myProfile?.data?.username || "user_name"}
               </h1>
               <h1 className="text-[1.4rem]  capitalize">
-                {myProfile?.data?.first_name} {myProfile?.data?.last_name}
+                {myProfile?.data?.first_name + " " + myProfile?.data?.last_name}
               </h1>
             </div>
             <p className="text-center text-sm mb-2 leading-loose capitalize max-w-[900px]">
@@ -63,7 +63,7 @@ export default function PhonePreview() {
                       color: selectedPlatform?.text_color,
                     } as any
                   }
-                  className={`  font-semibold tracking-wide cursor-pointer flex justify-between items-center px-4 py-4 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out my-1`}
+                  className={`  font-semibold tracking-wide cursor-pointer flex justify-between items-center p-4 hover:scale-[1.04] rounded-lg  w-[96%] max-w-[100%] active:scale-100 transition-all duration-300 ease-in-out my-1`}
                 >
                   <div className="flex items-center justify-center gap-3 text-lg">
                     {/* <FaGithub size={27} /> */}
