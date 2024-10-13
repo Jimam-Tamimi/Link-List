@@ -21,6 +21,24 @@ class UserViewSet(ModelViewSet):
         else:
             self.permission_classes = [IsAuthenticated]
         return super().get_permissions()
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+        return Response({'detail': 'Method "GET" not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response({'detail': 'Method "GET" not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def update(self, request, *args, **kwargs):
+        return Response({'detail': 'Method "PUT" not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def partial_update(self, request, *args, **kwargs):
+        return Response({'detail': 'Method "PATCH" not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'detail': 'Method "DELETE" not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     
@@ -76,7 +94,6 @@ class ProfileViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        sleep(8)
         
         return Profile.objects.filter(user=self.request.user.id)
 
@@ -88,6 +105,10 @@ class ProfileViewSet(ModelViewSet):
         print(request.data)
         instance = self.get_object()
         
+        # Ensure only the profile owner can update it
+        if instance.user != request.user:
+            return Response({'detail': 'You do not have permission to perform this action.'}, status=status.HTTP_403_FORBIDDEN)
+
         # Update the profile fields
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)

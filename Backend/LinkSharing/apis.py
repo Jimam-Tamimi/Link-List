@@ -26,17 +26,18 @@ class LinkViewSet(ModelViewSet):
     
     @action(detail=False, methods=['get'], url_path='get-links-for-me')
     def get_links_for_me(self, request): 
-        sleep(5)
         links = Link.objects.filter(profile__user=request.user)
         serializer = LinkSerializer(links, many=True)
         return Response(serializer.data)  
+    
     def partial_update(self, request, *args, **kwargs):
-        print(request)
+        link = self.get_object()
+        if link.profile.user != request.user:
+            return Response({'error': 'You do not have permission to update this link.'}, status=status.HTTP_403_FORBIDDEN)
         return super().partial_update(request, *args, **kwargs)
     
 
     def create(self, request, *args, **kwargs):
-        print(request.user.profile.id)
         request.data['profile'] = request.user.profile.id  # Set profile from request.user
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -49,9 +50,12 @@ class LinkViewSet(ModelViewSet):
     @action(detail=True, methods=['post'], url_path='update-order')
     def fix_order(self, request, pk=None):
         link = self.get_object()
+        if link.profile.user != request.user:
+            return Response({'error': 'You do not have permission to update the order of this link.'}, status=status.HTTP_403_FORBIDDEN)
+        
         order = request.data.get('order')
         if order is None:
-            return Response({'error': 'Order is required'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Order is required'}, status=status.HTTP_400_BAD_REQUEST)
         
         link.order = order
         link.save()
