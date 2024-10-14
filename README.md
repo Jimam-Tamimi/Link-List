@@ -26,6 +26,7 @@ You can access the live version of the website at [https://linklist-jim.vercel.a
 - Shareable profile links
 - Django backend for API and authentication
 - Next.js frontend for user interface
+- Multiple Language supported (English, Turkish, Bangla, German) 
 
 ## Tech Stack
 
@@ -39,6 +40,7 @@ You can access the live version of the website at [https://linklist-jim.vercel.a
 - **React.js** 18
 - **Tailwind CSS** for styling
 - **Framer Motion** for animations
+- **Next Intl** for multi-language feature
 
 ## Getting Started
 
