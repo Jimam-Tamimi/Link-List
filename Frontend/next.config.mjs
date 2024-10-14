@@ -13,7 +13,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "https://link-list-kl53.onrender.com",
+        hostname: "link-list-kl53.onrender.com",
+        port: '',
         pathname: "**",
       },
     ],
