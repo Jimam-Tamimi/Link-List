@@ -4,7 +4,7 @@
 Link-List is a web platform where users can sign up, create profiles, and share their information along with various links such as social media or websites.
 
 ## Features
-
+ 
 - User authentication (Sign up, Login)
 - Profile creation with personal information and link management
 - Shareable profile links
@@ -52,7 +52,7 @@ git clone https://github.com/Jimam-Tamimi/Link-List.git
 
    - **Windows**: 
      ```bash
-     .venvScriptsactivate
+     .\venv\Scripts\activate
      ```
    - **macOS/Linux**: 
      ```bash
