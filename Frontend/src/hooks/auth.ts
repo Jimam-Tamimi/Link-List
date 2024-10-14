@@ -9,7 +9,7 @@ import {
   signUp,
   updateMyProfile,
 } from "@/api-calls/auth";
-import { getAuthData, removeAuthData, storeAuthData } from "@/storage/auth";
+import {  removeAuthData, } from "@/storage/auth";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -142,7 +142,7 @@ export const useMyProfile = () => {
     staleTime: 1000 * 60 * 10,
     initialDataUpdatedAt: 1,
     
-    initialData:  auth?.access ? {
+    initialData :  auth?.access ? {
       id: 1,
       user: 1,
       username: "",
@@ -160,7 +160,7 @@ export const useMyProfile = () => {
       last_name: "Name",
       profile_image: "/images/unknown.webp",
       bio: "This is your bio",
-    },
+    } as any,
   });
 };
 

@@ -2,45 +2,20 @@
 import ProfilePictureUploader from "@/components/ProfilePictureUploader";
 import React, { useState } from "react";
 import Button from "@/components/utils/Button";
-import ThemeToggler from "@/components/ThemeToggler";
-import { Link } from "@/i18n/routing";
-import axios from "axios";
-import Image from "next/image";
-import { FaGripLines, FaLink, FaPlus } from "react-icons/fa";
 import {
   MdAlternateEmail,
   MdOutlineBadge,
-  MdOutlineDeleteSweep,
-  MdOutlineLibraryAddCheck,
 } from "react-icons/md";
-import { LiaGripLinesSolid } from "react-icons/lia";
-import Select from "@/components/utils/Select";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-  FaSnapchat,
-  FaReddit,
-  FaPinterest,
-  FaTiktok,
-} from "react-icons/fa";
-import { IoMdCheckboxOutline } from "react-icons/io";
 import Input from "@/components/utils/Input";
-import { BsYoutube } from "react-icons/bs";
-import { IoShareSocialSharp } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
-import { RiLockPasswordLine } from "react-icons/ri";
 import { LuFileText } from "react-icons/lu";
 import { useMyProfile, useUpdateProfile } from "@/hooks/auth";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ProfileType } from "@/api-calls/auth";
-import api from "@/api-calls/api";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 interface ProfileFormInputs {
   first_name: string;
@@ -119,7 +94,7 @@ export default function ProfileForm({pageContent}:{pageContent:any}) {
 
     await updateProfile?.mutateAsync(formData as any, {
       onSuccess: (data) => {
-        reset(data);
+        reset(data as any);
         toast.success("Profile updated successfully!");
       },
       onError: (error: any) => {

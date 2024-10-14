@@ -1,7 +1,4 @@
 
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import UrlComponent from "./UrlComponent";
 import { unstable_setRequestLocale } from "next-intl/server";
 import getPageContent from "@/helpers/getPageContent";

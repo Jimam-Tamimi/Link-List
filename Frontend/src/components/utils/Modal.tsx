@@ -1,4 +1,3 @@
-// components/Modal.tsx
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -128,7 +127,7 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div c>
+    <div>
       {opened && withOverlay && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50"

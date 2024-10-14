@@ -1,16 +1,11 @@
 "use client";
 import { useForm } from "react-hook-form";
 import Input from "../utils/Input";
-import { MdOutlineClose } from "react-icons/md";
-import Image from "next/image";
-import { Link } from "@/i18n/routing";
 import { useSignIn } from "@/hooks/auth"; // Import the useSignIn hook
 import { SignInFormDataType } from "@/api-calls/auth";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
-import getPageContent from "@/helpers/getPageContent";
 
 export default function SignIn({ pageContent }: { pageContent: any }) {
   const {

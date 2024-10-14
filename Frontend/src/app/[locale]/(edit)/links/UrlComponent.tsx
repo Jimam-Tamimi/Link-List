@@ -1,17 +1,10 @@
 "use client";
-import Button from "@/components/utils/Button";
-import ThemeToggler from "@/components/ThemeToggler";
-import { Link } from "@/i18n/routing";
-import axios from "axios";
-import Image from "next/image";
-import { FaGripLines, FaLink, FaPlus } from "react-icons/fa";
+import { FaLink, FaPlus } from "react-icons/fa";
 import { MdOutlineDeleteSweep, MdOutlineLibraryAddCheck } from "react-icons/md";
 import { LiaGripLinesSolid } from "react-icons/lia";
 import Select from "@/components/utils/Select";
 
-import { IoMdCheckboxOutline } from "react-icons/io";
 import Input from "@/components/utils/Input";
-import { BsYoutube } from "react-icons/bs";
 import { IoShareSocialSharp } from "react-icons/io5";
 import {
   useDeleteLink,
@@ -21,30 +14,21 @@ import {
 } from "@/hooks/linkSharing";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { link } from "fs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useCreateLink } from "@/hooks/linkSharing";
-import { createLink, LinkType } from "@/api-calls/linkSharing";
+import { LinkType } from "@/api-calls/linkSharing";
 import { useQueryClient } from "@tanstack/react-query";
-import { profile } from "console";
-import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
 import { toast } from "react-toastify";
 import { HashLoader } from "react-spinners";
 import { Tooltip } from "@nextui-org/tooltip";
 
 import React, { useEffect, useState } from "react";
-import { platform } from "os";
-import { url } from "inspector";
 import { socialMediaOptions } from "@/helpers/linkColors";
 
 
 export default function UrlComponent({pageContent}: {pageContent:any}) {
-  const queryClient = useQueryClient();
-  // const response = await axios.get(
-  //   `http://127.0.0.1:8000/static/content/${locale}/home.json`
-  // );
-  // const content = response.data;
+  const queryClient = useQueryClient(); 
 
   const auth = useSelector((state: RootState) => state.auth?.data);
   const username = auth?.profile?.username || "";
@@ -61,7 +45,6 @@ export default function UrlComponent({pageContent}: {pageContent:any}) {
         <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">{pageContent?.sign_in_demo_profile_error}</p>}
       </div>
 
-      {/* Add New Link */}
 
       <Tooltip
         showArrow
@@ -109,32 +92,14 @@ export default function UrlComponent({pageContent}: {pageContent:any}) {
                 ); 
               }
               return null;
-            }) 
-
-          // // const tmpChangedLinkOrder = changedLinks[0].order;
-          // // changedLinks[0].order = changedLinks[1].order;
-          // // changedLinks[1].order = tmpChangedLinkOrder;
-          // await changedLinks.map(async (link) => {
-          //   await updateLinkOrder.mutateAsync(link, {
-          //     onSuccess: () => {
-          //     },
-          //   });
-          // });
-
-          // await queryClient.setQueryData(
-          //   ["links", username],
-          //   (oldData: any) => {
-          //     console.log(newOrder);
-          //     return newOrder;
-          //   }
-          // );
+            })  
         }}
       >
         {
           linksForMe?.fetchStatus!='idle' ? 
           [1,2,3]?.map((link, i) => (
             <Reorder.Item className="" key={i} value={link}>
-              <UrlForm key={i} i={i} link={null} isLoaded={linksForMe?.fetchStatus=='idle'} />
+              <UrlForm pageContent={pageContent} key={i} i={i} link={null} isLoaded={linksForMe?.fetchStatus=='idle'} />
             </Reorder.Item>
           )) : 
           linksForMe?.data?.map((link, i) => (
@@ -162,7 +127,7 @@ const UrlForm = React.memo(({ link, i, isLoaded=true, pageContent }: { pageConte
   const [oldLink, setOldLink] = useState<LinkType | null>(null);
 
   useEffect(() => {
-    reset(link);
+    reset(link as any);
     setOldLink(link);
 
     return () => {};
@@ -399,7 +364,7 @@ const UrlForm = React.memo(({ link, i, isLoaded=true, pageContent }: { pageConte
                     value: link?.platform,
                     bg_color:'#2e2e3e',
                     icon: <FaLink />,
-                  }
+                  } as any
                 : null
             }
             isLoaded={isLoaded}

@@ -1,16 +1,12 @@
-import { getLinksByUsername, LinkType } from "@/api-calls/linkSharing";
-import { useMyProfile, useProfileByUsername } from "@/hooks/auth";
-import { useLinksByUsername } from "@/hooks/linkSharing";
+import {  LinkType } from "@/api-calls/linkSharing";
 import { Link } from "@/i18n/routing";
-import axios from "axios";
 import Image from "next/image";
 import React from "react";
-import { FaArrowRight,   } from "react-icons/fa";
 import { FaArrowRightLong,   } from "react-icons/fa6";
-import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp, FaYoutube, FaLinkedin, FaGoogle, FaGithub, FaSnapchat, FaReddit, FaPinterest, FaTiktok, FaTwitch, FaDiscord, FaApple, FaAmazon, FaMicrosoft, FaSkype, FaQuora, FaSoundcloud, FaDribbble, FaMedium, FaVimeo, FaTelegram, FaLink } from "react-icons/fa";
 
 import { ProfileType } from "@/api-calls/auth";
 import { socialMediaOptions } from "@/helpers/linkColors";
+import { FaLink } from "react-icons/fa";
 
  
 export default async function Preview({

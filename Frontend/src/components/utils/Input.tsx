@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef } from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   containerClass?: string;

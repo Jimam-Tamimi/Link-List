@@ -1,11 +1,7 @@
-import Button from "@/components/utils/Button";
-import ThemeToggler from "@/components/ThemeToggler";
-import { Link, redirect } from "@/i18n/routing";
-import axios from "axios";
-import Image from "next/image";
+import { redirect } from "@/i18n/routing";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-export default async function IndexPage({params: {locale}}) {
+export default async function IndexPage({params: {locale: locale}}: {params: {locale: string}}) {
   unstable_setRequestLocale(locale);
 
   redirect('/links')

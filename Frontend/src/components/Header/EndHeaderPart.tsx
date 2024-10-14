@@ -2,15 +2,13 @@
 
 import { RootState, useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
-import Button from "./utils/Button";
-import Link from "next/link";
+import Button from "../utils/Button";
 import { FiEdit, FiExternalLink } from "react-icons/fi";
 import { useMyProfile } from "@/hooks/auth";
-import Auth from "./Auth";
-import { useEffect, useState } from "react";
-import getPageContent from "@/helpers/getPageContent";
+import Auth from "../Auth";
 import { signOut } from "@/redux/slices/authSlice";
 import { toast } from "react-toastify";
+import { Link } from "@/i18n/routing";
 
 export default function EndHeaderPart({
   previewHeader = false,
@@ -49,7 +47,7 @@ function NotForPreview({ pageContent }: any) {
     <>
       {auth?.access ? (
         <>
-          <Link target="_blank" href={`/${myProfile?.data?.username}`}>
+          <Link target="_blank" href={`/${myProfile?.data?.username ? myProfile?.data?.username : ''}` as any}>
             <Button
               className="lg:text-base lg:py-3 lg:px-6 sm:flex hidden"
               size="sm"

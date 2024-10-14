@@ -1,6 +1,5 @@
 import { AuthType } from '@/api-calls/auth';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 interface AuthState {
   data: AuthType | null;

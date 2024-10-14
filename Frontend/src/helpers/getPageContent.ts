@@ -1,6 +1,5 @@
 "use server"
 
-import { locales } from "@/i18n/routing";
 import axios from "axios";
 import { getLocale } from "next-intl/server";
 import { cache } from "react";

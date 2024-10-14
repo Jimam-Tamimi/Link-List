@@ -88,12 +88,12 @@ export const useUpdateLinkOrder = () => {
       }
       return updateOrder(newOrderedObject);
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data:any, variables, context) => {
 
       queryClient.setQueryData(["links", username], (oldData: LinkType[]) => {
         if (!oldData) return;
         return oldData.map((link) => {
-          if (link.id === data.id) {
+          if (link.id === data?.id) {
             return data;
           }
           return link;

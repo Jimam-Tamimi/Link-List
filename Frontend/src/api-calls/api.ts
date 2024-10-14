@@ -1,15 +1,16 @@
-'use client'
+"use client";
 
-import axios from 'axios';
-import { getAuthData, removeAuthData, storeAuthData } from '@/storage/auth';
-import { store } from '@/redux/store';
-import { signInSuccess, signOut } from '@/redux/slices/authSlice';
-import { AuthType } from './auth';
+import axios from "axios";
+import { store } from "@/redux/store";
+import { signInSuccess, signOut } from "@/redux/slices/authSlice";
+import { AuthType } from "./auth";
+
+
 const api = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`, // Set this in your environment variables
   headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
+    "Content-Type": "application/json",
+    Accept: "application/json",
   },
 });
 
@@ -44,12 +45,11 @@ api.interceptors.response.use(
         store.dispatch(signInSuccess(newAuth));
 
         // Retry the original request with the new access token
-        originalRequest.headers['Authorization'] = `JWT ${newAuth.access}`;
+        originalRequest.headers["Authorization"] = `JWT ${newAuth.access}`;
         return api(originalRequest);
       } else {
         // Sign out the user and remove tokens if refresh fails
         store.dispatch(signOut());
-        await removeAuthData();
       }
     }
     return Promise.reject(error);
@@ -70,16 +70,12 @@ export const refreshAuth = async (): Promise<AuthType | null> => {
 
     const newAuth: AuthType = response.data;
 
-    // Store new tokens in Secure Storage
-    // await storeAuthData(newAuth);
-
     // Update Redux store with new tokens
     store.dispatch(signInSuccess(newAuth));
 
     return newAuth; // Return the new authentication data
   } catch (error) {
     // If refresh fails, sign the user out and clear data
-    await removeAuthData();
     store.dispatch(signOut()); // Dispatch signOut action in Redux
     return null;
   }

@@ -1,7 +1,4 @@
 
-import PreLoader from "@/components/PreLoader";
-import { HashLoader } from "react-spinners";
-
 export const metadata = {
   title: "Page Not Found!",
   description: "Page Not Found!",

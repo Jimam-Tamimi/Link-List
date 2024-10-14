@@ -1,21 +1,20 @@
 import React from "react";
-import { ClipLoader, HashLoader } from "react-spinners";
-import Image from "next/image";
-import { useTheme } from "next-themes";
+import {  HashLoader } from "react-spinners";
+
 
 interface ButtonProps {
   children: React.ReactNode;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   variant?: "primary" | "secondary" | "transparent";  
-  leftIcon?: React.ReactNode; // Can be an Image component or a text icon
-  rightIcon?: React.ReactNode; // Can be an Image component or a text icon
+  leftIcon?: React.ReactNode;  
+  rightIcon?: React.ReactNode; 
   isLoading?: boolean;
   loadingComponent?: React.ReactNode;
-  size?: "sm" | "sx" | "md" | "lg" | "full"; // Added size option
-  rounded?: "none" | "sm" | "md" | "lg" | "full"; // Added rounded-full option
-  className?: string; // Added to allow additional styles
-  isDarkMode?: boolean; // New prop to determine if dark mode is active
+  size?: "sm" | "sx" | "md" | "lg" | "full";
+  rounded?: "none" | "sm" | "md" | "lg" | "full";  
+  className?: string; 
+  isDarkMode?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -29,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
   loadingComponent,
   size = "md", // Default size
   rounded = "md", // Default rounded
-  className = "", // Default empty className
+  className = "",  
 }) => {
   const baseStyle =
     "  font-semibold focus:outline-none transition-all duration-300 ease-in-out rounded-none";

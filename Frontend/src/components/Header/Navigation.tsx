@@ -27,7 +27,7 @@ const Navigation = ( {pageContent}:{pageContent:any}) => {
     <nav style={{ position: "relative", display: "flex", }} className=" *:text-base *:md:text-lg *:font-semibold tracking-wide flex justify-center items-center  md:gap-12 gap-6 ">
       <Link
         href="/links"
-        ref={(el) => (linksRef.current[0] = el)}
+        ref={(el) => {(linksRef.current[0] = el)}}
         style={{ textDecoration: "none",  }}
         className="hover:scale-105 transition-all duration-300 ease-in-out active:scale-90"
       >
@@ -35,7 +35,7 @@ const Navigation = ( {pageContent}:{pageContent:any}) => {
       </Link>
       <Link
         href="/profile"
-        ref={(el) => (linksRef.current[1] = el)}
+        ref={(el) => {(linksRef.current[1] = el)}}
         style={{ textDecoration: "none",  }}
         className="hover:scale-105 transition-all duration-300 ease-in-out active:scale-90"
       >

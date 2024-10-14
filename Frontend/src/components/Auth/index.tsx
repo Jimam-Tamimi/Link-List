@@ -15,10 +15,7 @@ import { MdOutlineClose } from "react-icons/md";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "@/redux/store";
-import { signOut } from "@/redux/slices/authSlice";
-import { toast } from "react-toastify";
-import { signIn } from "next-auth/react";
+import { RootState } from "@/redux/store";
 import getPageContent from "@/helpers/getPageContent";
 
 export default function Auth({ pageContent }: any) {

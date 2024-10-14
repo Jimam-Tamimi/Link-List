@@ -1,6 +1,5 @@
 import {createLocalizedPathnamesNavigation} from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
-import { config } from '../middleware';
 
 
 export const locales =  ['en', "tr", "bn", 'de'];
@@ -9,7 +8,7 @@ export const routing = defineRouting({
   defaultLocale: 'en',
   localePrefix:"always",
   pathnames: {
-    '/': '/',
+    '/':   '/',
     '/profile': {
       en: '/profile',
       tr: '/profil',

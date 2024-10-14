@@ -1,16 +1,13 @@
 import { useForm } from "react-hook-form";
 import Input from "../utils/Input";
-import { MdOutlineClose, MdAlternateEmail } from "react-icons/md";
+import {  MdAlternateEmail } from "react-icons/md";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link } from "@/i18n/routing";
 import { useSignUp } from "@/hooks/auth"; // Import the useSignUp hook
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { AxiosError } from "axios";
 import { SignUpFormDataType } from "@/api-calls/auth";
-import getPageContent from "@/helpers/getPageContent";
-import { useEffect, useState } from "react";
 
 export default function SignUp({ pageContent }: { pageContent: any }) {
   const {

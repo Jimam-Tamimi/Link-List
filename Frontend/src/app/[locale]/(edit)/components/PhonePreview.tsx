@@ -2,16 +2,14 @@
 import { useLinksForMe } from "@/hooks/linkSharing";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { FaGithub, FaLink } from "react-icons/fa";
+import React from "react";
+import {  FaLink } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useMyProfile } from "@/hooks/auth";
 import { socialMediaOptions } from "@/helpers/linkColors";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 import Button from "@/components/utils/Button";
 import { FiExternalLink } from "react-icons/fi";
-import getPageContent from "@/helpers/getPageContent";
-import axios from "axios";
 
 export default function PhonePreview({ pageContent }: { pageContent: any }) {
   const linksForMe = useLinksForMe();
@@ -19,7 +17,6 @@ export default function PhonePreview({ pageContent }: { pageContent: any }) {
 
   return (
     <>
-      {/* <SkeletonTheme baseColor="#261d46" highlightColor="#382c63"> */}
 
       <div className="lg:w-[30%] xl:w-[27%]   md:w-6/12 w-[70%] sticky top-5 bottom-5 ">
         <div className="relative    ">
@@ -142,7 +139,7 @@ export default function PhonePreview({ pageContent }: { pageContent: any }) {
 
                   return (
                     <Link
-                      href={link?.url ? link?.url : ""}
+                      href={(link?.url ? link?.url : "") as any}
                       target="_blank"
                       style={
                         {
@@ -176,20 +173,10 @@ export default function PhonePreview({ pageContent }: { pageContent: any }) {
                     </Link>
                   );
                 })}
-          </div>
-          {/* <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full">
-                <Image
-                  alt="photo frame"
-                  src={"/images/me.webp"}
-                  width={800}
-                  height={800}
-                  className="object-cover object-center rounded-full w-14 h-14"
-                />
-                <h1>jimamt amimi</h1>
-              </div> */}
+          </div> 
         </div>
       </div>
-      <Link target="_blank" href={`/${myProfile?.data?.username}`}>
+      <Link target="_blank" href={`/${myProfile?.data?.username}` as any}>
         <Button
           className="lg:text-base lg:py-3 lg:px-6 block md:hidden"
           size="sm"

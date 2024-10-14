@@ -1,9 +1,5 @@
 
-import axios from "axios";
 import ProfileForm from "./component/ProfileForm";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { Skeleton } from "@nextui-org/skeleton";
 import { unstable_setRequestLocale } from "next-intl/server";
 import getPageContent from "@/helpers/getPageContent";
 import { Metadata } from "next";

@@ -1,11 +1,8 @@
 'use client'
 
-import Image from "next/image";
 import React, {  Key, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import {useLocale } from 'next-intl'; 
-import { useEffect } from 'react';
-import axios from "axios";
 import { useParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/routing";
  
@@ -58,7 +55,7 @@ export default function SelectLanguage() {
                         
                             }}  key={i}>
                                 <div key={i} onClick={e => {
-                                    router.replace({pathname: pathname, params: params }, { locale: language.locale} );
+                                    router.replace({ pathname: pathname }, { locale: language.locale });
 
                                 }} className="text-sm tracking-wide space-x-1.5 cursor-pointer  flex justify-start items-start   p-2.5   transition-all duration-300" >
                                     {/* <Image width={15} height={20} alt={`${language?.language} Flag`} src={language?.image as string} /> */}

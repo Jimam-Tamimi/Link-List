@@ -144,6 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Add your frontend URL here
+    "http://localhost:3001",  # Add your frontend URL here
+    "http://localhost:3002",  # Add your frontend URL here
+    "http://localhost:3003",  # Add your frontend URL here
     "https://linklist-jim.vercel.app"
 ]
 
