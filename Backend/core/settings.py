@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',   
-   'rest_framework_simplejwt',
-    'corsheaders',
+    "drf_yasg",
+    'drf_spectacular',
+    'rest_framework_simplejwt',
+    'corsheaders',    
+
     'LinkSharing',    
     'Auth',    
 ]
@@ -157,7 +160,8 @@ REST_FRAMEWORK = {
 
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
     # 'DEFAULT_RENDERER_CLASSES': (
     #     'rest_framework.renderers.JSONRenderer',
     #     # Add other renderers if needed, but exclude `BrowsableAPIRenderer`
