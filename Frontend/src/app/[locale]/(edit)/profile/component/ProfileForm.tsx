@@ -152,7 +152,7 @@ export default function ProfileForm({pageContent}:{pageContent:any}) {
 
   return (
     <>
-      <div className="space-y-2">
+    <div className="space-y-2">
         <h2 className="text-3xl font-bold ">{pageContent?.formTitle}</h2>
         <p className="text-gray-700 dark:text-gray-300">{pageContent?.formSubTitle}</p>
         {!auth?.access && (

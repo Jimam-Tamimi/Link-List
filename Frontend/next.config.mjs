@@ -1,16 +1,26 @@
-import createNextIntlPlugin from 'next-intl/plugin';
- 
+import createNextIntlPlugin from "next-intl/plugin";
+
 const withNextIntl = createNextIntlPlugin();
- 
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['127.0.0.1', 'localhost', "link-list-1.onrender.com"], // Add any other domains you want to allow
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        pathname: "**",
       },
-      typescript: {
-        ignoreBuildErrors: true,
-    
+      {
+        protocol: "https",
+        hostname: "https://link-list-kl53.onrender.com",
+        pathname: "**",
       },
+    ],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
- 
+
 export default withNextIntl(nextConfig);
