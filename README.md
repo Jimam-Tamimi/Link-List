@@ -3,8 +3,7 @@
 
 Link-List is a web platform where users can sign up, create profiles, and share their information along with various links such as social media or websites.
 
-# Link-List
-
+# Live Website
 You can access the live version of the website at [https://linklist-jim.vercel.app/](https://linklist-jim.vercel.app/).
 
 ## Table of Contents
