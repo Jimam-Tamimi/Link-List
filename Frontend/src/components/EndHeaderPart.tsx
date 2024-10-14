@@ -20,7 +20,7 @@ export default function EndHeaderPart({
   pageContent: any;
 }) {
   const auth = useSelector((state: RootState) => state.auth?.data);
-
+  console.log({ pageContent });
   return (
     <>
       {previewHeader ? (
@@ -47,33 +47,32 @@ function NotForPreview({ pageContent }: any) {
 
   return (
     <>
-      <Link target="_blank" href={`/${myProfile?.data?.username}`}>
-        <Button
-          className="lg:text-base lg:py-3 lg:px-6 sm:flex hidden"
-          size="sm"
-          rightIcon={<FiExternalLink size={24} />}
-        >
-          {pageContent?.button_text_preview}
-        </Button>
-      </Link>
-
       {auth?.access ? (
-        <Button
-          className="lg:text-base lg:py-3 lg:px-6"
-          size="sm"
-          variant="transparent"
-          onClick={() => {
-            dispatch(signOut());
-            toast.success("Successfully Signed Out");
-          }}
-        >
-          {pageContent?.button_text_sign_out}
-        </Button>
+        <>
+          <Link target="_blank" href={`/${myProfile?.data?.username}`}>
+            <Button
+              className="lg:text-base lg:py-3 lg:px-6 sm:flex hidden"
+              size="sm"
+              rightIcon={<FiExternalLink size={24} />}
+            >
+              {pageContent?.button_text_preview}
+            </Button>
+          </Link>
+          <Button
+            className="lg:text-base lg:py-3 lg:px-6"
+            size="sm"
+            variant="transparent"
+            onClick={() => {
+              dispatch(signOut());
+              toast.success("Successfully Signed Out");
+            }}
+          >
+            {pageContent?.button_text_sign_out}
+          </Button>
+        </>
       ) : (
         <Auth pageContent={pageContent} />
-
       )}
-
     </>
   );
 }

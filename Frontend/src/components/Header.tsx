@@ -38,7 +38,7 @@ export default async function Header({
   // }, []); 
   return (
     <>
-      <header className="  px-4 py-4  z-30 relative  shadow-md dark:shadow-[#ffffff30]">
+      <header className="  px-4 py-4  z-10 relative  shadow-md dark:shadow-[#ffffff30]">
         <div className="lg:w-[90%] m-auto flex justify-between items-center">
           <Link href={"/"} className="text-3xl hidden md:block font-bold bg-gradient-to-br  from-[#02103d] to-[#1e00a3] dark:from-[#eaefff] dark:to-[#ffcfe4]   text-transparent bg-clip-text ">
             Link List

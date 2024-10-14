@@ -31,11 +31,11 @@ export default async function Preview({
   return (
     <>
       <section
-        className={` ${className} flex justify-center items-center z-50 `}
+        className={` ${className} flex justify-center items-center    `}
       >
-        <div className="container flex flex-col justify-center gap-4  z-50 items-center py-10">
+        <div className="container flex flex-col justify-center gap-4  items-center py-10">
           <Image
-            alt="photo frame"
+            alt="profile picture"
             src={profile?.profile_image ? profile?.profile_image :'/images/unknown.webp' as any}
             width={800}
             height={800}

@@ -54,19 +54,7 @@ export default function Auth({ pageContent }: any) {
 
   return (
     <>
-      {auth?.access ? (
-        <Button
-          className="lg:text-base lg:py-3 lg:px-6"
-          size="sm"
-          variant="transparent"
-          onClick={() => {
-            dispatch(signOut());
-            toast.success("Successfully Signed Out");
-          }}
-        >
-          {pageContent?.button_text_sign_out}
-        </Button>
-      ) : (
+ 
         <Button
           className="lg:text-base lg:py-3 lg:px-6"
           size="sm"
@@ -74,9 +62,7 @@ export default function Auth({ pageContent }: any) {
           onClick={onOpen}
         >
           {pageContent?.button_text_sign_in}
-        </Button>
-      )}
-
+        </Button> 
       <Modal
         size="lg"
         hideCloseButton
