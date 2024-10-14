@@ -11,13 +11,15 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Button from "@/components/utils/Button";
 import { FiExternalLink } from "react-icons/fi";
 import getPageContent from "@/helpers/getPageContent";
+import axios from "axios";
 
-export default function PhonePreview({pageContent}:{pageContent:any}) {
+export default function PhonePreview({ pageContent }: { pageContent: any }) {
   const linksForMe = useLinksForMe();
-  const myProfile = useMyProfile(); 
+  const myProfile = useMyProfile();
+
   return (
     <>
-    {/* <SkeletonTheme baseColor="#261d46" highlightColor="#382c63"> */}
+      {/* <SkeletonTheme baseColor="#261d46" highlightColor="#382c63"> */}
 
       <div className="lg:w-[30%] xl:w-[27%]   md:w-6/12 w-[70%] sticky top-5 bottom-5 ">
         <div className="relative    ">
@@ -29,14 +31,17 @@ export default function PhonePreview({pageContent}:{pageContent:any}) {
           />
           <div
             className={`absolute  top-0  bottom-0 right-0 m-auto  no-scrollbar left-0     overflow-scroll flex flex-col justify-start max-w-[87%] max-h-[90%] py-10   items-center gap-${
-              (myProfile?.fetchStatus != "idle" && linksForMe?.fetchStatus == "idle") ? "8" : "4"
+              myProfile?.fetchStatus != "idle" &&
+              linksForMe?.fetchStatus == "idle"
+                ? "8"
+                : "4"
             } `}
           >
             <div>
               {myProfile?.fetchStatus != "idle" ? (
                 <>
                   <Skeleton
-                  circle
+                    circle
                     className="w-full h-full"
                     containerClassName="w-24 h-24  block"
                   />{" "}
@@ -44,7 +49,11 @@ export default function PhonePreview({pageContent}:{pageContent:any}) {
               ) : (
                 <Image
                   alt="photo frame"
-                  src={myProfile?.data?.profile_image ? myProfile?.data?.profile_image :'/images/unknown.webp' as any}
+                  src={
+                    myProfile?.data?.profile_image
+                      ? myProfile?.data?.profile_image
+                      : ("/images/unknown.webp" as any)
+                  }
                   width={800}
                   height={800}
                   className="object-cover object-center w-24 h-24 rounded-full"
@@ -72,7 +81,7 @@ export default function PhonePreview({pageContent}:{pageContent:any}) {
                 )}
               </h1>
               <h1 className="text-[1.4rem] min-w-[50%] capitalize">
-                {myProfile?.fetchStatus != "idle" ? (
+                {myProfile?.fetchStatus != "idle" || (!myProfile?.data?.first_name && !myProfile?.data?.last_name)? (
                   <>
                     <Skeleton
                       className="w-full h-full"
@@ -81,15 +90,19 @@ export default function PhonePreview({pageContent}:{pageContent:any}) {
                   </>
                 ) : (
                   <>
-                    {myProfile?.data?.first_name ? myProfile?.data?.first_name : '' +
-                      " " +
-                      myProfile?.data?.last_name ? myProfile?.data?.last_name : ''}
+                    {myProfile?.data?.first_name
+                      ? myProfile?.data?.first_name
+                      : ""}
+                      {" "}
+                      {myProfile?.data?.last_name
+                      ? myProfile?.data?.last_name
+                      : ""}
                   </>
                 )}
               </h1>
             </div>
             <p className="text-center  text-sm mb-2 flex justify-center items-center flex-col gap-3   leading-loose capitalize min-w-[80%] max-w-[900px]">
-              {myProfile?.fetchStatus != "idle" ? (
+              {myProfile?.fetchStatus != "idle" || !myProfile?.data?.bio ? (
                 <>
                   <Skeleton
                     className="w-full h-full"
@@ -109,7 +122,7 @@ export default function PhonePreview({pageContent}:{pageContent:any}) {
               )}
             </p>
 
-            {linksForMe?.fetchStatus != "idle"
+            {linksForMe?.fetchStatus != "idle" || linksForMe?.data?.length == 0
               ? [1, 2, 3].map(() => (
                   <Skeleton
                     className="w-full h-full"
@@ -185,8 +198,7 @@ export default function PhonePreview({pageContent}:{pageContent:any}) {
           {pageContent?.button_text_preview}
         </Button>
       </Link>
-    {/* </SkeletonTheme>   */}
-
+      {/* </SkeletonTheme>   */}
     </>
   );
 }

@@ -10,7 +10,7 @@ const getPageContent = cache(async (page: string, locale?:string): Promise<any> 
     locale = await getLocale();
   }
   try {
-    const response = await axios.get(`${process?.env?.NEXT_PUBLIC_API_URL}/static/content/${locale}/${page}.json`);
+    const response = await axios.get(`${process?.env?.NEXT_PUBLIC_BASE_URL}/content/${locale}/${page}.json`);
     return response.data;
   } catch (error) {
     // throw error;

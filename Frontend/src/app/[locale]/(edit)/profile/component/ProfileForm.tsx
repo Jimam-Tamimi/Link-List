@@ -177,7 +177,7 @@ export default function ProfileForm({pageContent}:{pageContent:any}) {
           <Input
             leftIcon={<MdOutlineBadge />}
             type="text"
-            label={pageContent?.text_input_label_bio}
+            label={pageContent?.text_input_label_last_name}
             required
             {...register("last_name", { required: "Last Name is required" })}
             isLoaded={myProfile?.fetchStatus == "idle"}
