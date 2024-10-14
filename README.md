@@ -33,65 +33,65 @@ Link-List is a web platform where users can sign up, create profiles, and share 
 - **Virtualenv** (recommended)
 
 ### Clone the repository
-\`\`\`bash
+```bash
 git clone https://github.com/Jimam-Tamimi/Link-List.git
-\`\`\`
+```
 
 ### Backend Setup (Django)
 
 1. Navigate to the backend directory:
-   \`\`\`bash
+   ```bash
    cd Link-List/Backend
-   \`\`\`
+   ```
 
 2. (Optional) Create and activate a virtual environment:
-   \`\`\`bash
+   ```bash
    pip install virtualenv
    virtualenv venv
-   \`\`\`
+   ```
 
    - **Windows**: 
-     \`\`\`bash
-     .\venv\Scripts\activate
-     \`\`\`
+     ```bash
+     .venvScriptsactivate
+     ```
    - **macOS/Linux**: 
-     \`\`\`bash
+     ```bash
      source venv/bin/activate
-     \`\`\`
+     ```
 
 3. Install dependencies:
-   \`\`\`bash
+   ```bash
    pip install -r requirements.txt
-   \`\`\`
+   ```
 
 4. Run migrations:
-   \`\`\`bash
+   ```bash
    python manage.py migrate
-   \`\`\`
+   ```
 
 5. Run the development server:
-   \`\`\`bash
+   ```bash
    python manage.py runserver
-   \`\`\`
+   ```
 
    The backend will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
 ### Frontend Setup (Next.js)
 
 1. Open a new terminal and navigate to the frontend directory:
-   \`\`\`bash
+   ```bash
    cd Link-List/Frontend
-   \`\`\`
+   ```
 
 2. Install dependencies:
-   \`\`\`bash
+   ```bash
    npm install
-   \`\`\`
+   ```
 
 3. Run the development server:
-   \`\`\`bash
+   ```bash
    npm run dev
-   \`\`\`
+   ```
 
    The frontend will be accessible at [http://localhost:3000/](http://localhost:3000/).
 
