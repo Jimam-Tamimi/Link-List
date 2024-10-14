@@ -70,7 +70,9 @@ export default async function Layout({
                     className="mix-blend-soft-light blur-[0.5px] dark:mix-blend-color-dodge "
                     alt={"World Map Image"}
                   />
+                  <div className="relative z-10">
                   {children}
+                  </div>
                 </QueryClientProvider>
               </NextUIProvider>
             </ThemeProvider>
