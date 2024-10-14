@@ -62,26 +62,26 @@ git clone https://github.com/Jimam-Tamimi/Link-List.git
    ```
 
 2. (Optional) Create and activate a virtual environment:
-  1. Install virtualenv if you don't have it installed. Open a terminal with admin privileges and run.
-
-     ```bash
-     pip install virtualenv
-     ```
-     
-  3. Come back to Link-List/Backend terminal and run 
-
-     ```bash
-     virtualenv venv
-     ```
-
-   - **Windows**: 
-     ```bash
-     .\venv\Scripts\activate
-     ```
-   - **macOS/Linux**: 
-     ```bash
-     source venv/bin/activate
-     ```
+    1. Install virtualenv if you don't have it installed. Open a terminal with admin privileges and run.
+    
+       ```bash
+       pip install virtualenv
+       ```
+       
+    3. Come back to Link-List/Backend terminal and run 
+    
+       ```bash
+       virtualenv venv
+       ```
+    
+     - **Windows**: 
+       ```bash
+       .\venv\Scripts\activate
+       ```
+     - **macOS/Linux**: 
+       ```bash
+       source venv/bin/activate
+       ```
 
 3. Install dependencies:
    ```bash
