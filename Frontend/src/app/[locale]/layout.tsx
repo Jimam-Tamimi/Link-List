@@ -55,7 +55,7 @@ export default async function Layout({
           <NextIntlClientProvider messages={messages}>
             <ToastContainer draggable />
 
-            <ThemeProvider defaultTheme="system" enableSystem attribute="class">
+            <ThemeProvider defaultTheme="dark" enableSystem attribute="class">
               <NextUIProvider>
                 <QueryClientProvider>
                   <div className="absolute  left-[212px] top-[212px] shadow-[0px_0px_300px_135px_#2563eb] bg-transparent z-0"></div>
