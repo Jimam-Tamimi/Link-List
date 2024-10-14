@@ -131,7 +131,7 @@ STATICFILES_DIRS = [
 ]
 
 # Directory where static files will be collected
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
