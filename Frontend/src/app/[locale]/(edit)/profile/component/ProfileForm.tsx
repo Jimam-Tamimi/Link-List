@@ -156,7 +156,7 @@ export default function ProfileForm({pageContent}:{pageContent:any}) {
         <h2 className="text-3xl font-bold ">{pageContent?.formTitle}</h2>
         <p className="text-gray-700 dark:text-gray-300">{pageContent?.formSubTitle}</p>
         {!auth?.access && (
-          <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">{pageContent?.sign_in_demo_profile_error}</p>
+          <p className=" text-xl capitalize font-semibold leading-relaxed text-red-600">{pageContent?.sign_in_demo_profile_error}</p>
         )}
       </div>
 

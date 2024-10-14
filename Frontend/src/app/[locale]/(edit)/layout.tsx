@@ -22,6 +22,7 @@ export default async function RootLayout({
   // await new Promise((resolve) => setTimeout(resolve, 10000)); // to see the loading animation (will be removed)
 
   let pageContent = await getPageContent('components/Header')
+  
   const authContent = await getPageContent('components/auth/index')
   pageContent = {...pageContent, ...authContent}
 
