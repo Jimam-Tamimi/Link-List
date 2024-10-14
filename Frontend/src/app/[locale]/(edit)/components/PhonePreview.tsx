@@ -2,7 +2,7 @@
 import { useLinksForMe } from "@/hooks/linkSharing";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaGithub, FaLink } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useMyProfile } from "@/hooks/auth";
@@ -10,10 +10,11 @@ import { socialMediaOptions } from "@/helpers/linkColors";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Button from "@/components/utils/Button";
 import { FiExternalLink } from "react-icons/fi";
+import getPageContent from "@/helpers/getPageContent";
 
-export default function PhonePreview() {
+export default function PhonePreview({pageContent}:{pageContent:any}) {
   const linksForMe = useLinksForMe();
-  const myProfile = useMyProfile();
+  const myProfile = useMyProfile(); 
   return (
     <>
     {/* <SkeletonTheme baseColor="#261d46" highlightColor="#382c63"> */}
@@ -181,7 +182,7 @@ export default function PhonePreview() {
           size="sm"
           rightIcon={<FiExternalLink size={24} />}
         >
-          Preview
+          {pageContent?.button_text_preview}
         </Button>
       </Link>
     {/* </SkeletonTheme>   */}

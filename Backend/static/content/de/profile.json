@@ -1,14 +1,14 @@
 {
-    "metaTitle": "Edit Profile",
-    "metaDescription": "Page to edit your profile.",
-    "formTitle": "Customize Your Profile",
-    "formSubTitle": "Edit your profile below and share it with the world!",
-    "sign_in_demo_profile_error": "This is a demo profile. Please sign in to create your own profile and customize it.",
-    "text_input_label_first_name": "First Name",
-    "text_input_label_last_name": "Last Name",
-    "text_input_label_bio": "Bio",
-    "text_input_label_username": "Username",
-    "text_input_label_email": "Email",
-    "image_input_label_profile_picture": "Drag 'n' drop your profile picture here, or click to select one.",
-    "button_text": "Save"
-  }
+  "metaTitle": "Profil bearbeiten",
+  "metaDescription": "Seite zum Bearbeiten deines Profils.",
+  "formTitle": "Passe dein Profil an",
+  "formSubTitle": "Bearbeite dein Profil unten und teile es mit der Welt!",
+  "sign_in_demo_profile_error": "Dies ist ein Demo-Profil. Bitte melde dich an, um dein eigenes Profil zu erstellen und anzupassen.",
+  "text_input_label_first_name": "Vorname",
+  "text_input_label_last_name": "Nachname",
+  "text_input_label_bio": "Bio",
+  "text_input_label_username": "Benutzername",
+  "text_input_label_email": "E-Mail",
+  "image_input_label_profile_picture": "Ziehe dein Profilbild hierher oder klicke, um eines auszuwählen.",
+  "button_text": "Speichern"
+}

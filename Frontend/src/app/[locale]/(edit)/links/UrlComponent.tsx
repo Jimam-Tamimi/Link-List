@@ -94,7 +94,6 @@ export default function UrlComponent({pageContent}: {pageContent:any}) {
         axis="y"
         values={linksForMe?.data || []}
         onReorder={async (newOrder) => {
-          console.log("run");
           await queryClient.setQueryData(
             ["links", username],
             (oldData: any) => {
@@ -104,7 +103,6 @@ export default function UrlComponent({pageContent}: {pageContent:any}) {
            newOrder.map(async (newLink, index) => {
               const oldLink = linksForMe?.data?.[index];
               if (oldLink && newLink.id !== oldLink.id) {
-                console.log("run" + index);
                 // newOrder[index].order = oldLink.order;
                 await updateLinkOrder?.mutateAsync(
                   { id: newLink.id, order: oldLink.order }, 

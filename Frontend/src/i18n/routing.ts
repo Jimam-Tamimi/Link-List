@@ -3,7 +3,7 @@ import { defineRouting } from 'next-intl/routing';
 import { config } from '../middleware';
 
 
-export const locales =  ['en', 'de'];
+export const locales =  ['en', "tr", "bn", 'de'];
 export const routing = defineRouting({
   locales: locales,
   defaultLocale: 'en',
@@ -12,11 +12,15 @@ export const routing = defineRouting({
     '/': '/',
     '/profile': {
       en: '/profile',
-      de: '/profile'
+      tr: '/profil',
+      bn: '/প্রোফাইল',
+      de: '/Profil'
     },
     '/links': {
       en: '/links',
-      de: '/links'
+      tr: '/bağlantılar',
+      bn: '/লিঙ্ক',
+      de: '/links',
     }
   }
 });

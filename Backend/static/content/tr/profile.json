@@ -1,0 +1,14 @@
+{
+  "metaTitle": "Profili Düzenle",
+  "metaDescription": "Profilinizi düzenleme sayfası.",
+  "formTitle": "Profilinizi Özelleştirin",
+  "formSubTitle": "Profilinizi aşağıda düzenleyin ve dünyayla paylaşın!",
+  "sign_in_demo_profile_error": "Bu bir demo profilidir. Kendi profilinizi oluşturmak ve özelleştirmek için lütfen giriş yapın.",
+  "text_input_label_first_name": "Ad",
+  "text_input_label_last_name": "Soyad",
+  "text_input_label_bio": "Biyografi",
+  "text_input_label_username": "Kullanıcı Adı",
+  "text_input_label_email": "E-posta",
+  "image_input_label_profile_picture": "Profil resminizi buraya sürükleyip bırakın veya seçmek için tıklayın.",
+  "button_text": "Kaydet"
+}

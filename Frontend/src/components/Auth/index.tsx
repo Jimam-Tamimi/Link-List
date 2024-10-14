@@ -30,7 +30,6 @@ export default function Auth({ pageContent }: any) {
 
   useEffect(() => {
     if (auth?.access) {
-      console.log("first");
       onOpenChange();
     }
     return () => {};

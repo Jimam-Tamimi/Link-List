@@ -29,6 +29,7 @@ const Navigation = ( {pageContent}:{pageContent:any}) => {
         href="/links"
         ref={(el) => (linksRef.current[0] = el)}
         style={{ textDecoration: "none",  }}
+        className="hover:scale-105 transition-all duration-300 ease-in-out active:scale-90"
       >
         {pageContent?.nav_link_links}
       </Link>
@@ -36,6 +37,7 @@ const Navigation = ( {pageContent}:{pageContent:any}) => {
         href="/profile"
         ref={(el) => (linksRef.current[1] = el)}
         style={{ textDecoration: "none",  }}
+        className="hover:scale-105 transition-all duration-300 ease-in-out active:scale-90"
       >
         {pageContent?.nav_link_profile}
         </Link>

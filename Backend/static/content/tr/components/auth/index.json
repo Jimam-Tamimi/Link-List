@@ -1,0 +1,10 @@
+{
+  "sign_in_title": "Giriş Yap", 
+  "sign_up_title": "Kayıt Ol", 
+  "button_text_sign_in": "Giriş Yap", 
+  "link_text_forgot_password": "Şifremi Unuttum", 
+  "text_dont_have_account": "Hesabın Yok Mu?", 
+  "text_already_have_account": "Zaten Hesabın Var mı?", 
+  "link_text_create": "Bir Hesap Oluştur",
+  "link_text_sign_in": "Bir Hesap Oluştur"
+}

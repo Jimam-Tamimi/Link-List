@@ -89,8 +89,6 @@ export const useUpdateLinkOrder = () => {
       return updateOrder(newOrderedObject);
     },
     onSuccess: (data, variables, context) => {
-      console.log({ variables });
-      console.log({ context });
 
       queryClient.setQueryData(["links", username], (oldData: LinkType[]) => {
         if (!oldData) return;

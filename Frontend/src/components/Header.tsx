@@ -20,8 +20,10 @@ import EndHeaderPart from "./EndHeaderPart";
 
 export default async function Header({
   previewHeader = false,
+  pageContent,
 }: {
   previewHeader?: boolean;
+  pageContent: any;
 }) {
   // const auth = useSelector((state: RootState) => state.auth?.data);
   // const [pageContent, setPageContent] = useState<any>({});
@@ -34,17 +36,13 @@ export default async function Header({
 
   //   return () => {};
   // }, []); 
-  let pageContent = await getPageContent('components/Header')
-  const authContent = await getPageContent('components/auth/index')
-  pageContent = {...pageContent, ...authContent}
-
   return (
     <>
-      <header className="  px-4 py-4    shadow-md dark:shadow-[#ffffff30]">
+      <header className="  px-4 py-4  z-10 relative  shadow-md dark:shadow-[#ffffff30]">
         <div className="lg:w-[90%] m-auto flex justify-between items-center">
-          <h1 className="text-3xl hidden md:block font-bold bg-gradient-to-br  from-[#02103d] to-[#1e00a3] dark:from-[#eaefff] dark:to-[#ffcfe4]   text-transparent bg-clip-text ">
+          <Link href={"/"} className="text-3xl hidden md:block font-bold bg-gradient-to-br  from-[#02103d] to-[#1e00a3] dark:from-[#eaefff] dark:to-[#ffcfe4]   text-transparent bg-clip-text ">
             Link List
-          </h1>
+          </Link>
           {!previewHeader ? <Navigation pageContent={pageContent} /> : ""}
 
           <div className="flex  justify-center items-center lg:gap-10 gap-5">

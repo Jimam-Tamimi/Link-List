@@ -30,8 +30,9 @@ export default function SelectLanguage() {
     const [selectedLanguage, ] = useState<any>()
      const [languages, setLanguages] = useState<LanguageType[]>([
         {id:1, language:"English", locale: "en"},
-        {id:2, language:"German", locale: "de"},
-
+        {id:2, language:"Turkish", locale: "tr"},
+        {id:3, language:"Bangla", locale: "bn"},
+        {id:4, language:"German", locale: "de"},
     ])
 
     return (

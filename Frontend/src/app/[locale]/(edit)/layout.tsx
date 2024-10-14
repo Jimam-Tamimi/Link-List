@@ -11,6 +11,7 @@ import Image from "next/image";
 import Preview from "@/components/Preview";
 import { FaArrowRightLong, FaGithub } from "react-icons/fa6";
 import PhonePreview from "./components/PhonePreview";
+import getPageContent from "@/helpers/getPageContent";
 
 export default async function RootLayout({
   children,
@@ -20,15 +21,20 @@ export default async function RootLayout({
 }>) {
   // await new Promise((resolve) => setTimeout(resolve, 10000)); // to see the loading animation (will be removed)
 
+  let pageContent = await getPageContent('components/Header')
+  const authContent = await getPageContent('components/auth/index')
+  pageContent = {...pageContent, ...authContent}
+
   return (
     <>
-      <Header />
+     
+      <Header pageContent={pageContent} />
 
       <div className="flex items-center justify-between ">
         <div className="container relative flex flex-col items-center justify-between gap-10 mx-auto lg:flex-row lg:py-20 py-14 lg:gap-0 ">
           {/* Mobile Mockup Section */}
 
-          <PhonePreview />
+          <PhonePreview pageContent={pageContent} />
 
           {/* Link Customization Section */}
           <LayoutTransition

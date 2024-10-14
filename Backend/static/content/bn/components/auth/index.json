@@ -1,0 +1,10 @@
+{
+  "sign_in_title": "সাইন ইন", 
+  "sign_up_title": "সাইন আপ", 
+  "button_text_sign_in": "সাইন ইন", 
+  "link_text_forgot_password": "পাসওয়ার্ড ভুলে গেছি", 
+  "text_dont_have_account": "একটি অ্যাকাউন্ট নেই?", 
+  "text_already_have_account": "ইতিমধ্যেই একটি অ্যাকাউন্ট আছে?", 
+  "link_text_create": "একটি তৈরি করুন",
+  "link_text_sign_in": "একটি তৈরি করুন"
+}

@@ -116,7 +116,6 @@ export default function ProfileForm({pageContent}:{pageContent:any}) {
     // if (data.profile_image && data.profile_image.length > 0) {
     //   formData.append("profile_image", data.profile_image[0]); // Only select the first image
     // }
-    console.log(formData?.values());
 
     await updateProfile?.mutateAsync(formData as any, {
       onSuccess: (data) => {
@@ -142,7 +141,6 @@ export default function ProfileForm({pageContent}:{pageContent:any}) {
         const file = value?.profile_image;
         const imageUrl = URL.createObjectURL(file);
         value.profile_image = imageUrl as any;
-        console.log("Image URL:", imageUrl);
       } else {
         value.profile_image = myProfile?.data?.profile_image as any;
       }

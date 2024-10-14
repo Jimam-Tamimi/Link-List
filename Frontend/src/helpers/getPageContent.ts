@@ -11,7 +11,6 @@ const getPageContent = cache(async (page: string, locale?:string): Promise<any> 
   }
   try {
     const response = await axios.get(`${process?.env?.NEXT_PUBLIC_API_URL}/static/content/${locale}/${page}.json`);
-    console.log(response?.data)
     return response.data;
   } catch (error) {
     // throw error;

@@ -1,0 +1,10 @@
+{
+  "metaTitle": "Bağlantılarınız",
+  "metaDescription": "Yeni bağlantılar oluşturma, mevcut bağlantıları düzenleme ve silme sayfası.",
+  "formTitle": "Bağlantılarınızı Özelleştirin",
+  "formSubTitle": "Aşağıda bağlantıları ekleyin, düzenleyin veya kaldırın ve ardından profilinizi dünyayla paylaşın!",
+  "sign_in_demo_profile_error": "Bu bir demo profilidir. Kendi profilinizi oluşturmak ve özelleştirmek için lütfen giriş yapın.",
+  "form_input_label_platform": "Platform",
+  "form_input_label_link": "Bağlantı",
+  "form_input_placeholder_link": "Bağlantınızı Girin"
+}

@@ -1,0 +1,14 @@
+{
+  "metaTitle": "প্রোফাইল সম্পাদনা করুন",
+  "metaDescription": "আপনার প্রোফাইল সম্পাদনার জন্য পৃষ্ঠা।",
+  "formTitle": "আপনার প্রোফাইল কাস্টমাইজ করুন",
+  "formSubTitle": "আপনার প্রোফাইলটি নিচে সম্পাদনা করুন এবং এটি বিশ্বের সাথে শেয়ার করুন!",
+  "sign_in_demo_profile_error": "এটি একটি ডেমো প্রোফাইল। অনুগ্রহ করে আপনার নিজস্ব প্রোফাইল তৈরি করতে এবং এটি কাস্টমাইজ করতে সাইন ইন করুন।",
+  "text_input_label_first_name": "প্রথম নাম",
+  "text_input_label_last_name": "শেষ নাম",
+  "text_input_label_bio": "জীবনী",
+  "text_input_label_username": "ব্যবহারকারীর নাম",
+  "text_input_label_email": "ইমেইল",
+  "image_input_label_profile_picture": "আপনার প্রোফাইল ছবিটি এখানে ড্র্যাগ করুন এবং ড্রপ করুন, অথবা একটি নির্বাচন করতে ক্লিক করুন।",
+  "button_text": "সংরক্ষণ করুন"
+}

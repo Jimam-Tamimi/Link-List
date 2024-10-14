@@ -26,7 +26,6 @@ export default function SignIn({pageContent}:{pageContent:any}) {
   const signInMutation = useSignIn(); // Use the useSignIn hook
 
   const onSubmit = (data: SignInFormDataType) => {
-    console.log(data);
     signInMutation.mutate(data, {
       onSuccess: async (data) => {
           toast.success("Signed in successfully!");
