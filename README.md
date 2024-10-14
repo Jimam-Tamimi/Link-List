@@ -3,6 +3,18 @@
 
 Link-List is a web platform where users can sign up, create profiles, and share their information along with various links such as social media or websites.
 
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Clone the repository](#clone-the-repository)
+  - [Backend Setup (Django)](#backend-setup-django)
+  - [Frontend Setup (Next.js)](#frontend-setup-nextjs)
+- [API Documentation](#api-documentation)
+- [Contributing](#contributing)
+
 ## Features
  
 - User authentication (Sign up, Login)
