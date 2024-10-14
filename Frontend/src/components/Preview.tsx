@@ -19,7 +19,7 @@ export default async function Preview({
   links
 }: {
   className?: string;
-  profile:ProfileType,
+  profile:ProfileType | null,
   links:LinkType[]
 }) {
 
@@ -36,7 +36,7 @@ export default async function Preview({
         <div className="container flex flex-col justify-center gap-4  z-50 items-center py-10">
           <Image
             alt="photo frame"
-            src={profile?.profile_image as any}
+            src={profile?.profile_image ? profile?.profile_image :'/images/unknown.webp' as any}
             width={800}
             height={800}
             className="object-cover object-center rounded-full w-32 h-32"

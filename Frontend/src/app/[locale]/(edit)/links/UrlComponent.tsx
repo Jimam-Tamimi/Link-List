@@ -39,7 +39,7 @@ import { url } from "inspector";
 import { socialMediaOptions } from "@/helpers/linkColors";
 
 
-export default function UrlComponent() {
+export default function UrlComponent({pageContent}: {pageContent:any}) {
   const queryClient = useQueryClient();
   // const response = await axios.get(
   //   `http://127.0.0.1:8000/static/content/${locale}/home.json`
@@ -55,14 +55,10 @@ export default function UrlComponent() {
   return (
     <>
       <div className="space-y-2">
-        <h2 className="text-3xl font-bold ">Customize your links</h2>
-        <p className="text-gray-700 dark:text-gray-300">
-          Add/edit/remove links below and then share all your profiles with the
-          world!
-        </p>
+        <h2 className="text-3xl font-bold ">{pageContent?.formTitle}</h2>
+        <p className="text-gray-700 dark:text-gray-300">{pageContent?.formSubTitle}</p>
         {!username && 
-        <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">This is a demo profile. Please sign in to create your own profile and customize it.</p>
-        }
+        <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">{pageContent?.sign_in_demo_profile_error}</p>}
       </div>
 
       {/* Add New Link */}
@@ -145,7 +141,7 @@ export default function UrlComponent() {
           )) : 
           linksForMe?.data?.map((link, i) => (
             <Reorder.Item className="" key={link?.id} value={link}>
-              <UrlForm key={link?.id} i={i} link={link} />
+              <UrlForm pageContent={pageContent} key={link?.id} i={i} link={link} />
             </Reorder.Item>
           ))
 
@@ -155,7 +151,7 @@ export default function UrlComponent() {
   );
 }
 
-const UrlForm = React.memo(({ link, i, isLoaded=true }: { link: (LinkType | null); i: number, isLoaded?:boolean }) => {
+const UrlForm = React.memo(({ link, i, isLoaded=true, pageContent }: { pageContent:any, link: (LinkType | null); i: number, isLoaded?:boolean }) => {
   const {
     register,
     handleSubmit,
@@ -389,7 +385,7 @@ const UrlForm = React.memo(({ link, i, isLoaded=true }: { link: (LinkType | null
         <div className="flex flex-col items-start gap-5 lg:justify-between lg:flex-row">
           <Select
             iconLabel={<IoShareSocialSharp size={18} />}
-            label={`Platform ${i + 1}`}
+            label={`${pageContent?.form_input_label_platform} ${i + 1}`}
             options={socialMediaOptions}
             onSelect={(option) =>
               option ? setValue("platform", option?.value) : "other"
@@ -415,8 +411,8 @@ const UrlForm = React.memo(({ link, i, isLoaded=true }: { link: (LinkType | null
           <Input
             id={`link-${i + 1}`}
             type="url"
-            placeholder="Enter Your Link"
-            label={`Link ${i + 1}`}
+            placeholder={pageContent?.form_input_placeholder_link}
+            label={`${pageContent?.form_input_label_link} ${i + 1}`}
             leftIcon={<FaLink size={15} />}
             {...register(`url`, {
               required: "URL is required",

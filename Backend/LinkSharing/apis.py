@@ -61,3 +61,26 @@ class LinkViewSet(ModelViewSet):
         link.save()
         serializer = LinkSerializer(link)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+# def getPageContent(request):
+#     locale = self.request.query_params.get('locale', "tr").lower()
+#     pageName = self.request.query_params.get('pageName', "home").lower()
+
+#     json_file_path = os.path.join(settings.BASE_DIR, 'default_page_content', f'{pageName}.json')
+#     data = {}
+#     try:
+#         with open(json_file_path, 'r') as json_file:
+#             data = json.load(json_file)
+#     except Exception:
+#         return Response({"error": "Page Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
+        
+#     try:
+#         instance = Page.objects.get(name=pageName)
+#         newData = self.set_media_urls(self.get_serializer(instance).data, request)
+#         for key in newData["content"][locale]:
+#             data[key] = newData["content"][locale][key]
+        
+#     except Exception:
+#         pass        
+
+#     return Response(data)

@@ -72,13 +72,13 @@ const dataURLtoBlob = (dataURL: string): Blob => {
   return new Blob([u8arr], { type: mime });
 };
 
-// Define props for the ProfilePictureUploader component
 interface ProfilePictureUploaderProps {
-  onUpload: (formData: FormData) => void; // Prop to pass the form data to the parent
+  onUpload: (formData: FormData) => void;  
+  label?: string;  
 }
 
 // Main ProfilePictureUploader component
-export default function ProfilePictureUploader({ onUpload, }: ProfilePictureUploaderProps) {
+export default function ProfilePictureUploader({ onUpload,label }: ProfilePictureUploaderProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [image, setImage] = useState<string | null>(null);
   const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -140,7 +140,7 @@ export default function ProfilePictureUploader({ onUpload, }: ProfilePictureUplo
     <>
       <div {...getRootProps()} style={{ border: "2px dashed #ccc", padding: "20px", textAlign: "center" }}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop your profile picture here, or click to select one.</p>
+        <p>{label}</p>
       </div>
 
       {/* Preview of Cropped Image Below the Upload Tool */}

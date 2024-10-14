@@ -1,0 +1,9 @@
+{
+    "metaTitle": "Your Links",
+    "metaDescription": "Page to create new links, edit and delete existing links..",
+    "formTitle": "Customize your links",
+    "formSubTitle": "Add/edit/remove links below and then share your profile with the world!",
+    "sign_in_demo_profile_error": "This is a demo profile. Please sign in to create your own profile and customize it.",
+    "form_input_label_platform": "Platform",
+    "form_input_label_link": "Link"
+  }

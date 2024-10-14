@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 
-const Navigation = () => {
+const Navigation = ( {pageContent}:{pageContent:any}) => {
   const pathname = usePathname();
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
   const linksRef = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -30,15 +30,15 @@ const Navigation = () => {
         ref={(el) => (linksRef.current[0] = el)}
         style={{ textDecoration: "none",  }}
       >
-        Links
+        {pageContent?.nav_link_links}
       </Link>
       <Link
         href="/profile"
         ref={(el) => (linksRef.current[1] = el)}
         style={{ textDecoration: "none",  }}
       >
-        Profile
-      </Link>
+        {pageContent?.nav_link_profile}
+        </Link>
 
       {/* Floating underline */}
       <motion.div

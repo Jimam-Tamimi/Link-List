@@ -22,8 +22,20 @@ class UserViewSet(ModelViewSet):
             self.permission_classes = [IsAuthenticated]
         return super().get_permissions()
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
+ 
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        refresh = RefreshToken.for_user(user)
+        headers = self.get_success_headers(serializer.data)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'profile': ProfileSerializer(user.profile).data
+        }, status=status.HTTP_201_CREATED, headers=headers)
     def list(self, request, *args, **kwargs):
         return Response({'detail': 'Method "GET" not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 

@@ -18,6 +18,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signInSuccess(state, action: PayloadAction<AuthType>) {
+      console.log({state})
       state.data = action.payload;
       state.loading = false;
       state.error = null;

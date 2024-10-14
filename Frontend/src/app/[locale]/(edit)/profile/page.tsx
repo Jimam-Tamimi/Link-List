@@ -5,22 +5,34 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Skeleton } from "@nextui-org/skeleton";
 import { unstable_setRequestLocale } from "next-intl/server";
+import getPageContent from "@/helpers/getPageContent";
+import { Metadata } from "next";
 
 
-export const metadata = {
-  title: "Edit Profile",
-  description: "Page to edit your profile.",
-};
+ 
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+
+  const pageContent = await getPageContent('profile')
+ 
+  
+  return {
+    title: pageContent?.metaTitle,
+    description: pageContent?.metaDescription,
+    
+  };
+}
 
 
 
-export default function page({ params }: { params: { locale: string } }) {
+export default async function page({ params }: { params: { locale: string } }) {
+  const pageContent = await getPageContent('profile')
   const { locale } = params;
   unstable_setRequestLocale(locale);
 
   return (
     <> 
-      <ProfileForm />
+      <ProfileForm  pageContent={pageContent} />
     </>
   );
 }

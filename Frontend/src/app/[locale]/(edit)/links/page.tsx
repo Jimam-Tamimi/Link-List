@@ -4,21 +4,33 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import UrlComponent from "./UrlComponent";
 import { unstable_setRequestLocale } from "next-intl/server";
+import getPageContent from "@/helpers/getPageContent";
+import { Metadata } from "next";
+ 
 
-export const metadata = {
-  title: "Edit Links",
-  description: "Page to create new links, edit and delete existing links.",
-};
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+
+  const pageContent = await getPageContent('links')
+ 
+  
+  return {
+    title: pageContent?.metaTitle,
+    description: pageContent?.metaDescription,
+    
+  };
+}
 
 
-export default function page({ params }: { params: { locale: string } }) {
+export default async function page({ params }: { params: { locale: string } }) {
+  const pageContent = await getPageContent('links')
   const { locale } = params;
+  
   unstable_setRequestLocale(locale);
 
   return (
     <>
 
-      <UrlComponent />
+      <UrlComponent pageContent={pageContent} />
     </>
   );
 }

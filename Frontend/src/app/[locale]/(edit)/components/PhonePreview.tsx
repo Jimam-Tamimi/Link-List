@@ -43,7 +43,7 @@ export default function PhonePreview() {
               ) : (
                 <Image
                   alt="photo frame"
-                  src={myProfile?.data?.profile_image as any}
+                  src={myProfile?.data?.profile_image ? myProfile?.data?.profile_image :'/images/unknown.webp' as any}
                   width={800}
                   height={800}
                   className="object-cover object-center w-24 h-24 rounded-full"
@@ -80,14 +80,14 @@ export default function PhonePreview() {
                   </>
                 ) : (
                   <>
-                    {myProfile?.data?.first_name +
+                    {myProfile?.data?.first_name ? myProfile?.data?.first_name : '' +
                       " " +
-                      myProfile?.data?.last_name}
+                      myProfile?.data?.last_name ? myProfile?.data?.last_name : ''}
                   </>
                 )}
               </h1>
             </div>
-            <p className="text-center text-center text-sm mb-2 flex justify-center items-center flex-col gap-3   leading-loose capitalize min-w-[80%] max-w-[900px]">
+            <p className="text-center  text-sm mb-2 flex justify-center items-center flex-col gap-3   leading-loose capitalize min-w-[80%] max-w-[900px]">
               {myProfile?.fetchStatus != "idle" ? (
                 <>
                   <Skeleton

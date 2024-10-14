@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import ThemeToggler from "./ThemeToggler";
 import Button from "./utils/Button";
@@ -15,12 +14,29 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useMyProfile } from "../hooks/auth";
 import SelectLanguage from "./SelectLanguage";
+import getPageContent from "@/helpers/getPageContent";
+import { useLocale } from "next-intl";
+import EndHeaderPart from "./EndHeaderPart";
 
-export default function Header({
+export default async function Header({
   previewHeader = false,
 }: {
   previewHeader?: boolean;
 }) {
+  // const auth = useSelector((state: RootState) => state.auth?.data);
+  // const [pageContent, setPageContent] = useState<any>({});
+  // const locale = useLocale()
+  // useEffect(() => {
+  //   async function run() {
+  //     setPageContent(await getPageContent("components/Header", locale));
+  //   }
+  //   run();
+
+  //   return () => {};
+  // }, []); 
+  let pageContent = await getPageContent('components/Header')
+  const authContent = await getPageContent('components/auth/index')
+  pageContent = {...pageContent, ...authContent}
 
   return (
     <>
@@ -29,44 +45,15 @@ export default function Header({
           <h1 className="text-3xl hidden md:block font-bold bg-gradient-to-br  from-[#02103d] to-[#1e00a3] dark:from-[#eaefff] dark:to-[#ffcfe4]   text-transparent bg-clip-text ">
             Link List
           </h1>
-          {!previewHeader ? <Navigation /> : ""}
+          {!previewHeader ? <Navigation pageContent={pageContent} /> : ""}
 
           <div className="flex  justify-center items-center lg:gap-10 gap-5">
             <ThemeToggler />
             <SelectLanguage />
-            {previewHeader ? (
-              <Link href={"/links"}>
-                <Button rightIcon={<FiEdit size={24} />}>
-                  Create Your Own Profile
-                </Button>
-              </Link>
-            ) : (
-              <>
-                <NotForPreview />
-              </>
-            )}
+            <EndHeaderPart previewHeader={previewHeader} pageContent={pageContent} />
           </div>
         </div>
       </header>
-    </>
-  );
-}
-
-function NotForPreview() {
-  const myProfile = useMyProfile();
-
-  return (
-    <>
-      <Link target="_blank" href={`/${myProfile?.data?.username}`}>
-        <Button
-          className="lg:text-base lg:py-3 lg:px-6 md:block hidden"
-          size="sm"
-          rightIcon={<FiExternalLink size={24} />}
-        >
-          Preview
-        </Button>
-      </Link>
-      <Auth />
     </>
   );
 }

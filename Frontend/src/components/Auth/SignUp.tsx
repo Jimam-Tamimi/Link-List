@@ -9,10 +9,10 @@ import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { AxiosError } from "axios";
 import { SignUpFormDataType } from "@/api-calls/auth";
+import getPageContent from "@/helpers/getPageContent";
+import { useEffect, useState } from "react";
 
- 
-
-export default function SignUp() {
+export default function SignUp({ pageContent }: { pageContent: any }) {
   const {
     register,
     handleSubmit,
@@ -39,7 +39,6 @@ export default function SignUp() {
         if (error.response) {
           switch (error.response.status) {
             case 400:
- 
               toast.error("Bad request. Please check your input.");
               break;
             case 401:
@@ -70,7 +69,7 @@ export default function SignUp() {
         <Input
           leftIcon={<MdAlternateEmail />}
           type="text"
-          label="Username"
+          label={pageContent?.text_input_label_username}
           {...register("username", {
             required: "Username is required",
           })}
@@ -82,7 +81,7 @@ export default function SignUp() {
         <Input
           leftIcon={<HiOutlineMail />}
           type="text"
-          label="Email"
+          label={pageContent?.text_input_label_email}
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -98,7 +97,7 @@ export default function SignUp() {
         <Input
           leftIcon={<RiLockPasswordLine />}
           type="password"
-          label="Password"
+          label={pageContent?.text_input_label_password}
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -114,7 +113,7 @@ export default function SignUp() {
         <Input
           leftIcon={<RiLockPasswordLine />}
           type="password"
-          label="Confirm Password"
+          label={pageContent?.text_input_label_confirm_password}
           {...register("confirmPassword", {
             required: "Confirm Password is required",
           })}
@@ -129,7 +128,7 @@ export default function SignUp() {
         type="submit"
         isLoading={signUpMutation.isPending}
       >
-        Submit
+        {pageContent?.button_text_sign_up}
       </Button>
     </form>
   );

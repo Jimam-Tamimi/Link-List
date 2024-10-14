@@ -55,7 +55,7 @@
 @layer components {
   .input {
     @apply shadow-[0_0px_15px_rgba(0,_0,_0,_0.1)] 
-      bg-[#ffffff3b] 
+      bg-[#eff4ffc0] 
       dark:bg-[#ffffff05] 
       backdrop-blur 
       outline-none 

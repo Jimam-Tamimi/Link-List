@@ -9,8 +9,14 @@ import { SignInFormDataType } from "@/api-calls/auth";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { AxiosError } from "axios"; 
+import { useEffect, useState } from "react";
+import getPageContent from "@/helpers/getPageContent";
 
-export default function SignIn() {
+export default function SignIn({pageContent}:{pageContent:any}) {
+
+ 
+  
+  
   const {
     register,
     handleSubmit,
@@ -58,7 +64,7 @@ export default function SignIn() {
       <div>
         <Input
           type="text"
-          label="Email or Username"
+          label={pageContent?.text_input_label_email_or_username}
           {...register("emailOrUsername", {
             required: "Email or Username is required",
           })}
@@ -69,7 +75,7 @@ export default function SignIn() {
       <div>
         <Input
           type="password"
-          label="Password"
+          label={pageContent?.text_input_label_password}
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -87,8 +93,8 @@ export default function SignIn() {
         type="submit"
         isLoading={signInMutation.isPending}
       >
-        Submit
-      </Button>
+          {pageContent?.button_text_sign_in}
+          </Button>
     </form>
   );
 }

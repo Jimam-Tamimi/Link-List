@@ -37,6 +37,7 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   const messages = await getMessages();
+
   return (
     <html lang="en">
     <body
@@ -49,7 +50,6 @@ export default async function Layout({
             <Image
               layout="fill"
               style={{
-                zIndex: "-1",
                 objectFit: "cover",
                 objectPosition: "center",
               }}

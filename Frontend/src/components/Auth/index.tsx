@@ -18,49 +18,65 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { signOut } from "@/redux/slices/authSlice";
 import { toast } from "react-toastify";
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
+import getPageContent from "@/helpers/getPageContent";
 
-export default function Auth() {
+export default function Auth({ pageContent }: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [visibleComponent, setVisibleComponent] = useState<
     "SIGN_IN" | "SIGN_UP"
   >("SIGN_IN");
-  const auth = useSelector(
-    (state: RootState) => state.auth?.data
-  );
-
-  const fadeAnimation = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
- 
- 
-  const dispatch = useAppDispatch();
+  const auth = useSelector((state: RootState) => state.auth?.data);
 
   useEffect(() => {
-    
-    if(auth?.access){
-      console.log("first")
-      onOpenChange()
+    if (auth?.access) {
+      console.log("first");
+      onOpenChange();
     }
-    return () => {
-      
-    }
-  }, [auth?.access])
-  
-  
+    return () => {};
+  }, [auth?.access]);
+
+  const [signUpContent, setSignUpContent] = useState<any>({});
+  const [signInContent, setSignInContent] = useState<any>({});
+
+  useEffect(() => {
+    const signUpData = async () => {
+      const data = await getPageContent("components/auth/SignUp");
+      setSignUpContent(data);
+    };
+    const signInData = async () => {
+      const data = await getPageContent("components/auth/SignIn");
+      setSignInContent(data);
+    };
+    signUpData();
+    signInData();
+    return () => {};
+  }, []);
+
   return (
     <>
-      {!auth?.access ? (
-        <Button className="lg:text-base lg:py-3 lg:px-6" size="sm"  variant="transparent" onClick={onOpen}>
-          Sign In
+      {auth?.access ? (
+        <Button
+          className="lg:text-base lg:py-3 lg:px-6"
+          size="sm"
+          variant="transparent"
+          onClick={() => {
+            dispatch(signOut());
+            toast.success("Successfully Signed Out");
+          }}
+        >
+          {pageContent?.button_text_sign_out}
         </Button>
-      ) : 
-        <Button className="lg:text-base lg:py-3 lg:px-6" size="sm"  variant="transparent" onClick={() => {dispatch(signOut()); toast.success("Successfully Signed Out")}}>
-          Sign Out
+      ) : (
+        <Button
+          className="lg:text-base lg:py-3 lg:px-6"
+          size="sm"
+          variant="transparent"
+          onClick={onOpen}
+        >
+          {pageContent?.button_text_sign_in}
         </Button>
-    }
+      )}
 
       <Modal
         size="lg"
@@ -86,7 +102,9 @@ export default function Auth() {
                 >
                   <ModalHeader className="flex flex-row items-center justify-between">
                     <h3 className="text-2xl tracking-wide">
-                      {visibleComponent === "SIGN_IN" ? "Sign In" : "Sign Up"}
+                      {visibleComponent === "SIGN_IN"
+                        ? pageContent?.sign_in_title
+                        : pageContent?.sign_up_title}
                     </h3>
                     <div
                       onClick={onOpenChange}
@@ -97,12 +115,19 @@ export default function Auth() {
                   </ModalHeader>
                   <ModalBody className="gap-6">
                     <>
-                      {visibleComponent === "SIGN_IN" ? <SignIn /> : <SignUp />}
+                      {visibleComponent === "SIGN_IN" ? (
+                        <SignIn pageContent={signInContent} />
+                      ) : (
+                        <SignUp pageContent={signUpContent} />
+                      )}
                     </>
                   </ModalBody>
                   <ModalFooter className="flex flex-col items-center justify-center gap-5">
                     <div className="flex items-center justify-center gap-14">
-                      <div onClick={() => signIn('google')} className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
+                      <div
+                        onClick={() => signIn("google")}
+                        className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer"
+                      >
                         <Image
                           alt="Google logo"
                           src={"/images/logo/Google Logo.svg"}
@@ -131,10 +156,12 @@ export default function Auth() {
                       </div>
                     </div>
                     <p className="font-semibold tracking-wide text-blue-500 transition-all duration-300 cursor-pointer hover:text-blue-600">
-                      Forgot Password
+                      {pageContent?.link_text_forgot_password}
                     </p>
                     <p>
-                      Don't Have an Account?
+                      {visibleComponent === "SIGN_IN"
+                        ? pageContent?.text_dont_have_account
+                        : pageContent?.text_already_have_account}
                       <span
                         onClick={() => {
                           visibleComponent === "SIGN_IN"
@@ -143,7 +170,10 @@ export default function Auth() {
                         }}
                         className="font-semibold tracking-wide text-blue-500 transition-all duration-300 cursor-pointer hover:text-blue-600"
                       >
-                        {"  "}Create One
+                        {" "}
+                        {visibleComponent === "SIGN_IN"
+                          ? pageContent?.link_text_create
+                          : pageContent?.link_text_sign_in}
                       </span>
                     </p>
                   </ModalFooter>

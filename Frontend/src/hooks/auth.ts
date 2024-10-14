@@ -53,6 +53,8 @@ export const useSignIn = () => {
 
 export const useSignUp = () => {
   const dispatch = useAppDispatch();
+  const signInMutation = useSignIn(); // Use the useSignIn hook
+  
   return useMutation({
     mutationFn: signUp,
     onMutate: () => {

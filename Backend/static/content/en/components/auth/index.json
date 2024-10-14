@@ -1,0 +1,10 @@
+{
+    "sign_in_title": "Sign In", 
+    "sign_up_title": "Sign Up", 
+    "button_text_sign_in": "Sign In", 
+    "link_text_forgot_password": "Forgot Password", 
+    "text_dont_have_account": "Don't Have an Account?", 
+    "text_already_have_account": "Already Have an Account?", 
+    "link_text_create": "Create One",
+    "link_text_sign_in": "Create One"
+}

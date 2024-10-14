@@ -1,0 +1,14 @@
+{
+    "metaTitle": "Edit Profile",
+    "metaDescription": "Page to edit your profile.",
+    "formTitle": "Customize Your Profile",
+    "formSubTitle": "Edit your profile below and share it with the world!",
+    "sign_in_demo_profile_error": "This is a demo profile. Please sign in to create your own profile and customize it.",
+    "text_input_label_first_name": "First Name",
+    "text_input_label_last_name": "Last Name",
+    "text_input_label_bio": "Bio",
+    "text_input_label_username": "Username",
+    "text_input_label_email": "Email",
+    "image_input_label_profile_picture": "Drag 'n' drop your profile picture here, or click to select one.",
+    "button_text": "Save"
+  }

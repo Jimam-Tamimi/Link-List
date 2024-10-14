@@ -51,7 +51,7 @@ interface ProfileFormInputs {
   profile_image: File;
 }
 
-export default function ProfileForm() {
+export default function ProfileForm({pageContent}:{pageContent:any}) {
   const myProfile = useMyProfile();
   const updateProfile = useUpdateProfile();
   const auth = useSelector((state: RootState) => state.auth?.data);
@@ -109,7 +109,7 @@ export default function ProfileForm() {
       data?.profile_image &&
       data?.profile_image?.type?.startsWith("image/")
     ) {
-      formData.append("profile_image", data.profile_image);
+      formData.append("profile_image", data?.profile_image);
     }
 
     // Append profile image if it exists
@@ -138,8 +138,8 @@ export default function ProfileForm() {
     // Store the watched field values in the QueryClient
 
     const subscription = watch((value) => {
-      if (value.profile_image && value.profile_image instanceof File) {
-        const file = value.profile_image;
+      if (value?.profile_image && value?.profile_image instanceof File) {
+        const file = value?.profile_image;
         const imageUrl = URL.createObjectURL(file);
         value.profile_image = imageUrl as any;
         console.log("Image URL:", imageUrl);
@@ -155,15 +155,10 @@ export default function ProfileForm() {
   return (
     <>
       <div className="space-y-2">
-        <h2 className="text-3xl font-bold ">Customize Your Profile</h2>
-        <p className="text-gray-700 dark:text-gray-300">
-          Edit your profile below and then share it with the world!
-        </p>
+        <h2 className="text-3xl font-bold ">{pageContent?.formTitle}</h2>
+        <p className="text-gray-700 dark:text-gray-300">{pageContent?.formSubTitle}</p>
         {!auth?.access && (
-          <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">
-            This is a demo profile. Please sign in to create your own profile
-            and customize it.
-          </p>
+          <p className="capitalize    text-xl font-semibold leading-relaxed text-red-600">{pageContent?.sign_in_demo_profile_error}</p>
         )}
       </div>
 
@@ -175,7 +170,7 @@ export default function ProfileForm() {
           <Input
             leftIcon={<MdOutlineBadge />}
             type="text"
-            label="First Name"
+            label={pageContent?.text_input_label_first_name}
             {...register("first_name", { required: "First Name is required" })}
             isLoaded={myProfile?.fetchStatus == "idle"}
             required
@@ -184,7 +179,7 @@ export default function ProfileForm() {
           <Input
             leftIcon={<MdOutlineBadge />}
             type="text"
-            label="Last Name"
+            label={pageContent?.text_input_label_bio}
             required
             {...register("last_name", { required: "Last Name is required" })}
             isLoaded={myProfile?.fetchStatus == "idle"}
@@ -193,7 +188,7 @@ export default function ProfileForm() {
         <Input
           leftIcon={<LuFileText />}
           type="text"
-          label="Bio"
+          label={pageContent?.text_input_label_bio}
           required
           {...register("bio", { required: "Bio is required" })}
           isLoaded={myProfile?.fetchStatus == "idle"}
@@ -201,7 +196,7 @@ export default function ProfileForm() {
         <Input
           leftIcon={<MdAlternateEmail />}
           type="text"
-          label="Username"
+          label={pageContent?.text_input_label_username}
           {...register("username", { required: "Username is required" })}
           required
           isLoaded={myProfile?.fetchStatus == "idle"}
@@ -209,17 +204,19 @@ export default function ProfileForm() {
         <Input
           leftIcon={<HiOutlineMail />}
           type="email"
-          label="Email"
+          label={pageContent?.text_input_label_email}
           {...register("email", { required: "Email is required" })}
           required
           isLoaded={myProfile?.fetchStatus == "idle"}
         />
 
         <ProfilePictureUploader
+          label={pageContent?.image_input_label_profile_picture}
+
           onUpload={(e) => setValue("profile_image", e.get("image") as File)}
           {...register("profile_image")}
         />
-        {errors.profile_image && <p>{errors.profile_image.message}</p>}
+        {errors?.profile_image && <p>{errors?.profile_image?.message}</p>}
 
         <Button
           className="md:self-end self-stretch hover:!scale-100 active:!scale-95 transition-all duration-300 ease-in-out mt-1"
@@ -227,7 +224,8 @@ export default function ProfileForm() {
           type="submit"
           isLoading={updateProfile?.isPending}
         >
-          Save
+          {pageContent?.button_text}
+          
         </Button>
       </form>
     </>
