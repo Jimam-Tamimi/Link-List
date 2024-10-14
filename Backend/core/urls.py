@@ -8,7 +8,6 @@ urlpatterns = [
     path('api/', include('LinkSharing.urls')),  # Include your app's URLs
     path('api/auth/', include('Auth.urls')),        # Include your Auth app's URLs
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
