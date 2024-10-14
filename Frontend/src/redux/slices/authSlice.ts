@@ -1,5 +1,6 @@
 import { AuthType } from '@/api-calls/auth';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 interface AuthState {
   data: AuthType | null;
@@ -21,6 +22,7 @@ const authSlice = createSlice({
       state.data = action.payload;
       state.loading = false;
       state.error = null;
+      
     },
     signOut(state) {
       state.data = null;

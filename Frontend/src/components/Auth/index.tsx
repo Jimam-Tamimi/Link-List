@@ -110,7 +110,7 @@ export default function Auth({ pageContent }: any) {
                   <ModalFooter className="flex flex-col items-center justify-center gap-5">
                     <div className="flex items-center justify-center gap-14">
                       <div
-                        onClick={() => signIn("google")}
+                        onClick={() => alert("This feature is not available at this moment")}
                         className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer"
                       >
                         <Image
@@ -121,7 +121,9 @@ export default function Auth({ pageContent }: any) {
                           className="w-6"
                         />
                       </div>
-                      <div className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
+                      <div 
+                        onClick={() => alert("This feature is not available at this moment")}
+                        className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
                         <Image
                           alt="Facebook logo"
                           src={"/images/logo/facebook-logo.png"}
@@ -130,7 +132,9 @@ export default function Auth({ pageContent }: any) {
                           className="w-6"
                         />
                       </div>
-                      <div className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
+                      <div
+                        onClick={() => alert("This feature is not available at this moment")}
+                        className="p-2 rounded-md bg-[#32010144] hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out cursor-pointer">
                         <Image
                           alt="Apple logo"
                           src={"/images/logo/apple logo.svg"}

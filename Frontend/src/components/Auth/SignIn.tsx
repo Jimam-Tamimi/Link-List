@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useForm } from "react-hook-form";
 import Input from "../utils/Input";
 import { MdOutlineClose } from "react-icons/md";
@@ -8,15 +8,11 @@ import { useSignIn } from "@/hooks/auth"; // Import the useSignIn hook
 import { SignInFormDataType } from "@/api-calls/auth";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
-import { AxiosError } from "axios"; 
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import getPageContent from "@/helpers/getPageContent";
 
-export default function SignIn({pageContent}:{pageContent:any}) {
-
- 
-  
-  
+export default function SignIn({ pageContent }: { pageContent: any }) {
   const {
     register,
     handleSubmit,
@@ -26,18 +22,21 @@ export default function SignIn({pageContent}:{pageContent:any}) {
   const signInMutation = useSignIn(); // Use the useSignIn hook
 
   const onSubmit = (data: SignInFormDataType) => {
-    signInMutation.mutate(data, {
+    console.log("first")
+    signInMutation.mutateAsync(data, {
       onSuccess: async (data) => {
-          toast.success("Signed in successfully!");
+        console.log("sign in "); 
       },
-      onError: (error:AxiosError) => {
+      onError: (error: AxiosError) => {
         if (error.response) {
           switch (error.response.status) {
             case 400:
               toast.error("Please check your inputs.");
-               break;
+              break;
             case 401:
-              toast.error("Username/Email or Password is incorrect. Please check again.");
+              toast.error(
+                "Username/Email or Password is incorrect. Please check again."
+              );
               break;
             case 403:
               toast.error(
@@ -92,8 +91,8 @@ export default function SignIn({pageContent}:{pageContent:any}) {
         type="submit"
         isLoading={signInMutation.isPending}
       >
-          {pageContent?.button_text_sign_in}
-          </Button>
+        {pageContent?.button_text_sign_in}
+      </Button>
     </form>
   );
 }

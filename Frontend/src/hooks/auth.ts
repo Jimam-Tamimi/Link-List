@@ -30,6 +30,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 export const useSignIn = () => {
   const dispatch = useAppDispatch();
 
@@ -40,6 +41,7 @@ export const useSignIn = () => {
     },
     onSuccess: async (data: AuthType) => {
       dispatch(signInSuccess(data)); // Dispatch sign-in success
+      toast.success("Sign In Successful!!");
       // await storeAuthData(data); // Store JWT on success
     },
     onError: (error: AxiosError) => {
@@ -62,7 +64,7 @@ export const useSignUp = () => {
     },
     onSuccess: async (data: AuthType) => {
       dispatch(signInSuccess(data)); // Dispatch sign-in success
-      // await storeAuthData(data); // Store JWT on success
+      toast.success("Successfully Created A New Account!");
     },
     onError: (error: AxiosError) => {
       dispatch(setError(error.message)); // Dispatch error

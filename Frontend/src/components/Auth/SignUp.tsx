@@ -33,7 +33,7 @@ export default function SignUp({ pageContent }: { pageContent: any }) {
 
     signUpMutation.mutate(data, {
       onSuccess: () => {
-        toast.success("Successfully created a new account!");
+        // toast.success("Successfully created a new account!");
       },
       onError: (error: AxiosError) => {
         if (error.response) {
