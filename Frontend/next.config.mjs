@@ -17,6 +17,12 @@ const nextConfig = {
         port: '',
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "linklistapi.vercel.app",
+        port: '',
+        pathname: "**",
+      },
     ],
   },
   typescript: {
