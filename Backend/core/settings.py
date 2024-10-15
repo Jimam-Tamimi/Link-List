@@ -163,10 +163,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
-    # 'DEFAULT_RENDERER_CLASSES': (
-    #     'rest_framework.renderers.JSONRenderer',
-    #     # Add other renderers if needed, but exclude `BrowsableAPIRenderer`
-    # ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # Add other renderers if needed, but exclude `BrowsableAPIRenderer`
+    ),
 }
  
 AUTHENTICATION_BACKENDS = [

@@ -19,7 +19,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "linklistapi.vercel.app",
+        hostname: "linklist.up.railway.app",
         port: '',
         pathname: "**",
       },
