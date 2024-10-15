@@ -12,6 +12,12 @@ const nextConfig = {
         pathname: "**",
       },
       {
+        protocol: "http",
+        hostname: "link-list-kl53.onrender.com",
+        port: '',
+        pathname: "**",
+      },
+      {
         protocol: "https",
         hostname: "link-list-kl53.onrender.com",
         port: '',
@@ -19,6 +25,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "linklist.up.railway.app",
+        port: '',
+        pathname: "**",
+      },
+      {
+        protocol: "http",
         hostname: "linklist.up.railway.app",
         port: '',
         pathname: "**",
