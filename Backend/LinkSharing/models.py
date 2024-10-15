@@ -18,7 +18,7 @@ class Link(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return self.platform
     
     class Meta:
         ordering = ['-order']
