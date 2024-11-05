@@ -54,7 +54,7 @@ git clone https://github.com/Jimam-Tamimi/Email-Builder.git
 
 1. Open a new terminal and navigate to the frontend directory:
    ```bash
-   cd Email-Builder/Frontend
+   cd Email-Builder/frontend
    ```
 
 2. Install dependencies:
